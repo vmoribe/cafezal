@@ -1,0 +1,1 @@
+json.partial! "fazendas/fazenda", fazenda: @fazenda

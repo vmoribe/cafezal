@@ -1,0 +1,29 @@
+<h1>Listing Fazendas</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Descricao</th>
+      <% #<th>User</th>%>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @fazendas.each do |fazenda| %>
+      <tr>
+        <td><%= fazenda.nome %></td>
+        <td><%= fazenda.descricao %></td>
+        <td><% fazenda.user_id %></td>
+        <td><%= link_to 'Show', fazenda %></td>
+        <td><%= link_to 'Edit', edit_fazenda_path(fazenda) %></td>
+        <td><%= link_to 'Destroy', fazenda, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Fazenda', new_fazenda_path %>

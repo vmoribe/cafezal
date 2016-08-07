@@ -1,0 +1,17 @@
+<p>
+  <strong>Nome:</strong>
+  <%= @fazenda.nome %>
+</p>
+
+<p>
+  <strong>Descricao:</strong>
+  <%= @fazenda.descricao %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @fazenda.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_fazenda_path(@fazenda) %> |
+<%= link_to 'Back', fazendas_path %>

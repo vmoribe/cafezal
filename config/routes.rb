@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :talhaos
+
   resources :fazendas
 
   namespace :admin do

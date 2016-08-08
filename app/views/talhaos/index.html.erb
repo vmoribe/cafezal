@@ -1,0 +1,103 @@
+<h1>Listagem Talhões</h1>
+
+<%= link_to 'Novo Talhão', new_talhao_path,:class => 'btn btn-default' %>
+
+
+<div class="container-fluid">
+    <% @areaSomaTotal = 0 %>
+    <% @plantasSomaTotal = 0 %>
+
+<% @fazendas.each do |fazenda| %>
+      <tr>
+        <td><h3><%= fazenda.nome %></h3></td>
+      </tr>
+      <% @fazenda_id = fazenda.id %>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <% #<th>Fazenda</th>%>
+      <th>Nome</th>
+      <th>Cultura</th>
+      <th>Variedade</th>
+      <th>Ano plantio</th>
+      <th>Area</th>
+      <th>Esp ruas</th>
+      <th>Esp plantas</th>
+      <th>Qtde plantas</th>
+      <!-- <th>Argila</th>
+      <th>Silte</th>
+      <th>Areia</th>
+      <th>User</th> !-->
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @total_plantas = 0 %>
+    <% @total_ha = 0 %>
+    <% @talhaos.where(fazenda_id: @fazenda_id).each do |talhao| %>
+      <tr>
+        <td><%= talhao.nome %></td>
+        <td><%= talhao.cultura %></td>
+        <td><%= talhao.variedade %></td>
+        <td><%= talhao.ano_plantio %></td>
+        <td><%= talhao.area %></td>
+        <td><%= talhao.esp_ruas %></td>
+        <td><%= talhao.esp_plantas %></td>
+        <td><%= valor_inteiro(talhao.qtde_plantas) %></td>
+        <!--<td><% talhao.argila %></td>
+        <td><% talhao.silte %></td>
+        <td><% talhao.areia %></td>
+        <td><% talhao.user %></td> !-->
+        <td><%= link_to 'Edit', edit_talhao_path(talhao) %></td>
+        <td><%= link_to 'Destroy', talhao, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% @total_plantas += talhao.qtde_plantas %>
+    <% @total_ha += talhao.area %>
+    <% end %>
+
+<br>
+
+      <tr>
+        <td><b>Total</b></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><b><%=valor_duascasas(@total_ha)%></b></td>
+        <td></td>
+        <td></td>
+        <td><b><%= valor_inteiro(@total_plantas) %></b></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+<% @areaSomaTotal += @total_ha %>
+<% @plantasSomaTotal += @total_plantas %>
+
+<% end %>
+</div>
+
+<div class="col-md-6 col-md-offset-3">
+<table class="table table-condensed table-striped"> <%# Table 4%>
+  <thead>
+  <tr>
+    <th class="text-center"></th>
+    <th class="text-center"><b>Área Fazendas</b></th>
+    <th class="text-center"><b>Plantas Fazendas</b></th>    
+  </tr> 
+  </thead>
+  <tbody>
+  <tr>
+    <td class="text-center"><b>Total</b></td>
+    <td class="text-center"><%= valor_inteiro(@areaSomaTotal) %></td>
+    <td class="text-center"><%= valor_inteiro(@plantasSomaTotal) %></td>
+  </tr>
+</tbody>
+</table><%# Fim Table 4%>
+</div><%# Fim Div%>

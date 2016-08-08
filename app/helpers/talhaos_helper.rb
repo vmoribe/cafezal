@@ -1,0 +1,2 @@
+module TalhaosHelper
+end

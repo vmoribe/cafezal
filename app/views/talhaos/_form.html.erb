@@ -1,0 +1,28 @@
+<%= simple_form_for(@talhao) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="row">
+      <div class="col-md-6">
+    <%= f.association :fazenda, label_method: :nome, collection: Fazenda.where(user_id: current_user.id) %>
+    <%= f.input :nome %>
+    <%= f.input :cultura %>
+    <%= f.input :variedade %>
+    <%= f.input :ano_plantio %>
+      </div>
+      <div class="col-md-6">
+    <%= f.input :area %>
+    <%= f.input :esp_ruas %>
+    <%= f.input :esp_plantas %>
+    <%= f.input :argila %>
+    <%= f.input :silte %>
+    <%= f.input :areia %>
+      </div>
+    <% f.association :user %>
+  </div>
+</div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

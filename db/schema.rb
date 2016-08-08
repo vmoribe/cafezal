@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160807154050) do
+ActiveRecord::Schema.define(version: 20160807184045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,26 @@ ActiveRecord::Schema.define(version: 20160807154050) do
   end
 
   add_index "fazendas", ["user_id"], name: "index_fazendas_on_user_id", using: :btree
+
+  create_table "talhaos", force: :cascade do |t|
+    t.integer  "fazenda_id"
+    t.string   "nome"
+    t.string   "cultura"
+    t.string   "variedade"
+    t.integer  "ano_plantio"
+    t.decimal  "area",        precision: 10, scale: 2
+    t.decimal  "esp_ruas",    precision: 10, scale: 2
+    t.decimal  "esp_plantas", precision: 10, scale: 2
+    t.integer  "argila"
+    t.integer  "silte"
+    t.integer  "areia"
+    t.integer  "user_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "talhaos", ["fazenda_id"], name: "index_talhaos_on_fazenda_id", using: :btree
+  add_index "talhaos", ["user_id"], name: "index_talhaos_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -62,4 +82,6 @@ ActiveRecord::Schema.define(version: 20160807154050) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "fazendas", "users"
+  add_foreign_key "talhaos", "fazendas"
+  add_foreign_key "talhaos", "users"
 end

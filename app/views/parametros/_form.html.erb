@@ -1,0 +1,13 @@
+<%= simple_form_for(@parametro) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :ano %>
+    <%= f.input :parcelamento %>
+    <%= f.input :producao_esperada, collection: ["<20", "21 - 30", "31 - 40", "41 - 50", "51 - 60", ">60"] %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

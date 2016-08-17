@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :fazendas
   has_many :talhaos
   has_many :analises
+  has_many :parametros
   
   def set_default_role
     self.role ||= :user

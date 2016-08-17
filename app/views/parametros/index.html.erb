@@ -1,0 +1,30 @@
+<h1>Listagem Parâmetros</h1>
+
+<%= link_to 'Novo Parâmetro', new_parametro_path,:class => 'btn btn-default' %>
+
+<table class="table table-condensed table-hover text-center">
+  <thead>
+    <tr>
+      <th>Ano</th>
+      <th>Parcelamento</th>
+      <th>Produção esperada</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @parametros.each do |parametro| %>
+      <tr>
+        <td><%= parametro.ano %></td>
+        <td><%= parametro.parcelamento %></td>
+        <td><%= parametro.producao_esperada %></td>
+        <td><% link_to 'Show', parametro %></td>
+        <td><%= link_to 'Edit', edit_parametro_path(parametro) %></td>
+        <td><%= link_to 'Destroy', parametro, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

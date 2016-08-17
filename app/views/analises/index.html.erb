@@ -2,6 +2,13 @@
 
 <%= link_to 'Nova Analise', new_analise_path,:class => 'btn btn-default' %>
 
+<% @parametros.each do |parametro| %>
+   <tr>
+     <td><h2  class="text-center"><%= parametro.ano %></h2></td>
+   </tr>      
+<% @parametro_ano = parametro.ano %>
+
+
   <% @fazendas.each do |fazenda| %>
     <tr>
       <td><h3><%= fazenda.nome %></h3></td>
@@ -47,7 +54,7 @@
 
   <tbody>
       <tr>
-    <% @analises.where("(fazenda_id= ?)", @fazenda_id).each do |analise| %>
+    <% @analises.where("(fazenda_id= ? AND ano= ?)", @fazenda_id, @parametro_ano).each do |analise| %>
         <td><%= analise.talhao.nome %></td>
         <td><%= analise.situacao %></td>
         <td><%= analise.profundidade %></td>
@@ -78,4 +85,4 @@
     <% end %>
 
 <br>
-
+<% end %>

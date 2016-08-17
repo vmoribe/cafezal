@@ -6,6 +6,7 @@ class AnalisesController < ApplicationController
   def index
     @analises = Analise.where(user_id: current_user.id).order("id ASC")
     @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
+    @parametros = Parametro.where(user_id: current_user.id).order("id DESC")
   end
 
   # GET /analises/1

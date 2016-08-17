@@ -1,0 +1,18 @@
+
+<p>
+  <strong>Ano:</strong>
+  <%= @parametro.ano %>
+</p>
+
+<p>
+  <strong>Parcelamento:</strong>
+  <%= @parametro.parcelamento %>
+</p>
+
+<p>
+  <strong>Producao esperada:</strong>
+  <%= @parametro.producao_esperada %>
+</p>
+
+<%= link_to 'Edit', edit_parametro_path(@parametro) %> |
+<%= link_to 'Back', parametros_path %>

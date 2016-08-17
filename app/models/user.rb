@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   after_initialize :set_default_role, :if => :new_record?
   has_many :fazendas
   has_many :talhaos
+  has_many :analises
+  
   def set_default_role
     self.role ||= :user
   end

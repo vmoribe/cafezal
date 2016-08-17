@@ -1,0 +1,32 @@
+<%= simple_form_for(@analise) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :user %>
+    <%= f.association :fazenda %>
+    <%= f.association :talhao %>
+    <%= f.input :situacao %>
+    <%= f.input :profundidade %>
+    <%= f.input :ano %>
+    <%= f.input :ph %>
+    <%= f.input :potassio_k %>
+    <%= f.input :fosforo_p %>
+    <%= f.input :sodio_na %>
+    <%= f.input :calcio_ca %>
+    <%= f.input :magnesio_mg %>
+    <%= f.input :aluminio_al %>
+    <%= f.input :h_al %>
+    <%= f.input :mat_organica %>
+    <%= f.input :p_rem %>
+    <%= f.input :zinco_zn %>
+    <%= f.input :ferro_fe %>
+    <%= f.input :manganes_mn %>
+    <%= f.input :cobre_cu %>
+    <%= f.input :boro_b %>
+    <%= f.input :enxofre_s %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

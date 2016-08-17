@@ -11,10 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160807184045) do
+ActiveRecord::Schema.define(version: 20160816175959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "analises", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "fazenda_id"
+    t.integer  "talhao_id"
+    t.string   "situacao"
+    t.string   "profundidade"
+    t.integer  "ano"
+    t.decimal  "ph",           precision: 10, scale: 2
+    t.decimal  "potassio_k",   precision: 10, scale: 2
+    t.decimal  "fosforo_p",    precision: 10, scale: 2
+    t.decimal  "sodio_na",     precision: 10, scale: 2
+    t.decimal  "calcio_ca",    precision: 10, scale: 2
+    t.decimal  "magnesio_mg",  precision: 10, scale: 2
+    t.decimal  "aluminio_al",  precision: 10, scale: 2
+    t.decimal  "h_al",         precision: 10, scale: 2
+    t.decimal  "mat_organica", precision: 10, scale: 2
+    t.decimal  "p_rem",        precision: 10, scale: 2
+    t.decimal  "zinco_zn",     precision: 10, scale: 2
+    t.decimal  "ferro_fe",     precision: 10, scale: 2
+    t.decimal  "manganes_mn",  precision: 10, scale: 2
+    t.decimal  "cobre_cu",     precision: 10, scale: 2
+    t.decimal  "boro_b",       precision: 10, scale: 2
+    t.decimal  "enxofre_s",    precision: 10, scale: 2
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "analises", ["fazenda_id"], name: "index_analises_on_fazenda_id", using: :btree
+  add_index "analises", ["talhao_id"], name: "index_analises_on_talhao_id", using: :btree
+  add_index "analises", ["user_id"], name: "index_analises_on_user_id", using: :btree
 
   create_table "fazendas", force: :cascade do |t|
     t.string   "nome"
@@ -81,6 +112,9 @@ ActiveRecord::Schema.define(version: 20160807184045) do
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "analises", "fazendas"
+  add_foreign_key "analises", "talhaos"
+  add_foreign_key "analises", "users"
   add_foreign_key "fazendas", "users"
   add_foreign_key "talhaos", "fazendas"
   add_foreign_key "talhaos", "users"

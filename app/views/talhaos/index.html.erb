@@ -3,7 +3,7 @@
 <%= link_to 'Novo Talhão', new_talhao_path,:class => 'btn btn-default' %>
 
 
-<div class="container-fluid">
+<div class="container-fluid table-responsive">
     <% @areaSomaTotal = 0 %>
     <% @plantasSomaTotal = 0 %>
 
@@ -14,7 +14,7 @@
       <% @fazenda_id = fazenda.id %>
 
 
-<table class="table">
+<table class="table table-condensed table-hover">
   <thead>
     <tr>
       <% #<th>Fazenda</th>%>

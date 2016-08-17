@@ -1,8 +1,9 @@
+<div class="container-fluid table-responsive">
 <h1>Listagem das Fazendas</h1>
 
-<%= link_to 'New Fazenda', new_fazenda_path,:class => 'btn btn-default' %>
+<%= link_to 'Nova Fazenda', new_fazenda_path,:class => 'btn btn-default' %>
 
-<table class="table">
+<table class="table table-condensed table-hover">
   <thead>
     <tr>
       <th>Nome</th>
@@ -19,7 +20,7 @@
         <td><%= fazenda.descricao %></td>
         <td><% fazenda.user_id %></td>
         <td><% link_to 'Show', fazenda %></td>
-        <td><%= link_to 'Edit', edit_fazenda_path(fazenda) %></td>
+        <td ><%= link_to 'Edit', edit_fazenda_path(fazenda) %></td>
         <td><%= link_to 'Destroy', fazenda, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -27,5 +28,6 @@
 </table>
 
 <br>
+</div>
 
 

@@ -1,10 +1,20 @@
 class AnalisesController < ApplicationController
   before_action :set_analise, only: [:show, :edit, :update, :destroy]
 
+  def calagem
+    @analises = Analise.where(user_id: current_user.id).order("id ASC")
+    @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
+    @plantio = Analise.where("situacao = ?", "Plantio").order("ano DESC")
+    @correcao = Analise.where("situacao != ?", "Plantio").order("ano DESC")
+    @parametros = Parametro.where(user_id: current_user.id).order("id DESC")
+
+Analise.where("situacao = ?", "Plantio").order("ano DESC").select("DISTINCT(ano)", "fazenda_id")
+
+  end
   # GET /analises
   # GET /analises.json
   def index
-    @analises = Analise.where(user_id: current_user.id).order("id ASC")
+    @analises = Analise.where(user_id: current_user.id).order( "profundidade ASC", "talhao_id ASC")
     @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
     @parametros = Parametro.where(user_id: current_user.id).order("id DESC")
   end

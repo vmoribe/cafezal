@@ -2,14 +2,17 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :user %>
-    <%= f.association :fazenda %>
-    <%= f.association :talhao %>
-    <%= f.input :situacao %>
-    <%= f.input :profundidade %>
+      <div class="row">
+        <div class="col-md-4">
+    <%= f.association :fazenda, label_method: :nome, collection: Fazenda.where(user_id: current_user.id) %>
+    <%= f.association :talhao, label_method: :nome, collection: Talhao.where(user_id: current_user.id) %>
+    <%= f.input :situacao, collection: ["Produção","1° Ano", "2° Ano / Poda", "Plantio"] %>
+    <%= f.input :profundidade, collection: ["0-20","20-40", "40-60", "60-80"] %>
     <%= f.input :ano %>
     <%= f.input :ph %>
     <%= f.input :potassio_k %>
+        </div>
+        <div class="col-md-4">
     <%= f.input :fosforo_p %>
     <%= f.input :sodio_na %>
     <%= f.input :calcio_ca %>
@@ -17,6 +20,8 @@
     <%= f.input :aluminio_al %>
     <%= f.input :h_al %>
     <%= f.input :mat_organica %>
+        </div>
+        <div class="col-md-4">
     <%= f.input :p_rem %>
     <%= f.input :zinco_zn %>
     <%= f.input :ferro_fe %>
@@ -24,6 +29,7 @@
     <%= f.input :cobre_cu %>
     <%= f.input :boro_b %>
     <%= f.input :enxofre_s %>
+        </div>
   </div>
 
   <div class="form-actions">

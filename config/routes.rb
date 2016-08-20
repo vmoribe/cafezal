@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :parametros
 
+    get 'analises/calagem'
   resources :analises
 
   resources :talhaos

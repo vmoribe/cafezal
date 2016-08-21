@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :parametros
 
     get 'analises/calagem'
+    get 'analises/fertilidade'
+  
   resources :analises
 
   resources :talhaos

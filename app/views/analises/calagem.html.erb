@@ -26,17 +26,20 @@
 </table>
 </div>
 
+<% @analises.select("DISTINCT(ano)").each do |p| %>
+<% @parametro_ano = p.ano %>
 
+    <% @ncPlantiototal = 0 %>
+    <% @nctotalPlantiocorrigida = 0 %>
+    <% @nctotalPlantiocomplementar = 0 %>
+    <% @totalPlantiocalcario = 0 %>
 <%# Bloco Plantio%>
 <table class="table table-condensed">
 <tr>
-<td><h2>Calagem de plantio</h3></td>
-</tr>
-<% @plantio.select("DISTINCT(ano)", "fazenda_id").each do |p| %>
-<% @parametro_ano = p.ano %>
-<% @fazenda_id = p.fazenda_id %>
-<tr>
 <td><h3 class="text-center"><%= @parametro_ano %></h3></td>
+</tr>
+<tr>
+<td><h2><b>Calagem de plantio</b></h3></td>
 </tr>
 
 <% @variavels.where("(ano= ?)", @parametro_ano).each do |variavel| %>
@@ -45,7 +48,13 @@
   <% @variavel_areaAplicacao = variavel.areaAplicacao %>
   <% @variavel_prnt = variavel.prnt %>
 
-    <% @fazendas.where("(id= ?)", @fazenda_id).each do |fazenda| %>
+    
+<% @teste.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "Plantio").each do |v| %>
+  <% @faz_id = v.fazenda_id %>
+
+
+
+    <% @fazendas.where("(id= ?)", @faz_id).each do |fazenda| %>
     <tr>
       <td><h3><%= fazenda.nome %></h3></td>
     </tr>
@@ -118,24 +127,24 @@
     </tr>
   </tbody>
 </table>
-    <% end %>
+
+    <% @ncPlantiototal += @nctotal %>
+    <% @nctotalPlantiocorrigida += @nctotalcorrigida %>
+    <% @nctotalPlantiocomplementar += @nctotalcomplementar %>
+    <% @totalPlantiocalcario += @totalcalcario %>
       <% end %>
-
-<br>
+    <% end %>
 <% end %>
+<br>
 
-
-
+  
+  <% @ncProducaototal = 0 %>
+  <% @nctotalProducaocorrigida = 0 %>
+  <% @totalProducaocalcario = 0 %>
 <%# Bloco Produção%>
 <table class="table table-condensed">
 <tr>
-<td><h2>Calagem de Produção</h3></td>
-</tr>
-<% @correcao.select("DISTINCT(ano)").each do |p| %>
-<% @parametro_ano = p.ano %>
-
-<tr>
-<td><h3 class="text-center"><%= @parametro_ano %></h3></td>
+<td><h2><b>Calagem de Produção</b></h3></td>
 </tr>
 
 <% @variavels.where("(ano= ?)", @parametro_ano).each do |variavel| %>
@@ -143,8 +152,12 @@
   <% @variavel_profundidade = variavel.profundidade %>
   <% @variavel_areaAplicacao = variavel.areaAplicacao %>
   <% @variavel_prnt = variavel.prnt %>
-    <% @nc = 0 %>
-    <% @fazendas.each do |fazenda| %>
+
+<% @teste.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao != ?)", @parametro_ano, "Plantio").each do |v| %>
+  <% @faz_id = v.fazenda_id %>
+
+
+    <% @fazendas.where("(id= ?)", @faz_id).each do |fazenda| %>
     <tr>
       <td><h3><%= fazenda.nome %></h3></td>
     </tr>
@@ -187,7 +200,6 @@
       </tr>
       <% @nctotal += analise.necessidadeCalagem %>
       <% @nctotalcorrigida += (analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt)) %>
-      <% @nctotalcomplementar += analise.necCalagemCompAreaTotal %>
       <% @totalcalcario += (analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt) + analise.necCalagemCompAreaTotal) %>
     <% end %>
 
@@ -200,17 +212,61 @@
         <th class="text-center"><b><%= valor_duascasas(@nctotal) %></b></th>
         <th></th>
         <th></th>
-        <th class="text-center"><b><%= valor_duascasas(@nctotalcorrigida) %></b></th>     
+        <th class="text-center"><b><%= valor_duascasas(@nctotalcorrigida) %></b></th>  
         <th></th>
     </tr>
-        <% @nc += @totalcalcario %>
   </tbody>
 </table>
+  <% @ncProducaototal += @nctotal %>
+  <% @nctotalProducaocorrigida += @nctotalcorrigida %>
+  <% @totalProducaocalcario += @totalcalcario %>
+<% end %>
+<br>
     <% end %>
       <% end %>
-<h3><b>Necessidade de Calagem Total - Ano <%= @parametro_ano %> - <%= valor_duascasas(@nc) %> ton</b></h3>
 
-<br>
-<% end %>
 
+<div class="col-md-6 col-md-offset-3">
+<table class="table table-condensed table-striped"> <%# Table 4%>
+  <thead>
+  <tr>
+    <th class="text-center"><%= @parametro_ano%></th>
+    <th class="text-center"><b>Total Calcario/ha</b></th>
+    <th class="text-center"><b>Total Calcario Corrigido</b></th>
+    <th class="text-center"><b>Total Complementar</b></th>    
+    <th class="text-center"><b></b>Total Geral</th>
+  </tr> 
+  </thead>
+  <tbody>
+  <tr>
+    <td class="text-center"><b>Plantio</b></td>
+    <td class="text-center"><%= valor_duascasas(@ncPlantiototal) %></td>
+    <td class="text-center"><%= valor_duascasas(@nctotalPlantiocorrigida) %></td>
+    <td class="text-center"><%= valor_duascasas(@nctotalPlantiocomplementar) %></td>
+    <td class="text-center"><%= valor_duascasas(@totalPlantiocalcario)%></td>
+  </tr>
+    <tr>
+    <td class="text-center"><b>Produção</b></td>
+    <td class="text-center"><%= valor_duascasas(@ncProducaototal) %></td>
+    <td class="text-center"><%= valor_duascasas(@nctotalProducaocorrigida) %></td>
+    <td class="text-center"></td>
+    <td class="text-center"><%= valor_duascasas(@totalProducaocalcario)%></td>
+  </tr>
+  <% @ncTotal = @ncPlantiototal + @ncProducaototal %>
+  <% @corrigidaTotal = @nctotalPlantiocorrigida + @nctotalProducaocorrigida %>
+  <% @complementarTotal = @nctotalPlantiocomplementar %>
+  <% @total = @totalPlantiocalcario + @totalProducaocalcario %>
+    <tr>
+    <td class="text-center"><b>Total</b></td>
+    <td class="text-center"><%= valor_duascasas(@ncTotal) %></td>
+    <td class="text-center"><%= valor_duascasas(@corrigidaTotal) %></td>
+    <td class="text-center"><%= valor_duascasas(@complementarTotal) %></td>
+    <td class="text-center"><%= valor_duascasas(@total) %></td>
+  </tr>
+
+  </tbody>
+</table><%# Fim Table 4%>
+</div><%# Fim Div%>
+
+<%end%>
 

@@ -1,8 +1,20 @@
 class AnalisesController < ApplicationController
   before_action :set_analise, only: [:show, :edit, :update, :destroy]
 
+  def fertilidade
+    @parametros = Parametro.where(user_id: current_user.id).order("id DESC")
+    @plantio = Analise.where("situacao = ?", "Plantio").order("ano DESC", "talhao_id ASC")
+    @primeiroAno = Analise.where("situacao = ?", "1° Ano").order("ano DESC", "talhao_id ASC")
+    @segundoAno = Analise.where("situacao = ?", "2° Ano / Poda").order("ano DESC", "talhao_id ASC")
+    @producao = Analise.where("situacao = ?", "Produção").order("ano DESC", "talhao_id ASC")
+    @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
+    @analises = Analise.where(user_id: current_user.id).order("ano DESC")
+    @teste = Analise.where(user_id: current_user.id)
+  end
+
   def calagem
-    @analises = Analise.where(user_id: current_user.id).order("id ASC")
+    @teste = Analise.where(user_id: current_user.id)
+    @analises = Analise.where(user_id: current_user.id).order("ano DESC")
     @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
     @plantio = Analise.where("situacao = ?", "Plantio").order("ano DESC")
     @correcao = Analise.where("situacao != ?", "Plantio").order("ano DESC")

@@ -5,6 +5,22 @@ class Analise < ActiveRecord::Base
 
 validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :ph, :potassio_k, :fosforo_p, :sodio_na, :calcio_ca, :magnesio_mg, :aluminio_al, :h_al, :mat_organica, :p_rem, :zinco_zn, :ferro_fe, :manganes_mn, :cobre_cu, :boro_b, :enxofre_s
 
+#Gessagem
+
+#teor inferior ou igual a 0,4 cmol c /dm 3 de Ca e, ou,
+#3+
+#3+
+#superior a 0,5 cmol c /dm 3 de Al e, ou, saturação por Al (m) superior a 30
+
+  def calculoCaGessagem(p_rem)
+    315.8 - ((25.5066*(p_rem)**0.5) - (5.70675*(p_rem)) + (0.485335*((p_rem)**1.5)))  
+  end
+
+  def necessidadeGessagem(caGessagem,teorCalcio)
+    caGessagem / (10*teorCalcio)
+  end
+
+#Calagem
 def proporcaoCaMg
     calcio_ca / magnesio_mg
   end

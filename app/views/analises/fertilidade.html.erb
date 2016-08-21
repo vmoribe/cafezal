@@ -1,0 +1,502 @@
+<h1>Necessidade de Adubação</h1>
+
+<%# Bloco Parâmetros %>
+<div class="col-md-6 col-md-offset-3">
+<table class="table table-condensed text-center">
+  <thead>
+    <tr>
+      <th class="text-center">Ano</th>
+      <th class="text-center">Parcelamento</th>
+      <th class="text-center">Produção Esperada</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+  <%= link_to 'Novo Parâmetro', new_parametro_path,:class => 'btn btn-default' %>
+  <tbody>
+      <% @parametros.each do |parametro| %>
+    <tr>
+        <td><%= parametro.ano %></td>
+        <td><%= parametro.parcelamento %></td>
+        <td><%= parametro.producao_esperada %></td>
+        <td><%= link_to 'Edit', edit_parametro_path(parametro),:class => 'btn btn-default' %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<%# Bloco Plantio%>
+<table class="table table-condensed">
+
+
+<% @analises.select("DISTINCT(ano)").each do |p| %>
+<% @parametro_ano = p.ano %>
+
+<div class="col-xs-12 col-md-12"> <%# Divisão 1%>
+
+    <table class="table table-condensed"><%# Table 2%>
+<h1><%= @parametro_ano %></h1>
+<h2>Adubação de Plantio</h2>
+    
+    </table><%# Table 2%>
+
+  <% @necNplantioSomaTotal = 0 %>
+  <% @necP2o5plantioSomaTotal = 0 %>
+  <% @necK2oplantioSomaTotal = 0 %>
+
+	<% @teste.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "Plantio").each do |v| %>
+	<% @faz_id = v.fazenda_id %>
+
+
+<table class="table table-condensed"> <%# Table 1%>
+  
+      <tbody><%# Body 1%>
+        <% @fazendas.where("(id= ?)", @faz_id).each do |fazenda| %> <%# Do Farm 1%>
+          <tr>
+            <td><h3><%= fazenda.nome %></h3></td>
+          </tr>
+          <% @fazenda_id = fazenda.id %>
+  
+  <% @necNplantioSoma = 0 %>
+  <% @necP2o5plantioSoma = 0 %>
+  <% @necK2oplantioSoma = 0 %>
+
+
+<table class="table table-condensed"> <%# Table 3%>
+          <thead>
+            <tr>
+              <th>Ano</th>
+              <th>Talhão</th>
+              <th>Área</th>
+              <th>P rem</th>
+              <th>Fosforo</th>
+              <th>Potássio</th>
+              <th>Nec N (g/ cova)</th>
+              <th>Nec N (kg/ha) Aplicação</th>
+              <th>Nec N Área / Aplicação (kg)</th>
+              <th>Nec N Total (kg)</th>
+              <th>Nec P2O5 (g/ cova)</th>
+              <th>Nec P2O5 (kg/ha)</th>
+              <th>Nec Total P2O5 (Kg) </th>
+              <th>Nec K2O (g/ cova)</th>
+              <th>Nec K2O (kg/ha /ano)</th>
+              <th>Nec K2O/ Aplicação (kg/ha)</th>
+              <th>Nec K2O Área / Aplicação (kg)</th>
+              <th>Nec K2O Total (kg)</th>
+            </tr>
+          </thead>
+
+<% @plantio.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @fazenda_id, @parametro_ano, "20-40").each do |analise| %>
+
+<% @parametros.each do |parametro| %>
+<% if parametro.ano == analise.ano 
+    @parametro_parcelamento = parametro.parcelamento
+    @parametro_producao_esperada = parametro.producao_esperada
+  else
+     0
+  end %> <%# End do If%>
+<% end %><%# End do parametro%>
+
+  <tbody>
+   <tr>
+    <td><%= analise.ano %></td>
+    <td><%= analise.talhao.nome %></td>
+    <td><%= analise.talhao.area %></td>
+    <td><%= analise.p_rem %></td>
+    <td><%= analise.fosforo_p %></td>
+    <td><%= analise.potassio_k %></td>
+    <td><%= valor_inteiro(analise.necNplantio)%></td>
+    <td class="danger"><%= valor_inteiro(analise.necNplantioemKgha)%></td>
+    <td class="success"><%= valor_inteiro(analise.necNPlantioAplicacao) %></td>
+    <td class="active"><%= valor_inteiro(analise.necNplantioTotal(@parametro_parcelamento))%></td>
+    <td><%= valor_inteiro(analise.necP2o5plantio) %></td>
+    <td class="danger"><%= valor_inteiro(analise.necP2o5plantioemKgha)%></td>
+    <td class="active"><%= valor_inteiro(analise.necP2o5plantioTotal)%></td>
+
+    <td><%= valor_inteiro(analise.necK2oplantio) %></td>
+    <td><%= valor_inteiro(analise.necK2oplantioemKgha) %></td>
+    <td class="danger"><%= valor_inteiro(analise.necK2oPlantioAplicacaoHa(@parametro_parcelamento))%></td>
+    <td class="success"><%= valor_inteiro(analise.necK2oplantioAreaTotal) %></td>
+    <td class="active"><%= valor_inteiro(analise.necK2oPlantioTotal(@parametro_parcelamento))%></td>
+   </tr>  
+
+  <% @necNplantioSoma += analise.necNplantioTotal(@parametro_parcelamento) %>
+  <% @necP2o5plantioSoma += analise.necP2o5plantioTotal %>
+  <% @necK2oplantioSoma += analise.necK2oPlantioTotal(@parametro_parcelamento) %>
+  
+<% end %>
+<%end%>
+  <tr>
+    <th><b>Total</b></th>
+    <th colspan="8"></th>
+    <th><%= valor_inteiro(@necNplantioSoma) %></th>
+    <th colspan="2"></th>
+    <th><%= valor_inteiro(@necP2o5plantioSoma) %></th>
+    <th colspan="4"></th>
+    <th><%= valor_inteiro(@necK2oplantioSoma) %></th>
+  </tr>
+
+   <% @necNplantioSomaTotal += @necNplantioSoma %>
+   <% @necP2o5plantioSomaTotal += @necP2o5plantioSoma %>
+   <% @necK2oplantioSomaTotal += @necK2oplantioSoma %>
+   
+  </tbody> 
+</table> <%# Table 3%>
+<% end %> <%# Fim Do Farm 1%> 
+    </tbody><%# Fim Do Body 1%>
+  </table> <%# Fim Table 1%>
+</div> <%# Fim Divisão 1%>
+
+
+<%# Fim Bloco Plantio%>
+
+
+<%# Bloco 1 Ano%>
+
+<div class="col-xs-12 col-md-12"> <%# Divisão 1%>
+    <table class="table table-condensed"><%# Table 2%>
+    <h2>Adubação de 1° Ano</h2>
+
+    </table><%# Table 2%>
+
+<table class="table table-condensed"> <%# Table 1%>
+  <% @necN1anoSomaTotal = 0 %>
+  <% @necK2o1anoSomaTotal = 0 %>
+
+
+	<% @teste.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "1° Ano").each do |v| %>
+
+	<% @faz_id = v.fazenda_id %>
+  
+  <% @necN1anoSoma = 0 %>
+  <% @necK2o1anoSoma = 0 %>
+      <tbody><%# Body 1%>
+        <% @fazendas.where("(id= ?)", @faz_id).each do |fazenda| %> <%# Do Farm 1%>
+          <tr>
+            <td><h3><%= fazenda.nome %></h3></td>
+          </tr>
+          <% @fazenda_id = fazenda.id %>
+
+
+<table class="table table-condensed"> <%# Table 3%>
+          <thead>
+            <tr>
+              <th>Ano</th>
+              <th>Talhão</th>
+              <th>Área</th>
+              <th>Potássio</th>
+              <th>Nec N (g/ cova)</th>
+              <th>Nec N (kg/ha)</th>
+              <th>Nec N/Aplicação</th>
+              <th>Nec N Total (kg)</th>
+              <th>Nec K2O (g/ cova)</th>
+              <th>Nec K2O (kg/ha)</th>
+              <th>Nec K2O/Aplicação</th>
+              <th>Nec K2O Total (kg)</th>
+            </tr>
+          </thead>
+
+<% @primeiroAno.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @fazenda_id, @parametro_ano, "20-40").each do |analise| %>
+
+<% @parametros.each do |parametro| %>
+<% if parametro.ano == analise.ano 
+    @parametro_parcelamento = parametro.parcelamento
+  else
+     0
+  end %>
+<% end %>
+
+  <tbody>
+   <tr>
+    <td><%= analise.ano %></td>
+    <td><%= analise.talhao.nome %></td>
+    <td><%= analise.talhao.area %></td>
+    <td><%= analise.potassio_k %></td>
+    <td><%= valor_inteiro(analise.necN1ano)%></td>
+    <td class="danger"><%= valor_inteiro(analise.necN1anoemKgha)%></td>
+    <td class="success"><%= valor_inteiro(analise.necN1anoTotal)%></td>
+    <td class="active"><%= valor_inteiro(analise.necN1anoTotal * @parametro_parcelamento)%></td>
+    <td><%= valor_inteiro(analise.necK2o1ano) %></td>
+    <td class="danger"><%= valor_inteiro(analise.necK2o1anoemKgha) %></td>
+    <td class="success"><%= valor_inteiro(analise.necK2o1anoTotal / @parametro_parcelamento)%></td>
+    <td class="active"><%= valor_inteiro(analise.necK2o1anoTotal) %></td>
+   </tr>  
+
+  <% @necN1anoSoma += analise.necN1anoTotal * @parametro_parcelamento %>
+  <% @necK2o1anoSoma += analise.necK2o1anoTotal %>
+  
+<% end %>
+<%end%>
+  <tr>
+    <th><b>Total</b></th>
+    <th colspan="6"></th>
+    <th><%= valor_inteiro(@necN1anoSoma) %></th>
+    <th colspan="3"></th>
+    <th><%= valor_inteiro(@necK2o1anoSoma) %></th>
+  </tr>
+   <% @necN1anoSomaTotal += @necN1anoSoma %>
+   <% @necK2o1anoSomaTotal += @necK2o1anoSoma %>
+   
+  </tbody> 
+</table> <%# Table 3%>
+<% end %> <%# Fim Do Farm 1%> 
+    </tbody><%# Fim Do Body 1%>
+  </table> <%# Fim Table 1%>
+</div> <%# Fim Divisão 1%>
+<%# Fim Bloco 1° Ano%>
+
+
+
+<%# Bloco 2 Ano%>
+<div class="col-xs-12 col-md-12"> <%# Divisão 1%>
+    <table class="table table-condensed"><%# Table 2%>
+    <h2>Adubação de 2° Ano / Poda</h2>
+    </table><%# Table 2%>
+
+<table class="table table-condensed"> <%# Table 1%>
+  <% @necN2anoSomaTotal = 0 %>
+  <% @necK2o2anoSomaTotal = 0 %>
+
+  	<% @teste.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "2° Ano / Poda").each do |v| %>
+
+	<% @faz_id = v.fazenda_id %>
+  
+      <tbody><%# Body 1%>
+        <% @fazendas.where("(id= ?)", @faz_id).each do |fazenda| %> <%# Do Farm 1%>
+          <tr>
+            <td><h3><%= fazenda.nome %></h3></td>
+          </tr>
+          <% @fazenda_id = fazenda.id %>
+  <% @necN2anoSoma = 0 %>
+  <% @necK2o2anoSoma = 0 %>
+
+
+<table class="table table-condensed"> <%# Table 3%>
+          <thead>
+            <tr>
+              <th>Ano</th>
+              <th>Talhão</th>
+              <th>Área</th>
+              <th>Potássio</th>
+              <th>Nec N (g/ cova)</th>
+              <th>Nec N (kg/ha)</th>
+              <th>Nec N/Aplicação</th>
+              <th>Nec N Total (kg)</th>
+              <th>Nec K2O (g/ cova)</th>
+              <th>Nec K2O (kg/ha)</th>
+              <th>Nec K2O/Aplicação</th>
+              <th>Nec K2O Total (kg)</th>
+            </tr>
+          </thead>
+
+<% @segundoAno.where("(fazenda_id= ?AND ano= ? AND profundidade!= ?)", @fazenda_id, @parametro_ano, "20-40").each do |analise| %>
+
+<% @parametros.each do |parametro| %>
+<% if parametro.ano == analise.ano 
+    @parametro_parcelamento = parametro.parcelamento
+  else
+     0
+  end %>
+<% end %>
+
+  <tbody>
+   <tr>
+    <td><%= analise.ano %></td>
+    <td><%= analise.talhao.nome %></td>
+    <td><%= analise.talhao.area %></td>
+    <td><%= analise.potassio_k %></td>
+    <td><%= valor_inteiro(analise.necN2ano)%></td>
+    <td class="danger"><%= valor_inteiro(analise.necN2anoemKgha)%></td>
+    <td class="success"><%= valor_inteiro(analise.necN2anoTotal)%></td>
+    <td class="active"><%= valor_inteiro(analise.necN2anoTotal * @parametro_parcelamento)%></td>
+    <td><%= valor_inteiro(analise.necK2o2ano) %></td>
+    <td class="danger"><%= valor_inteiro(analise.necK2o2anoemKgha) %></td>
+    <td class="success"><%= valor_inteiro(analise.necK2o2anoTotal / @parametro_parcelamento)%></td>
+    <td class="active"><%= valor_inteiro(analise.necK2o2anoTotal) %></td>
+   </tr>  
+
+  <% @necN2anoSoma += analise.necN2anoTotal * @parametro_parcelamento %>
+  <% @necK2o2anoSoma += analise.necK2o2anoTotal %>
+  
+<% end %>
+<%end%>
+  <tr>
+    <th><b>Total</b></th>
+    <th colspan="6"></th>
+    <th><%= valor_inteiro(@necN2anoSoma) %></th>
+    <th colspan="3"></th>
+    <th><%= valor_inteiro(@necK2o2anoSoma) %></th>
+  </tr>
+   <% @necN2anoSomaTotal += @necN2anoSoma %>
+   <% @necK2o2anoSomaTotal += @necK2o2anoSoma %>
+   
+  </tbody> 
+</table> <%# Table 3%>
+<% end %> <%# Fim Do Farm 1%> 
+    </tbody><%# Fim Do Body 1%>
+  </table> <%# Fim Table 1%>
+</div> <%# Fim Divisão 1%>
+<%# Fim Bloco 2° Ano%>
+
+<%# Bloco Producao%>
+<div class="col-xs-12 col-md-12"> <%# Divisão 1%>
+    <table class="table table-condensed"><%# Table 2%>
+    <h2>Adubação de Producao</h2>
+
+
+    </table><%# Table 2%>
+
+<table class="table table-condensed"> <%# Table 1%>
+  <% @necNProducaoSomaTotal = 0 %>
+  <% @necP2o5ProducaoSomaTotal = 0 %>
+  <% @necK2oProducaoSomaTotal = 0 %>
+  
+
+  <% @teste.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "Produção").each do |v| %>
+
+	<% @faz_id = v.fazenda_id %>
+
+      <tbody><%# Body 1%>
+        <% @fazendas.where("(id= ?)", @faz_id).each do |fazenda| %> <%# Do Farm 1%>
+          <tr>
+            <td><h3><%= fazenda.nome %></h3></td>
+          </tr>
+          <% @fazenda_id = fazenda.id %>
+  <% @necNProducaoSoma = 0 %>
+  <% @necP2o5ProducaoSoma = 0 %>
+  <% @necK2oProducaoSoma = 0 %>
+
+
+<table class="table table-condensed"> <%# Table 3%>
+          <thead>
+            <tr>
+              <th>Ano</th>
+              <th>Talhão</th>
+              <th>Área</th>
+              <th>P rem</th>
+              <th>Fosforo</th>
+              <th>Potássio</th>
+              <th>Nec N (g/m linear)</th>
+              <th>Nec N (kg/ha)</th>
+              <th>Nec N/ Aplicação</th>
+              <th>Nec N Total (kg)</th>
+              <th>Nec P2O5 (g/m linear)</th>
+              <th>Nec P2O5 (kg/ha)</th>
+              <th>Nec Total P2O5 (Kg) </th>
+              <th>Nec K2O (g/m linear)</th>
+              <th>Nec K2O (kg/ha)</th>
+              <th>Nec K2O/ Aplicação</th>
+              <th>Nec K2O Total (kg)</th>
+            </tr>
+          </thead>
+
+<% @producao.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @fazenda_id, @parametro_ano, "20-40").each do |analise| %>
+
+<% @parametros.each do |parametro| %>
+<% if parametro.ano == analise.ano 
+    @parametro_parcelamento = parametro.parcelamento
+    @parametro_producao_esperada = parametro.producao_esperada
+  else
+     0
+  end %>
+<% end %>
+
+  <tbody>
+   <tr>
+    <td><%= analise.ano %></td>
+    <td><%= analise.talhao.nome %></td>
+    <td><%= analise.talhao.area %></td>
+    <td><%= analise.p_rem %></td>
+    <td><%= analise.fosforo_p %></td>
+    <td><%= analise.potassio_k %></td>
+    <td><%= valor_inteiro(analise.necNProducaoemMetroLinear(@parametro_producao_esperada))%></td>
+    <td class="danger"><%= valor_inteiro(analise.necNProducaoKgha(@parametro_producao_esperada))%></td>
+    <td class="success"><%= valor_inteiro(analise.necNProducaoAplicacao(@parametro_producao_esperada,@parametro_parcelamento))%></td>
+    <td class="active"><%= valor_inteiro(analise.necNProducaoTotal(@parametro_producao_esperada))%></td>
+    <td><%= valor_inteiro(analise.necP2o5ProducaoemMetroLinear(@parametro_producao_esperada)) %></td>
+    <td class="danger"><%= valor_inteiro(analise.necP2o5ProducaoKgha(@parametro_producao_esperada))%></td>
+    <td class="active"><%= valor_inteiro(analise.necP2o5ProducaoTotal(@parametro_producao_esperada))%></td>
+    <td><%= valor_inteiro(analise.necK2oProducaoemMetroLinear(@parametro_producao_esperada)) %></td>
+    <td class="danger"><%= valor_inteiro(analise.necK2oProducaoKgha(@parametro_producao_esperada)) %></td>
+    <td class="success"><%= valor_inteiro(analise.necK2oProducaoAplicacao(@parametro_producao_esperada,@parametro_parcelamento))%></td>
+    <td class="active"><%= valor_inteiro(analise.necK2oProducaoTotal(@parametro_producao_esperada)) %></td>
+   </tr>  
+
+  <% @necNProducaoSoma += analise.necNProducaoTotal(@parametro_producao_esperada) %>
+  <% @necP2o5ProducaoSoma += analise.necP2o5ProducaoTotal(@parametro_producao_esperada) %>
+  <% @necK2oProducaoSoma += analise.necK2oProducaoTotal(@parametro_producao_esperada) %>
+<%end%>
+<% end %>
+  <tr>
+    <th><b>Total</b></th>
+    <th colspan="8"></th>
+    <th><%= valor_inteiro(@necNProducaoSoma) %></th>
+    <th colspan="2"></th>
+    <th><%= valor_inteiro(@necP2o5ProducaoSoma) %></th>
+    <th colspan="3"></th>
+    <th><%= valor_inteiro(@necK2oProducaoSoma) %></th>
+  </tr>
+   <% @necNProducaoSomaTotal += @necNProducaoSoma %>
+   <% @necP2o5ProducaoSomaTotal += @necP2o5ProducaoSoma %>
+   <% @necK2oProducaoSomaTotal += @necK2oProducaoSoma %>
+   
+  </tbody> 
+</table> <%# Table 3%>
+<% end %> <%# Fim Do Farm 1%> 
+    </tbody><%# Fim Do Body 1%>
+  </table> <%# Fim Table 1%>
+</div> <%# Fim Divisão 1%>
+<%# Fim Bloco Producao%>
+
+
+
+<div class="col-md-6 col-md-offset-3">
+<table class="table table-condensed table-striped"> <%# Table 4%>
+  <thead>
+  <tr>
+    <th class="text-center"><%= @parametro_ano%></th>
+    <th class="text-center"><b>Total N fazendas</b></th>
+    <th class="text-center"><b>Total P2O5 Fazendas</b></th>
+    <th class="text-center"><b>Total K2O Fazendas</b></th>    
+  </tr> 
+  </thead>
+  <tbody>
+  <tr>
+    <td class="text-center"><b>Plantio</b></td>
+    <td class="text-center"><%= valor_inteiro(@necNplantioSomaTotal) %></td>
+    <td class="text-center"><%= valor_inteiro(@necP2o5plantioSomaTotal) %></td>
+    <td class="text-center"><%= valor_inteiro(@necK2oplantioSomaTotal) %></td>
+  </tr>
+  <tr>
+    <td class="text-center"><b>1° Ano</b></td>
+    <td class="text-center"><%= valor_inteiro(@necN1anoSomaTotal) %></td>
+    <td class="text-center"></td>
+    <td class="text-center"><%= valor_inteiro(@necK2o1anoSomaTotal) %></td>
+  </tr>
+  <tr>
+    <td class="text-center"><b>2° Ano</b></td>
+    <td class="text-center"><%= valor_inteiro(@necN2anoSomaTotal) %></td>
+    <td class="text-center"></td>
+    <td class="text-center"><%= valor_inteiro(@necK2o2anoSomaTotal) %></td>
+  </tr>
+    <tr>
+    <td class="text-center"><b>Produção</b></td>
+    <td class="text-center"><%= valor_inteiro(@necNProducaoSomaTotal) %></td>
+    <td class="text-center"><%= valor_inteiro(@necP2o5ProducaoSomaTotal) %></td>
+    <td class="text-center"><%= valor_inteiro(@necK2oProducaoSomaTotal) %></td>
+  </tr>
+  <% @nTotal = @necNplantioSomaTotal + @necN1anoSomaTotal + @necN2anoSomaTotal + @necNProducaoSomaTotal %>
+  <% @P2o5Total = @necP2o5plantioSomaTotal + @necP2o5ProducaoSomaTotal %>
+  <% @K2oTotal = @necK2oplantioSomaTotal + @necK2o1anoSomaTotal + @necK2o2anoSomaTotal + @necK2oProducaoSomaTotal %>
+    <tr>
+    <td class="text-center"><b>Total</b></td>
+    <td class="text-center"><%= valor_inteiro(@nTotal) %></td>
+    <td class="text-center"><%= valor_inteiro(@P2o5Total) %></td>
+    <td class="text-center"><%= valor_inteiro(@K2oTotal) %></td>
+  </tr>
+
+  </tbody>
+</table><%# Fim Table 4%>
+</div><%# Fim Div%>
+
+<% end %> <%# End do ANO %>

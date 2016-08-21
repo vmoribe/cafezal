@@ -1,0 +1,14 @@
+<%= simple_form_for(@variavel) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :ano %>
+    <%= f.input :profundidade %>
+    <%= f.input :areaAplicacao %>
+    <%= f.input :prnt %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -1,0 +1,31 @@
+<h1>Listing Variavels</h1>
+
+<%= link_to 'New Variavel', new_variavel_path,:class => 'btn btn-default' %>
+
+<table class="table table-condensed table-hover text-center">
+  <thead>
+    <tr>
+      <th class="text-center">Ano</th>
+      <th class="text-center">Profundidade</th>
+      <th class="text-center">Área de aplicação</th>
+      <th class="text-center">PRNT</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @variavels.each do |variavel| %>
+      <tr>
+        <td><%= variavel.ano %></td>
+        <td><%= variavel.profundidade %></td>
+        <td><%= variavel.areaAplicacao %></td>
+        <td><%= variavel.prnt %></td>
+        <td><% link_to 'Show', variavel %></td>
+        <td><%= link_to 'Edit', edit_variavel_path(variavel) %></td>
+        <td><%= link_to 'Destroy', variavel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

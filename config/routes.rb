@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :variavels
+
   resources :parametros
 
     get 'analises/calagem'

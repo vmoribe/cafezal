@@ -1,0 +1,1 @@
+json.partial! "variavels/variavel", variavel: @variavel

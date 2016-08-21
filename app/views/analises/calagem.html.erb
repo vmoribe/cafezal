@@ -1,6 +1,34 @@
 <h1>Necessidade de Calagem</h1>
 
+<div class="col-md-6 col-md-offset-3">
+<table class="table table-condensed text-center">
+  <thead>
+    <tr>
+      <th class="text-center">Ano</th>
+      <th class="text-center">Profundidade</th>
+      <th class="text-center">Área de aplicação</th>
+      <th class="text-center">PRNT</th>
+      <th colspan="1"></th>
+    </tr>
+    <%= link_to 'Nova Variável', new_variavel_path,:class => 'btn btn-default' %>
+  </thead>
+    <% @variavels.each do |variavel| %>
+  <tbody>
+    <tr>
+        <td><%= variavel.ano %></td>
+        <td><%= variavel.profundidade %></td>
+        <td><%= variavel.areaAplicacao %></td>
+        <td><%= variavel.prnt %></td>
+        <td><%= link_to 'Edit', edit_variavel_path(variavel),:class => 'btn btn-default' %></td>
+    </tr>
+  </tbody>
+<% end %>
+</table>
+</div>
+
+
 <%# Bloco Plantio%>
+<table class="table table-condensed">
 <tr>
 <td><h2>Calagem de plantio</h3></td>
 </tr>
@@ -11,79 +39,176 @@
 <td><h3 class="text-center"><%= @parametro_ano %></h3></td>
 </tr>
 
+<% @variavels.where("(ano= ?)", @parametro_ano).each do |variavel| %>
+
+  <% @variavel_profundidade = variavel.profundidade %>
+  <% @variavel_areaAplicacao = variavel.areaAplicacao %>
+  <% @variavel_prnt = variavel.prnt %>
+
     <% @fazendas.where("(id= ?)", @fazenda_id).each do |fazenda| %>
     <tr>
       <td><h3><%= fazenda.nome %></h3></td>
     </tr>
   <% @fazenda_id = fazenda.id %>
 
-<table class="table table-condensed table-hover text-center">
+<table class="table table-condensed table-striped">
   <thead>
     <tr>
-      <th class="text-center">Talhão</th>
-      <th class="text-center">Situação</th>
-      <th class="text-center">Prof</th>
-      <th class="text-center">Ano</th>
-      <th class="text-center">Ph</th>
-      <th class="text-center">K</th>
-      <th class="text-center">P</th>
-      <th class="text-center">Na</th>
-      <th class="text-center">Ca</th>
-      <th class="text-center">Mg</th>
-      <th class="text-center">Al</th>
-      <th class="text-center">H_al</th>
-      <th class="text-center">MO</th>
-      <th class="text-center">P_rem</th>
-      <th class="text-center">Zn</th>
-      <th class="text-center">Fe</th>
-      <th class="text-center">Mn</th>
-      <th class="text-center">Co</th>
-      <th class="text-center">B</th>
-      <th class="text-center">S</th>
-      <th colspan="2"></th>
-    </tr>
-      <tr>
-      <th class="text-center" colspan="5"></th>
-      <th class="text-center" colspan="3">mg/ dm³</th>
-      <th class="text-center" colspan="4">cmol/ dm³</th>
-      <th class="text-center" >dag/ Kg</th>
-      <th class="text-center" >mg/ L</th>
-      <th class="text-center" colspan="6">mg/ dm³</th>
-      <th class="text-center" colspan="2"></th>
+      <th>Talhão</th>
+      <th>Ph</th>
+      <th>CTC a Ph 7</th>
+      <th>V%</th>
+      <th>Ca/Mg</th>
+      <th>NC/ha Método SP</th>
+      <th>Talhão area</th>
+      <th>NC/Total</th>
+      <th>NC/Total - Corrigida</th>
+      <th>NC/ha - Corrigida</th>
+      <th>NC g/m linear compl</th>
+      <th>Calagem Compl (t/ha)</th>
+      <th>Total CC area total</th>
+      <th>Total Calcário</th>
     </tr>
   </thead>
-
   <tbody>
+
+    <% @nctotal = 0 %>
+    <% @nctotalcorrigida = 0 %>
+    <% @nctotalcomplementar = 0 %>
+    <% @totalcalcario = 0 %>
+    <% @plantio.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @fazenda_id, @parametro_ano, "20-40").order("talhao_id").each do |analise| %>
+      
       <tr>
-    <% @plantio.where("(fazenda_id= ? AND ano= ?)", @fazenda_id, @parametro_ano).each do |analise| %>
         <td><%= analise.talhao.nome %></td>
-        <td><%= analise.situacao %></td>
-        <td><%= analise.profundidade %></td>
-        <td><%= analise.ano %></td>
         <td><%= analise.ph %></td>
-        <td><%= analise.potassio_k %></td>
-        <td><%= analise.fosforo_p %></td>
-        <td><%= analise.sodio_na %></td>
-        <td><%= analise.calcio_ca %></td>
-        <td><%= analise.magnesio_mg %></td>
-        <td><%= analise.aluminio_al %></td>
-        <td><%= analise.h_al %></td>
-        <td><%= analise.mat_organica %></td>
-        <td><%= analise.p_rem %></td>
-        <td><%= analise.zinco_zn %></td>
-        <td><%= analise.ferro_fe %></td>
-        <td><%= analise.manganes_mn %></td>
-        <td><%= analise.cobre_cu %></td>
-        <td><%= analise.boro_b %></td>
-        <td><%= analise.enxofre_s %></td>
-        <td><% link_to 'Show', analise %></td>
-        <td><%= link_to 'Edit', edit_analise_path(analise) %></td>
-        <td><%= link_to 'Destroy', analise, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= valor_duascasas(analise.ctcApH7) %></td>
+        <td><%= valor_duascasas(analise.saturacaoBase) %></td>
+        <td><%= valor_duascasas(analise.proporcaoCaMg) %></td>
+        <td class="info"><%= valor_duascasas(analise.necessidadeCalagem) %></td>
+        <td><%= analise.talhao.area %></td>
+        <td><%= valor_duascasas(analise.nctotalcomarea) %></td>
+        <td class="danger"><%= valor_duascasas(analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt)) %></td>
+        <td><%= valor_duascasas((analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt))/analise.talhao.area ) %></td>
+        <td><%= valor_duascasas(analise.necCalagemCompl) %></td>
+        <td><%= valor_duascasas(analise.calagemComplementar) %></td>
+        <td><%= valor_duascasas(analise.necCalagemCompAreaTotal)%></td>
+        <td><%= valor_duascasas(analise.somaCalcario(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt))%></td>
       </tr>
+      <% @nctotal += analise.necessidadeCalagem %>
+      <% @nctotalcorrigida += (analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt)) %>
+      <% @nctotalcomplementar += analise.necCalagemCompAreaTotal %>
+      <% @totalcalcario += (analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt) + analise.necCalagemCompAreaTotal) %>
+    <% end %>
+
+    <tr>
+        <th><b>TOTAL</b></th>   
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th><b><%= valor_duascasas(@nctotal) %></b></th>
+        <th></th>
+        <th></th>
+        <th><b><%= valor_duascasas(@nctotalcorrigida) %></b></th>     
+        <th></th>
+        <th></th>
+        <th></th>
+        <th><b><%= valor_duascasas(@nctotalcomplementar) %></b></th>
+        <th><b><%= valor_duascasas(@totalcalcario) %></b></th>
+    </tr>
   </tbody>
-<% end %>
 </table>
     <% end %>
+      <% end %>
+
+<br>
+<% end %>
+
+
+
+<%# Bloco Produção%>
+<table class="table table-condensed">
+<tr>
+<td><h2>Calagem de Produção</h3></td>
+</tr>
+<% @correcao.select("DISTINCT(ano)").each do |p| %>
+<% @parametro_ano = p.ano %>
+
+<tr>
+<td><h3 class="text-center"><%= @parametro_ano %></h3></td>
+</tr>
+
+<% @variavels.where("(ano= ?)", @parametro_ano).each do |variavel| %>
+
+  <% @variavel_profundidade = variavel.profundidade %>
+  <% @variavel_areaAplicacao = variavel.areaAplicacao %>
+  <% @variavel_prnt = variavel.prnt %>
+    <% @nc = 0 %>
+    <% @fazendas.each do |fazenda| %>
+    <tr>
+      <td><h3><%= fazenda.nome %></h3></td>
+    </tr>
+  <% @fazenda_id = fazenda.id %>
+
+<table class="table table-condensed table-striped">
+  <thead>
+    <tr>
+      <th>Talhão</th>
+      <th>Ph</th>
+      <th>CTC a Ph 7</th>
+      <th>V%</th>
+      <th>Ca/Mg</th>
+      <th>NC/ha Método SP</th>
+      <th>Talhão area</th>
+      <th>NC/Total</th>
+      <th>NC/Total - Corrigida</th>
+      <th>NC/ha - Corrigida</th>
+    </tr>
+  </thead>
+  <tbody class="text-center">
+
+    <% @nctotal = 0 %>
+    <% @nctotalcorrigida = 0 %>
+    <% @nctotalcomplementar = 0 %>
+    <% @totalcalcario = 0 %>
+    <% @correcao.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @fazenda_id, @parametro_ano, "20-40").order("talhao_id").each do |analise| %>
+      
+      <tr>
+        <td><%= analise.talhao.nome %></td>
+        <td><%= analise.ph %></td>
+        <td><%= valor_duascasas(analise.ctcApH7) %></td>
+        <td><%= valor_duascasas(analise.saturacaoBase) %></td>
+        <td><%= valor_duascasas(analise.proporcaoCaMg) %></td>
+        <td class="info"><%= valor_duascasas(analise.necessidadeCalagem) %></td>
+        <td><%= analise.talhao.area %></td>
+        <td><%= valor_duascasas(analise.nctotalcomarea) %></td>
+        <td class="danger"><%= valor_duascasas(analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt)) %></td>
+        <td><%= valor_duascasas((analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt))/analise.talhao.area ) %></td>
+      </tr>
+      <% @nctotal += analise.necessidadeCalagem %>
+      <% @nctotalcorrigida += (analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt)) %>
+      <% @nctotalcomplementar += analise.necCalagemCompAreaTotal %>
+      <% @totalcalcario += (analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt) + analise.necCalagemCompAreaTotal) %>
+    <% end %>
+
+    <tr>
+        <th class="text-center"><b>TOTAL</b></th>   
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th class="text-center"><b><%= valor_duascasas(@nctotal) %></b></th>
+        <th></th>
+        <th></th>
+        <th class="text-center"><b><%= valor_duascasas(@nctotalcorrigida) %></b></th>     
+        <th></th>
+    </tr>
+        <% @nc += @totalcalcario %>
+  </tbody>
+</table>
+    <% end %>
+      <% end %>
+<h3><b>Necessidade de Calagem Total - Ano <%= @parametro_ano %> - <%= valor_duascasas(@nc) %> ton</b></h3>
 
 <br>
 <% end %>

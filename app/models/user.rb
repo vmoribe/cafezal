@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :talhaos
   has_many :analises
   has_many :parametros
+  has_many :variavels
   
   def set_default_role
     self.role ||= :user

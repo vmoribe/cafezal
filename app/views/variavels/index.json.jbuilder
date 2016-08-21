@@ -1,0 +1,1 @@
+json.array! @variavels, partial: 'variavels/variavel', as: :variavel

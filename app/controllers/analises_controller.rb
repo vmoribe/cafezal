@@ -7,9 +7,7 @@ class AnalisesController < ApplicationController
     @plantio = Analise.where("situacao = ?", "Plantio").order("ano DESC")
     @correcao = Analise.where("situacao != ?", "Plantio").order("ano DESC")
     @parametros = Parametro.where(user_id: current_user.id).order("id DESC")
-
-Analise.where("situacao = ?", "Plantio").order("ano DESC").select("DISTINCT(ano)", "fazenda_id")
-
+    @variavels = Variavel.where(user_id: current_user.id).order("id DESC")
   end
   # GET /analises
   # GET /analises.json

@@ -1,0 +1,31 @@
+<h1>Listagem Variáveis Gessagem</h1>
+
+<%= link_to 'New Vargesso', new_vargesso_path,:class => 'btn btn-default' %>
+
+<table class="table table-condensed table-hover text-center">
+  <thead>
+    <tr>
+      <th class="text-center">Ano</th>
+      <th class="text-center">Profundidade</th>
+      <th class="text-center">Área aplicação</th>
+      <th class="text-center">Teor Calcio(%)</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vargessos.each do |vargesso| %>
+      <tr>
+        <td><%= vargesso.ano %></td>
+        <td><%= vargesso.profundidade %></td>
+        <td><%= vargesso.areaAplicacao %></td>
+        <td><%= vargesso.teorCalcio %></td>
+        <td><%= link_to 'Edit', edit_vargesso_path(vargesso) %></td>
+        <td><%= link_to 'Destroy', vargesso, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

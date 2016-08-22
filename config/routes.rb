@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  resources :vargessos
+
   resources :variavels
 
   resources :parametros
 
+    get 'analises/gessagem'
     get 'analises/calagem'
     get 'analises/fertilidade'
   

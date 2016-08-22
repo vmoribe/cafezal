@@ -1,0 +1,148 @@
+<h1>Necessidade de Gessagem</h1>
+
+<div class="col-md-6 col-md-offset-3">
+<table class="table table-condensed text-center">
+  <thead>
+    <tr>
+      <th class="text-center">Ano</th>
+      <th class="text-center">Profundidade</th>
+      <th class="text-center">Área de aplicação</th>
+      <th class="text-center">Teor de Cálcio</th>
+      <th colspan="1"></th>
+    </tr>
+    <%= link_to 'Nova Variável gesso', new_vargesso_path,:class => 'btn btn-default' %>
+
+  </thead>
+    <% @vargessos.each do |vargesso| %>
+  <tbody>
+    <tr>
+        <td><%= vargesso.ano %></td>
+        <td><%= vargesso.profundidade %></td>
+        <td><%= vargesso.areaAplicacao %></td>
+        <td><%= vargesso.teorCalcio %></td>
+        <td><%= link_to 'Edit', edit_vargesso_path(vargesso),:class => 'btn btn-default' %></td>
+    </tr>
+  </tbody>
+<% end %>
+</table>
+</div>
+
+
+<% @analises.select("DISTINCT(ano)").each do |p| %>
+<% @parametro_ano = p.ano %>
+
+    <% @ngtotal = 0 %>
+    <% @ncaGessagem = 0 %>
+    <% @ngCorrigidoTotal = 0 %>
+    <% @ngCorrigidoTotalArea = 0 %>
+
+<%# Bloco Gesso%>
+<table class="table table-condensed">
+<tr>
+<td><h3 class="text-center"><%= @parametro_ano %></h3></td>
+</tr>
+
+
+<% @vargessos.where("(ano= ?)", @parametro_ano).each do |variavel| %>
+
+  <% @variavel_profundidade = variavel.profundidade %>
+  <% @variavel_areaAplicacao = variavel.areaAplicacao %>
+  <% @variavel_teorCalcio = variavel.teorCalcio %>
+
+    
+<% @teste.select("DISTINCT(fazenda_id)").where("(ano= ? AND profundidade = ?)", @parametro_ano, "20-40").each do |v| %>
+  <% @faz_id = v.fazenda_id %>
+
+    <% @fazendas.where("(id= ?)", @faz_id).each do |fazenda| %>
+    <tr>
+      <td><h3><%= fazenda.nome %></h3></td>
+    </tr>
+  <% @fazenda_id = fazenda.id %>
+
+<table class="table table-condensed table-striped text-center">
+  <thead>
+    <tr>
+      <th class="text-center">Talhão</th>
+      <th class="text-center">Cálcio</th>
+      <th class="text-center">Alumínio</th>
+      <th class="text-center">Saturação Al</th>
+      <th class="text-center">Talhão area</th>
+      <th class="text-center">Nec Cálcio(kg)</th>
+      <th class="text-center">Nec Gesso(ton/ha)</th>
+      <th class="text-center">Nec Gesso Corrigido (ton/ha)</th>
+      <th class="text-center">Nec Gesso Total</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% @ng = 0 %>
+    <% @nca = 0 %>
+    <% @ngCorrigido = 0 %>
+    <% @ngCorrigidoArea = 0 %>
+    <% @analises.where("(fazenda_id= ? AND ano= ? AND profundidade= ?)", @fazenda_id, @parametro_ano, "20-40").order("talhao_id").each do |analise| %>
+      
+      <tr>
+        <td><%= analise.talhao.nome %></td>
+        <td><%= analise.calcio_ca %></td>
+        <td><%= analise.aluminio_al %></td>
+        <td><%= valor_duascasas(analise.saturacaoAluminio) %></td>
+        <td><%= analise.talhao.area %></td>
+        <td><%= valor_duascasas(analise.calculoCaGessagem(analise.p_rem)) %></td>
+        <td class="danger"><%= valor_duascasas(analise.necessidadeGessagem(analise.calculoCaGessagem(analise.p_rem),@variavel_teorCalcio)) %></td>
+        <td><%= valor_duascasas(analise.correcaoGesso(analise.necessidadeGessagem(analise.calculoCaGessagem(analise.p_rem),@variavel_teorCalcio),@variavel_areaAplicacao,@variavel_profundidade))%></td>
+        <td class="success"><%= valor_duascasas(analise.gessoTotalCorrigido(analise.correcaoGesso(analise.necessidadeGessagem(analise.calculoCaGessagem(analise.p_rem),@variavel_teorCalcio),@variavel_areaAplicacao,@variavel_profundidade),analise.talhao.area))%></td>
+      </tr>
+      <% @ng += analise.necessidadeGessagem(analise.calculoCaGessagem(analise.p_rem),@variavel_teorCalcio) %>
+      <% @nca += analise.calculoCaGessagem(analise.p_rem) %>
+      <% @ngCorrigido += analise.correcaoGesso(analise.necessidadeGessagem(analise.calculoCaGessagem(analise.p_rem),@variavel_teorCalcio),@variavel_areaAplicacao,@variavel_profundidade) %>
+      <% @ngCorrigidoArea += analise.gessoTotalCorrigido(analise.correcaoGesso(analise.necessidadeGessagem(analise.calculoCaGessagem(analise.p_rem),@variavel_teorCalcio),@variavel_areaAplicacao,@variavel_profundidade),analise.talhao.area) %>
+    <% end %>
+
+    <tr>
+        <th><b>TOTAL</b></th>   
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th><b><%= valor_duascasas(@nca) %></b></th>
+        <th><b><%= valor_duascasas(@ng) %></b></th>  
+        <th><b><%= valor_duascasas(@ngCorrigido) %></b></th>   
+        <th><b><%= valor_duascasas(@ngCorrigidoArea) %></b></th>
+    </tr>
+  </tbody>
+</table>
+
+    <% @ngtotal += @ng %>
+    <% @ncaGessagem += @nca %>
+    <% @ngCorrigidoTotal += @ngCorrigido %>
+    <% @ngCorrigidoTotalArea += @ngCorrigidoArea %>
+      <% end %>
+    <% end %>
+<div class="col-md-6 col-md-offset-3">
+<table class="table table-condensed table-striped"> <%# Table 4%>
+  <thead>
+  <tr>
+    <th class="text-center"><%= @parametro_ano%></th>
+    <th class="text-center"><b>Total Cálcio</b></th>
+    <th class="text-center"><b>Total Gesso/ha</b></th>
+    <th class="text-center"><b>Total Gesso Corrigido (t/ha)</b></th>
+    <th class="text-center"><b>Total Gesso Corrigido Área</b></th>    
+  </tr> 
+  </thead>
+  <tbody>
+  <tr>
+    <td class="text-center"><b>Correção</b></td>
+    <td class="text-center"><%= valor_duascasas(@ncaGessagem) %></td>
+    <td class="text-center"><%= valor_duascasas(@ngtotal) %></td>
+    <td class="text-center"><%= valor_duascasas(@ngCorrigidoTotal) %></td>
+    <td class="text-center"><%= valor_duascasas(@ngCorrigidoTotalArea) %></td>
+  </tr>
+
+  </tbody>
+</table><%# Fim Table 4%>
+</div><%# Fim Div%>
+<% end %>
+<br>
+
+
+<%end%>

@@ -1,0 +1,1 @@
+json.array! @vargessos, partial: 'vargessos/vargesso', as: :vargesso

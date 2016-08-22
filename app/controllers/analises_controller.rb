@@ -1,6 +1,13 @@
 class AnalisesController < ApplicationController
   before_action :set_analise, only: [:show, :edit, :update, :destroy]
 
+  def gessagem
+    @vargessos = Vargesso.where(user_id: current_user.id).order("id DESC")
+    @teste = Analise.where(user_id: current_user.id)
+    @analises = Analise.where(user_id: current_user.id).order("ano DESC")
+    @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
+  end
+
   def fertilidade
     @parametros = Parametro.where(user_id: current_user.id).order("id DESC")
     @plantio = Analise.where("situacao = ?", "Plantio").order("ano DESC", "talhao_id ASC")

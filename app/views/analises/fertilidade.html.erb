@@ -1,5 +1,5 @@
 <div class="row">
-<h1 class="text-center">Necessidade de Adubação</h1>
+<h1 class="text-center">Necessidade de Adubação NPK</h1>
 <div class="col-md-6">
 <table class="table table-condensed text-center">
   <thead>
@@ -25,7 +25,7 @@
 </div>
 <div class="col-md-6">
 <%= search_form_for @search, :class => "form-inline", url: analises_fertilidade_path do |f| %>
-<h1>Filtro</h1>
+<h3>Filtro</h3>
   <%= f.label :ano_eq, "Ano:" %>
   <%= f.search_field :ano_eq, :class => "text-center form-control"%>
   <%= f.label :fazenda_nome_cont, "Fazenda:" %>
@@ -43,8 +43,8 @@
 
 <div class="col-xs-12 col-md-12"> <%# Divisão 1%>
 
-    <table class="table table-condensed"><%# Table 2%>
-    
+    <table class="table table-condensed text-center"><%# Table 2%>
+
     </table><%# Table 2%>
 
   <% @necNplantioSomaTotal = 0 %>
@@ -58,7 +58,7 @@
 
 <h2>Adubação de Plantio</h2>
 
-<table class="table table-condensed"> <%# Table 1%>
+<table class="table table-condensed text-center"> <%# Table 1%>
   
       <tbody><%# Body 1%>
   
@@ -67,7 +67,7 @@
   <% @necK2oplantioSoma = 0 %>
 
 
-<table class="table table-condensed"> <%# Table 3%>
+<table class="table table-condensed text-center"> <%# Table 3%>
           <thead>
             <tr>
               <th>Fazenda</th>
@@ -113,12 +113,12 @@
     <td><%= analise.fosforo_p %></td>
     <td><%= analise.potassio_k %></td>
     <td><%= valor_inteiro(analise.necNplantio)%></td>
-    <td class="danger"><%= valor_inteiro(analise.necNplantioemKgha)%></td>
-    <td class="success"><%= valor_inteiro(analise.necNPlantioAplicacao) %></td>
-    <td class="active"><%= valor_inteiro(analise.necNplantioTotal(@parametro_parcelamento))%></td>
+    <td class="danger text-center"><%= valor_inteiro(analise.necNplantioemKgha)%></td>
+    <td class="success text-center"><%= valor_inteiro(analise.necNPlantioAplicacao) %></td>
+    <td class="active text-center"><%= valor_inteiro(analise.necNplantioTotal(@parametro_parcelamento))%></td>
     <td><%= valor_inteiro(analise.necP2o5plantio) %></td>
-    <td class="danger"><%= valor_inteiro(analise.necP2o5plantioemKgha)%></td>
-    <td class="active"><%= valor_inteiro(analise.necP2o5plantioTotal)%></td>
+    <td class="danger text-center"><%= valor_inteiro(analise.necP2o5plantioemKgha)%></td>
+    <td class="active text-center"><%= valor_inteiro(analise.necP2o5plantioTotal)%></td>
 
     <td><%= valor_inteiro(analise.necK2oplantio) %></td>
     <td><%= valor_inteiro(analise.necK2oplantioemKgha) %></td>
@@ -133,13 +133,13 @@
   
 <% end %>
   <tr>
-    <th><b>Total</b></th>
+    <th class="text-center"><b>Total</b></th>
     <th colspan="8"></th>
-    <th><%= valor_inteiro(@necNplantioSoma) %></th>
+    <th class="text-center"><%= valor_inteiro(@necNplantioSoma) %></th>
     <th colspan="2"></th>
-    <th><%= valor_inteiro(@necP2o5plantioSoma) %></th>
+    <th class="text-center"><%= valor_inteiro(@necP2o5plantioSoma) %></th>
     <th colspan="4"></th>
-    <th><%= valor_inteiro(@necK2oplantioSoma) %></th>
+    <th class="text-center"><%= valor_inteiro(@necK2oplantioSoma) %></th>
   </tr>
 
    <% @necNplantioSomaTotal += @necNplantioSoma %>
@@ -179,7 +179,7 @@
       <tbody><%# Body 1%>
 
 
-<table class="table table-condensed"> <%# Table 3%>
+<table class="table table-condensed text-center"> <%# Table 3%>
           <thead>
             <tr>
               <th>Fazenda</th>
@@ -231,11 +231,11 @@
 <% end %>
 
   <tr>
-    <th><b>Total</b></th>
+    <th class="text-center"><b>Total</b></th>
     <th colspan="6"></th>
-    <th><%= valor_inteiro(@necN1anoSoma) %></th>
+    <th class="text-center"><%= valor_inteiro(@necN1anoSoma) %></th>
     <th colspan="3"></th>
-    <th><%= valor_inteiro(@necK2o1anoSoma) %></th>
+    <th class="text-center"><%= valor_inteiro(@necK2o1anoSoma) %></th>
   </tr>
    <% @necN1anoSomaTotal += @necN1anoSoma %>
    <% @necK2o1anoSomaTotal += @necK2o1anoSoma %>
@@ -255,7 +255,7 @@
     <table class="table table-condensed"><%# Table 2%>
     </table><%# Table 2%>
 
-<table class="table table-condensed"> <%# Table 1%>
+<table class="table table-condensed text-center"> <%# Table 1%>
   <% @necN2anoSomaTotal = 0 %>
   <% @necK2o2anoSomaTotal = 0 %>
 
@@ -270,7 +270,7 @@
   <% @necK2o2anoSoma = 0 %>
 
 
-<table class="table table-condensed"> <%# Table 3%>
+<table class="table table-condensed text-center"> <%# Table 3%>
           <thead>
             <tr>
               <th>Fazenda</th>
@@ -322,11 +322,11 @@
 <% end %>
 
   <tr>
-    <th><b>Total</b></th>
+    <th class="text-center"><b>Total</b></th>
     <th colspan="6"></th>
-    <th><%= valor_inteiro(@necN2anoSoma) %></th>
+    <th class="text-center"><%= valor_inteiro(@necN2anoSoma) %></th>
     <th colspan="3"></th>
-    <th><%= valor_inteiro(@necK2o2anoSoma) %></th>
+    <th class="text-center"><%= valor_inteiro(@necK2o2anoSoma) %></th>
   </tr>
    <% @necN2anoSomaTotal += @necN2anoSoma %>
    <% @necK2o2anoSomaTotal += @necK2o2anoSoma %>
@@ -364,7 +364,7 @@
   <% @necK2oProducaoSoma = 0 %>
 
 
-<table class="table table-condensed"> <%# Table 3%>
+<table class="table table-condensed text-center"> <%# Table 3%>
           <thead>
             <tr>
               <th>Fazenda</th>
@@ -427,13 +427,13 @@
 
 <% end %>
   <tr>
-    <th><b>Total</b></th>
+    <th class="text-center"><b>Total</b></th>
     <th colspan="8"></th>
-    <th><%= valor_inteiro(@necNProducaoSoma) %></th>
+    <th class="text-center"><%= valor_inteiro(@necNProducaoSoma) %></th>
     <th colspan="2"></th>
-    <th><%= valor_inteiro(@necP2o5ProducaoSoma) %></th>
+    <th class="text-center"><%= valor_inteiro(@necP2o5ProducaoSoma) %></th>
     <th colspan="3"></th>
-    <th><%= valor_inteiro(@necK2oProducaoSoma) %></th>
+    <th class="text-center"><%= valor_inteiro(@necK2oProducaoSoma) %></th>
   </tr>
    <% @necNProducaoSomaTotal += @necNProducaoSoma %>
    <% @necP2o5ProducaoSomaTotal += @necP2o5ProducaoSoma %>

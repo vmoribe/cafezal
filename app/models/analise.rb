@@ -7,8 +7,7 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
 
 #Gessagem
   def gessoTotalCorrigido(correcaoGesso,areaTalhao)
-    correcaoGesso * areaTalhao
-      
+    correcaoGesso * areaTalhao   
   end
 
   def correcaoGesso(necessidadeGessagem,areaAplicacao,profundidade)
@@ -34,6 +33,7 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
   def saturacaoAluminio
     (100 * aluminio_al) / ctcEfetiva
   end
+
 #Calagem
 
   def ctcEfetiva
@@ -115,6 +115,60 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
 
   def ncporha
     nctotalcomarea / talhao.area
+  end
+
+#Fertilidade - Micronutrientes
+
+  def necBoro #Extrator Água quente
+    case boro_b
+    when 0 .. 0.2
+      3
+    when 0.21 .. 0.4
+      2
+    when 0.41 .. 0.6
+      1
+    when 0.61 .. 1000
+      0
+    end
+  end
+
+  def necCobre #Extrator Mechlich-1
+    case cobre_cu
+    when 0 .. 0.5
+      3
+    when 0.51 .. 1.0
+      2
+    when 1.01 .. 1.5
+      1
+    when 1.51 .. 1000
+      0
+    end
+  end
+
+  def necManganes #Extrator Mechlich-1
+    case manganes_mn
+    when 0 .. 5.0
+      15
+    when 5.01 .. 10.0
+      10
+    when 10.01 .. 15.0
+      5
+    when 15.01 .. 1000
+      0
+    end
+  end
+
+  def necZinco #Extrator Mechlich-1
+    case zinco_zn
+    when 0 .. 2.0
+      6
+    when 2.01 .. 4.0
+      4
+    when 4.01 .. 6.0
+      2
+    when 6.01 .. 1000
+      0
+    end
   end
 
 

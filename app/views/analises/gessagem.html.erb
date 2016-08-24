@@ -28,7 +28,7 @@
 </div>
 <div class="col-md-6">
 <%= search_form_for @search, :class => "form-inline", url: analises_gessagem_path do |f| %>
-<h1>Filtro</h1>
+<h3>Filtro</h3>
   <%= f.label :ano_eq, "Ano:" %>
   <%= f.search_field :ano_eq, :class => "text-center form-control"%>
   <%= f.label :fazenda_nome_cont, "Fazenda:" %>
@@ -80,7 +80,7 @@
       <th class="text-center">Nec Gesso Total</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody  class="text-center">
 
     <% @ng = 0 %>
     <% @nca = 0 %>
@@ -107,15 +107,16 @@
     <% end %>
 
     <tr>
-        <th><b>TOTAL</b></th>   
+        <th class="text-center"><b>TOTAL</b></th>   
         <th></th>
         <th></th>
         <th></th>
         <th></th>
-        <th><b><%= valor_duascasas(@nca) %></b></th>
-        <th><b><%= valor_duascasas(@ng) %></b></th>  
-        <th><b><%= valor_duascasas(@ngCorrigido) %></b></th>   
-        <th><b><%= valor_duascasas(@ngCorrigidoArea) %></b></th>
+        <th></th>
+        <th class="text-center"><b><%= valor_duascasas(@nca) %></b></th>
+        <th class="text-center"><b><%= valor_duascasas(@ng) %></b></th>  
+        <th class="text-center"><b><%= valor_duascasas(@ngCorrigido) %></b></th>   
+        <th class="text-center"><b><%= valor_duascasas(@ngCorrigidoArea) %></b></th>
     </tr>
   </tbody>
 </table>

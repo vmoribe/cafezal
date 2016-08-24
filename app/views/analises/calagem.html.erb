@@ -28,7 +28,7 @@
 </div>
 <div class="col-md-6">
 <%= search_form_for @search, :class => "form-inline", url: analises_calagem_path do |f| %>
-<h1>Filtro</h1>
+<h3>Filtro</h3>
   <%= f.label :ano_eq, "Ano:" %>
   <%= f.search_field :ano_eq, :class => "text-center form-control"%>
   <%= f.label :fazenda_nome_cont, "Fazenda:" %>
@@ -124,6 +124,7 @@
         <th></th>
         <th></th>
         <th></th>
+        <th></th>
         <th><b><%= valor_duascasas(@nctotal) %></b></th>
         <th></th>
         <th></th>
@@ -210,6 +211,7 @@
 
     <tr>
         <th class="text-center"><b>TOTAL</b></th>   
+        <th></th>
         <th></th>
         <th></th>
         <th></th>

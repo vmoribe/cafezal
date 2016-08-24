@@ -1,0 +1,144 @@
+<div class="row">
+<h1 class="text-center">Necessidade de Adubação Micronutrientes</h1>
+<div class="col-md-6">
+</div>
+<div class="col-md-6">
+<%= search_form_for @search, :class => "form-inline", url: analises_micronutrientes_path do |f| %>
+<h3>Filtro</h3>
+  <%= f.label :ano_eq, "Ano:" %>
+  <%= f.search_field :ano_eq, :class => "text-center form-control"%>
+  <%= f.label :fazenda_nome_cont, "Fazenda:" %>
+  <%= f.search_field :fazenda_nome_cont, :class => "text-center form-control" %>
+  <%= f.submit :class => 'btn btn-primary' %>
+<% end %>
+</div>
+
+
+<%# Bloco Micronutrientes%>
+<table class="table table-condensed">
+
+<% @analises.select("DISTINCT(ano)").each do |p| %>
+<% @parametro_ano = p.ano %>
+
+<div class="col-xs-12 col-md-12"> <%# Divisão 1%>
+
+    <table class="table table-condensed text-center"><%# Table 2%>
+
+    </table><%# Table 2%>
+
+  <% @necBoroSomaTotal = 0 %>
+  <% @necCobreSomaTotal = 0 %>
+  <% @necManganesSomaTotal = 0 %>
+  <% @necZincoSomaTotal = 0 %>
+
+  <% @analises.select("DISTINCT(fazenda_id)").where("(ano= ?)", @parametro_ano).each do |v| %>
+  <% @faz_id = v.fazenda_id %>
+
+<table class="table table-condensed text-center"> <%# Table 1%>
+  
+      <tbody><%# Body 1%>
+  
+  <% @necBoroSoma = 0 %>
+  <% @necCobreSoma = 0 %>
+  <% @necManganesSoma = 0 %>
+  <% @necZincoSoma = 0 %>
+
+
+<table class="table table-condensed text-center"> <%# Table 3%>
+          <thead>
+            <tr>
+              <th>Fazenda</th>
+              <th>Ano</th>
+              <th>Talhão</th>
+              <th>Área</th>
+              <th>Boro</th>
+              <th>Nec B (kg/ha)</th>
+              <th>Cobre</th>
+              <th>Nec Cu (kg/ha)</th>
+              <th>Manganês</th>
+              <th>Nec Mn (kg/ha)</th>
+              <th>Zinco</th>
+              <th>Nec Zn (kg/ha)</th>
+            </tr>
+          </thead>
+
+<% @analises.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @faz_id, @parametro_ano, "20-40").each do |analise| %>
+
+	<% @necBoro = analise.necBoro %>
+	<% @necCobre = analise.necCobre %>
+	<% @necManganes = analise.necManganes %>
+	<% @necZinco = analise.necZinco %>
+
+  <tbody>
+   <tr>
+    <td><%= analise.fazenda.nome %></td>
+    <td><%= analise.ano %></td>
+    <td><%= analise.talhao.nome %></td>
+    <td><%= analise.talhao.area %></td>
+    <td><%= analise.boro_b %></td>
+    <td class="danger text-center"><%= valor_duascasas(@necBoro) %></td>
+    <td><%= analise.cobre_cu %></td>
+    <td class="danger text-center"><%= valor_duascasas(@necCobre)%></td>
+    <td><%= analise.manganes_mn %></td>
+    <td class="danger text-center"><%= valor_duascasas(@necManganes) %></td>
+    <td><%= analise.zinco_zn %></td>
+    <td class="danger text-center"><%= valor_duascasas(@necZinco)%></td>
+   </tr>  
+
+  <% @necBoroSoma += @necBoro %>
+  <% @necCobreSoma += @necCobre %>
+  <% @necManganesSoma += @necManganes %>
+  <% @necZincoSoma += @necZinco %>  
+<% end %>
+
+  <tr>
+    <th class="text-center"><b>Total</b></th>
+    <th colspan="4"></th>
+    <th class="text-center"><%= valor_duascasas(@necBoroSoma) %></th>
+    <th colspan="1"></th>
+    <th class="text-center"><%= valor_duascasas(@necCobreSoma) %></th>
+    <th colspan="1"></th>
+    <th class="text-center"><%= valor_duascasas(@necManganesSoma) %></th>
+    <th colspan="1"></th>
+    <th class="text-center"><%= valor_duascasas(@necZincoSoma) %></th>
+  </tr>
+
+	<% @necBoroSomaTotal += @necBoroSoma %>
+	<% @necCobreSomaTotal += @necCobreSoma %>
+	<% @necManganesSomaTotal += @necManganesSoma %>
+	<% @necZincoSomaTotal += @necZincoSoma %>
+   
+  </tbody> 
+</table> <%# Table 3%>
+<% end %> <%# Fim Do Farm 1%> 
+    </tbody><%# Fim Do Body 1%>
+  </table> <%# Fim Table 1%>
+</div> <%# Fim Divisão 1%>
+
+<%# Fim Bloco Micronutrientes%>
+
+<div class="col-md-6 col-md-offset-3">
+<table class="table table-condensed table-striped"> <%# Table 4%>
+  <thead>
+  <tr>
+    <th class="text-center"><%= @parametro_ano%></th>
+    <th class="text-center"><b>Total Boro</b></th>
+    <th class="text-center"><b>Total Cobre</b></th>
+    <th class="text-center"><b>Total Manganês</b></th>    
+    <th class="text-center"><b>Total Zinco</b></th>    
+  </tr> 
+  </thead>
+  <tbody>
+    <tr>
+    <td class="text-center"><b>Total</b></td>
+    <td class="text-center"><%= valor_duascasas(@necBoroSomaTotal) %></td>
+    <td class="text-center"><%= valor_duascasas(@necCobreSomaTotal) %></td>
+    <td class="text-center"><%= valor_duascasas(@necManganesSomaTotal) %></td>
+    <td class="text-center"><%= valor_duascasas(@necZincoSomaTotal) %></td>
+  </tr>
+
+  </tbody>
+</table><%# Fim Table 4%>
+</div><%# Fim Div%>
+
+<% end %> <%# End do ANO %>

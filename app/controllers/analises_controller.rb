@@ -30,11 +30,9 @@ class AnalisesController < ApplicationController
   # GET /analises
   # GET /analises.json
   def index
-    @search = Analise.where(user_id: current_user.id).ransack(params[:q])
-    @analises = @search.result
-    @analises = @analises.where(:ano => nil) unless params[:q]
-    #@analises = Analise.where(user_id: current_user.id).order( "profundidade ASC", "talhao_id ASC")
-
+    @analises = Analise.where(user_id: current_user.id).order( "profundidade ASC", "talhao_id ASC")
+    @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
+    @parametros = Parametro.where(user_id: current_user.id).order("id DESC")
   end
 
   # GET /analises/1

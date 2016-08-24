@@ -1,28 +1,29 @@
-  <div class="container">
-<%= search_form_for @search, :class => "form-inline", url: analises_path do |f| %>
-<h1>Filtro</h1>
-  <%= f.label :ano_eq, "Ano:" %>
-  <%= f.search_field :ano_eq, :class => "text-center form-control"%>
-  <%= f.label :fazenda_nome_cont, "Fazenda:" %>
-  <%= f.search_field :fazenda_nome_cont, :class => "text-center form-control" %>
-  <%= f.submit :class => 'btn btn-primary' %>
-<% end %>
-</div>
-
 
 <h1>Listagem Análises</h1>
 
 <%= link_to 'Nova Analise', new_analise_path,:class => 'btn btn-default' %>
 
 
+<% @parametros.each do |parametro| %>
+   <tr>
+     <td><h2  class="text-center"><%= parametro.ano %></h2></td>
+   </tr>      
+<% @parametro_ano = parametro.ano %>
+
+  <% @fazendas.each do |fazenda| %>
+    <tr>
+      <td><h3><%= fazenda.nome %></h3></td>
+    </tr>
+  <% @fazenda_id = fazenda.id %>
+ 
+
 <table class="table table-condensed table-hover text-center">
   <thead>
     <tr>
-      <th class="text-center"><%= sort_link(@search, :fazenda_id, 'Fazenda', default_order: :desc) %></th>
-      <th class="text-center"><%= sort_link(@search, :talhao_id, 'Talhão', default_order: :desc) %></th>
-      <th class="text-center"><%= sort_link(@search, :situacao, 'Situação', default_order: :desc) %></th>
-      <th class="text-center"><%= sort_link(@search, :profundidade, 'Prof', default_order: :desc) %></th>
-      <th class="text-center"><%= sort_link(@search, :ano, 'Ano', default_order: :desc) %></th>
+      <th class="text-center">Talhão</th>
+      <th class="text-center">Situação</th>
+      <th class="text-center">Profundidade</th>
+      <th class="text-center">Ano</th>
       <th class="text-center">Ph</th>
       <th class="text-center">K</th>
       <th class="text-center">P</th>
@@ -54,8 +55,7 @@
 
   <tbody>
       <tr>
-    <% @analises.each do |analise| %>
-        <td><%= analise.fazenda.nome %></td>    
+    <% @analises.where("(fazenda_id= ? AND ano= ?)", @fazenda_id, @parametro_ano).each do |analise| %>
         <td><%= analise.talhao.nome %></td>
         <td><%= analise.situacao %></td>
         <td><%= analise.profundidade %></td>
@@ -83,4 +83,5 @@
   </tbody>
 <% end %>
 </table>
-
+<%end%>
+<%end%>

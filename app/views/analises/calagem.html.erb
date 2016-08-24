@@ -1,6 +1,7 @@
-<h1>Necessidade de Calagem</h1>
 
-<div class="col-md-6 col-md-offset-3">
+<div class="row">
+<h1 class="text-center">Necessidade de Calagem</h1>
+<div class="col-md-6">
 <table class="table table-condensed text-center">
   <thead>
     <tr>
@@ -25,6 +26,18 @@
 <% end %>
 </table>
 </div>
+<div class="col-md-6">
+<%= search_form_for @search, :class => "form-inline", url: analises_calagem_path do |f| %>
+<h1>Filtro</h1>
+  <%= f.label :ano_eq, "Ano:" %>
+  <%= f.search_field :ano_eq, :class => "text-center form-control"%>
+  <%= f.label :fazenda_nome_cont, "Fazenda:" %>
+  <%= f.search_field :fazenda_nome_cont, :class => "text-center form-control" %>
+  <%= f.submit :class => 'btn btn-primary' %>
+<% end %>
+</div>
+</div>
+
 
 <% @analises.select("DISTINCT(ano)").each do |p| %>
 <% @parametro_ano = p.ano %>
@@ -49,20 +62,15 @@
   <% @variavel_prnt = variavel.prnt %>
 
     
-<% @teste.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "Plantio").each do |v| %>
+<% @analises.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "Plantio").each do |v| %>
   <% @faz_id = v.fazenda_id %>
 
 
 
-    <% @fazendas.where("(id= ?)", @faz_id).each do |fazenda| %>
-    <tr>
-      <td><h3><%= fazenda.nome %></h3></td>
-    </tr>
-  <% @fazenda_id = fazenda.id %>
-
 <table class="table table-condensed table-striped">
   <thead>
     <tr>
+      <th>Fazenda</th>
       <th>Talhão</th>
       <th>Ph</th>
       <th>CTC a Ph 7</th>
@@ -85,9 +93,10 @@
     <% @nctotalcorrigida = 0 %>
     <% @nctotalcomplementar = 0 %>
     <% @totalcalcario = 0 %>
-    <% @plantio.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @fazenda_id, @parametro_ano, "20-40").order("talhao_id").each do |analise| %>
+    <% @plantio.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @faz_id, @parametro_ano, "20-40").order("talhao_id").each do |analise| %>
       
       <tr>
+        <td><%= analise.fazenda.nome %></td>
         <td><%= analise.talhao.nome %></td>
         <td><%= analise.ph %></td>
         <td><%= valor_duascasas(analise.ctcApH7) %></td>
@@ -134,7 +143,7 @@
     <% @totalPlantiocalcario += @totalcalcario %>
       <% end %>
     <% end %>
-<% end %>
+
 <br>
 
   
@@ -153,19 +162,14 @@
   <% @variavel_areaAplicacao = variavel.areaAplicacao %>
   <% @variavel_prnt = variavel.prnt %>
 
-<% @teste.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao != ?)", @parametro_ano, "Plantio").each do |v| %>
+<% @analises.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao != ?)", @parametro_ano, "Plantio").each do |v| %>
   <% @faz_id = v.fazenda_id %>
 
-
-    <% @fazendas.where("(id= ?)", @faz_id).each do |fazenda| %>
-    <tr>
-      <td><h3><%= fazenda.nome %></h3></td>
-    </tr>
-  <% @fazenda_id = fazenda.id %>
 
 <table class="table table-condensed table-striped">
   <thead>
     <tr>
+      <th>Fazenda</th>
       <th>Talhão</th>
       <th>Ph</th>
       <th>CTC a Ph 7</th>
@@ -184,9 +188,10 @@
     <% @nctotalcorrigida = 0 %>
     <% @nctotalcomplementar = 0 %>
     <% @totalcalcario = 0 %>
-    <% @correcao.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @fazenda_id, @parametro_ano, "20-40").order("talhao_id").each do |analise| %>
+    <% @correcao.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @faz_id, @parametro_ano, "20-40").order("talhao_id").each do |analise| %>
       
       <tr>
+        <td><%= analise.fazenda.nome %></td>
         <td><%= analise.talhao.nome %></td>
         <td><%= analise.ph %></td>
         <td><%= valor_duascasas(analise.ctcApH7) %></td>
@@ -223,8 +228,6 @@
 <% end %>
 <br>
     <% end %>
-      <% end %>
-
 
 <div class="col-md-6 col-md-offset-3">
 <table class="table table-condensed table-striped"> <%# Table 4%>

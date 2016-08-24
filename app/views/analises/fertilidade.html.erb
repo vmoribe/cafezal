@@ -1,7 +1,6 @@
-<h1>Necessidade de Adubação</h1>
-
-<%# Bloco Parâmetros %>
-<div class="col-md-6 col-md-offset-3">
+<div class="row">
+<h1 class="text-center">Necessidade de Adubação</h1>
+<div class="col-md-6">
 <table class="table table-condensed text-center">
   <thead>
     <tr>
@@ -24,10 +23,20 @@
   </tbody>
 </table>
 </div>
+<div class="col-md-6">
+<%= search_form_for @search, :class => "form-inline", url: analises_fertilidade_path do |f| %>
+<h1>Filtro</h1>
+  <%= f.label :ano_eq, "Ano:" %>
+  <%= f.search_field :ano_eq, :class => "text-center form-control"%>
+  <%= f.label :fazenda_nome_cont, "Fazenda:" %>
+  <%= f.search_field :fazenda_nome_cont, :class => "text-center form-control" %>
+  <%= f.submit :class => 'btn btn-primary' %>
+<% end %>
+</div>
+</div>
 
 <%# Bloco Plantio%>
 <table class="table table-condensed">
-
 
 <% @analises.select("DISTINCT(ano)").each do |p| %>
 <% @parametro_ano = p.ano %>
@@ -35,8 +44,6 @@
 <div class="col-xs-12 col-md-12"> <%# Divisão 1%>
 
     <table class="table table-condensed"><%# Table 2%>
-<h1><%= @parametro_ano %></h1>
-<h2>Adubação de Plantio</h2>
     
     </table><%# Table 2%>
 
@@ -44,18 +51,16 @@
   <% @necP2o5plantioSomaTotal = 0 %>
   <% @necK2oplantioSomaTotal = 0 %>
 
-	<% @teste.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "Plantio").each do |v| %>
-	<% @faz_id = v.fazenda_id %>
+  <% @analises.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "Plantio").each do |v| %>
+  <% @faz_id = v.fazenda_id %>
 
+<h1><%= @parametro_ano %></h1>
+
+<h2>Adubação de Plantio</h2>
 
 <table class="table table-condensed"> <%# Table 1%>
   
       <tbody><%# Body 1%>
-        <% @fazendas.where("(id= ?)", @faz_id).each do |fazenda| %> <%# Do Farm 1%>
-          <tr>
-            <td><h3><%= fazenda.nome %></h3></td>
-          </tr>
-          <% @fazenda_id = fazenda.id %>
   
   <% @necNplantioSoma = 0 %>
   <% @necP2o5plantioSoma = 0 %>
@@ -65,6 +70,7 @@
 <table class="table table-condensed"> <%# Table 3%>
           <thead>
             <tr>
+              <th>Fazenda</th>
               <th>Ano</th>
               <th>Talhão</th>
               <th>Área</th>
@@ -86,7 +92,7 @@
             </tr>
           </thead>
 
-<% @plantio.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @fazenda_id, @parametro_ano, "20-40").each do |analise| %>
+<% @plantio.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @faz_id, @parametro_ano, "20-40").each do |analise| %>
 
 <% @parametros.each do |parametro| %>
 <% if parametro.ano == analise.ano 
@@ -99,6 +105,7 @@
 
   <tbody>
    <tr>
+    <td><%= analise.fazenda.nome %></td>
     <td><%= analise.ano %></td>
     <td><%= analise.talhao.nome %></td>
     <td><%= analise.talhao.area %></td>
@@ -125,7 +132,6 @@
   <% @necK2oplantioSoma += analise.necK2oPlantioTotal(@parametro_parcelamento) %>
   
 <% end %>
-<%end%>
   <tr>
     <th><b>Total</b></th>
     <th colspan="8"></th>
@@ -155,7 +161,6 @@
 
 <div class="col-xs-12 col-md-12"> <%# Divisão 1%>
     <table class="table table-condensed"><%# Table 2%>
-    <h2>Adubação de 1° Ano</h2>
 
     </table><%# Table 2%>
 
@@ -164,23 +169,20 @@
   <% @necK2o1anoSomaTotal = 0 %>
 
 
-	<% @teste.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "1° Ano").each do |v| %>
+  <% @analises.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "1° Ano").each do |v| %>
 
-	<% @faz_id = v.fazenda_id %>
+    <h2>Adubação de 1° Ano</h2>
+  <% @faz_id = v.fazenda_id %>
   
   <% @necN1anoSoma = 0 %>
   <% @necK2o1anoSoma = 0 %>
       <tbody><%# Body 1%>
-        <% @fazendas.where("(id= ?)", @faz_id).each do |fazenda| %> <%# Do Farm 1%>
-          <tr>
-            <td><h3><%= fazenda.nome %></h3></td>
-          </tr>
-          <% @fazenda_id = fazenda.id %>
 
 
 <table class="table table-condensed"> <%# Table 3%>
           <thead>
             <tr>
+              <th>Fazenda</th>
               <th>Ano</th>
               <th>Talhão</th>
               <th>Área</th>
@@ -196,7 +198,7 @@
             </tr>
           </thead>
 
-<% @primeiroAno.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @fazenda_id, @parametro_ano, "20-40").each do |analise| %>
+<% @primeiroAno.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @faz_id, @parametro_ano, "20-40").each do |analise| %>
 
 <% @parametros.each do |parametro| %>
 <% if parametro.ano == analise.ano 
@@ -208,6 +210,7 @@
 
   <tbody>
    <tr>
+    <td><%= analise.fazenda.nome %></td>
     <td><%= analise.ano %></td>
     <td><%= analise.talhao.nome %></td>
     <td><%= analise.talhao.area %></td>
@@ -226,7 +229,7 @@
   <% @necK2o1anoSoma += analise.necK2o1anoTotal %>
   
 <% end %>
-<%end%>
+
   <tr>
     <th><b>Total</b></th>
     <th colspan="6"></th>
@@ -250,23 +253,19 @@
 <%# Bloco 2 Ano%>
 <div class="col-xs-12 col-md-12"> <%# Divisão 1%>
     <table class="table table-condensed"><%# Table 2%>
-    <h2>Adubação de 2° Ano / Poda</h2>
     </table><%# Table 2%>
 
 <table class="table table-condensed"> <%# Table 1%>
   <% @necN2anoSomaTotal = 0 %>
   <% @necK2o2anoSomaTotal = 0 %>
 
-  	<% @teste.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "2° Ano / Poda").each do |v| %>
+    <% @analises.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "2° Ano / Poda").each do |v| %>
 
-	<% @faz_id = v.fazenda_id %>
+    <h2>Adubação de 2° Ano / Poda</h2>
+  <% @faz_id = v.fazenda_id %>
   
       <tbody><%# Body 1%>
-        <% @fazendas.where("(id= ?)", @faz_id).each do |fazenda| %> <%# Do Farm 1%>
-          <tr>
-            <td><h3><%= fazenda.nome %></h3></td>
-          </tr>
-          <% @fazenda_id = fazenda.id %>
+
   <% @necN2anoSoma = 0 %>
   <% @necK2o2anoSoma = 0 %>
 
@@ -274,6 +273,7 @@
 <table class="table table-condensed"> <%# Table 3%>
           <thead>
             <tr>
+              <th>Fazenda</th>
               <th>Ano</th>
               <th>Talhão</th>
               <th>Área</th>
@@ -289,7 +289,7 @@
             </tr>
           </thead>
 
-<% @segundoAno.where("(fazenda_id= ?AND ano= ? AND profundidade!= ?)", @fazenda_id, @parametro_ano, "20-40").each do |analise| %>
+<% @segundoAno.where("(fazenda_id= ?AND ano= ? AND profundidade!= ?)", @faz_id, @parametro_ano, "20-40").each do |analise| %>
 
 <% @parametros.each do |parametro| %>
 <% if parametro.ano == analise.ano 
@@ -301,6 +301,7 @@
 
   <tbody>
    <tr>
+    <td><%= analise.fazenda.nome %></td>
     <td><%= analise.ano %></td>
     <td><%= analise.talhao.nome %></td>
     <td><%= analise.talhao.area %></td>
@@ -319,7 +320,7 @@
   <% @necK2o2anoSoma += analise.necK2o2anoTotal %>
   
 <% end %>
-<%end%>
+
   <tr>
     <th><b>Total</b></th>
     <th colspan="6"></th>
@@ -341,7 +342,6 @@
 <%# Bloco Producao%>
 <div class="col-xs-12 col-md-12"> <%# Divisão 1%>
     <table class="table table-condensed"><%# Table 2%>
-    <h2>Adubação de Producao</h2>
 
 
     </table><%# Table 2%>
@@ -352,16 +352,13 @@
   <% @necK2oProducaoSomaTotal = 0 %>
   
 
-  <% @teste.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "Produção").each do |v| %>
+  <% @analises.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "Produção").each do |v| %>
 
+    <h2>Adubação de Producao</h2>
 	<% @faz_id = v.fazenda_id %>
 
       <tbody><%# Body 1%>
-        <% @fazendas.where("(id= ?)", @faz_id).each do |fazenda| %> <%# Do Farm 1%>
-          <tr>
-            <td><h3><%= fazenda.nome %></h3></td>
-          </tr>
-          <% @fazenda_id = fazenda.id %>
+
   <% @necNProducaoSoma = 0 %>
   <% @necP2o5ProducaoSoma = 0 %>
   <% @necK2oProducaoSoma = 0 %>
@@ -370,6 +367,7 @@
 <table class="table table-condensed"> <%# Table 3%>
           <thead>
             <tr>
+              <th>Fazenda</th>
               <th>Ano</th>
               <th>Talhão</th>
               <th>Área</th>
@@ -390,7 +388,7 @@
             </tr>
           </thead>
 
-<% @producao.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @fazenda_id, @parametro_ano, "20-40").each do |analise| %>
+<% @producao.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @faz_id, @parametro_ano, "20-40").each do |analise| %>
 
 <% @parametros.each do |parametro| %>
 <% if parametro.ano == analise.ano 
@@ -403,6 +401,7 @@
 
   <tbody>
    <tr>
+    <td><%= analise.fazenda.nome %></td>
     <td><%= analise.ano %></td>
     <td><%= analise.talhao.nome %></td>
     <td><%= analise.talhao.area %></td>
@@ -425,7 +424,7 @@
   <% @necNProducaoSoma += analise.necNProducaoTotal(@parametro_producao_esperada) %>
   <% @necP2o5ProducaoSoma += analise.necP2o5ProducaoTotal(@parametro_producao_esperada) %>
   <% @necK2oProducaoSoma += analise.necK2oProducaoTotal(@parametro_producao_esperada) %>
-<%end%>
+
 <% end %>
   <tr>
     <th><b>Total</b></th>

@@ -2,38 +2,39 @@ class AnalisesController < ApplicationController
   before_action :set_analise, only: [:show, :edit, :update, :destroy]
 
   def gessagem
+    @search = Analise.where(user_id: current_user.id).ransack(params[:q])
+    @analises = @search.result
+    @analises = @analises.where(:ano => nil) unless params[:q]
     @vargessos = Vargesso.where(user_id: current_user.id).order("id DESC")
-    @teste = Analise.where(user_id: current_user.id)
-    @analises = Analise.where(user_id: current_user.id).order("ano DESC")
-    @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
   end
 
   def fertilidade
+    @search = Analise.where(user_id: current_user.id).ransack(params[:q])
+    @analises = @search.result
+    @analises = @analises.where(:ano => nil) unless params[:q]
     @parametros = Parametro.where(user_id: current_user.id).order("id DESC")
-    @plantio = Analise.where("situacao = ?", "Plantio").order("ano DESC", "talhao_id ASC")
-    @primeiroAno = Analise.where("situacao = ?", "1° Ano").order("ano DESC", "talhao_id ASC")
-    @segundoAno = Analise.where("situacao = ?", "2° Ano / Poda").order("ano DESC", "talhao_id ASC")
-    @producao = Analise.where("situacao = ?", "Produção").order("ano DESC", "talhao_id ASC")
-    @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
-    @analises = Analise.where(user_id: current_user.id).order("ano DESC")
-    @teste = Analise.where(user_id: current_user.id)
+    @plantio = @analises.where("situacao = ?", "Plantio").order("ano DESC", "talhao_id ASC")
+    @primeiroAno = @analises.where("situacao = ?", "1° Ano").order("ano DESC", "talhao_id ASC")
+    @segundoAno = @analises.where("situacao = ?", "2° Ano / Poda").order("ano DESC", "talhao_id ASC")
+    @producao = @analises.where("situacao = ?", "Produção").order("ano DESC", "talhao_id ASC")
   end
 
   def calagem
-    @teste = Analise.where(user_id: current_user.id)
-    @analises = Analise.where(user_id: current_user.id).order("ano DESC")
-    @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
-    @plantio = Analise.where("situacao = ?", "Plantio").order("ano DESC")
-    @correcao = Analise.where("situacao != ?", "Plantio").order("ano DESC")
-    @parametros = Parametro.where(user_id: current_user.id).order("id DESC")
+    @search = Analise.where(user_id: current_user.id).ransack(params[:q])
+    @analises = @search.result
+    @analises = @analises.where(:ano => nil) unless params[:q]
+    @plantio = @analises.where("situacao = ?", "Plantio").order("ano DESC")
+    @correcao = @analises.where("situacao != ?", "Plantio").order("ano DESC")
     @variavels = Variavel.where(user_id: current_user.id).order("id DESC")
   end
   # GET /analises
   # GET /analises.json
   def index
-    @analises = Analise.where(user_id: current_user.id).order( "profundidade ASC", "talhao_id ASC")
-    @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
-    @parametros = Parametro.where(user_id: current_user.id).order("id DESC")
+    @search = Analise.where(user_id: current_user.id).ransack(params[:q])
+    @analises = @search.result
+    @analises = @analises.where(:ano => nil) unless params[:q]
+    #@analises = Analise.where(user_id: current_user.id).order( "profundidade ASC", "talhao_id ASC")
+
   end
 
   # GET /analises/1

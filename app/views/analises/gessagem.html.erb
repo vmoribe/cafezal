@@ -1,6 +1,6 @@
-<h1>Necessidade de Gessagem</h1>
-
-<div class="col-md-6 col-md-offset-3">
+<div class="row">
+<h1 class="text-center">Necessidade de Gessagem</h1>
+<div class="col-md-6">
 <table class="table table-condensed text-center">
   <thead>
     <tr>
@@ -26,6 +26,17 @@
 <% end %>
 </table>
 </div>
+<div class="col-md-6">
+<%= search_form_for @search, :class => "form-inline", url: analises_gessagem_path do |f| %>
+<h1>Filtro</h1>
+  <%= f.label :ano_eq, "Ano:" %>
+  <%= f.search_field :ano_eq, :class => "text-center form-control"%>
+  <%= f.label :fazenda_nome_cont, "Fazenda:" %>
+  <%= f.search_field :fazenda_nome_cont, :class => "text-center form-control" %>
+  <%= f.submit :class => 'btn btn-primary' %>
+<% end %>
+</div>
+</div>
 
 
 <% @analises.select("DISTINCT(ano)").each do |p| %>
@@ -50,18 +61,14 @@
   <% @variavel_teorCalcio = variavel.teorCalcio %>
 
     
-<% @teste.select("DISTINCT(fazenda_id)").where("(ano= ? AND profundidade = ?)", @parametro_ano, "20-40").each do |v| %>
+<% @analises.select("DISTINCT(fazenda_id)").where("(ano= ? AND profundidade = ?)", @parametro_ano, "20-40").each do |v| %>
   <% @faz_id = v.fazenda_id %>
 
-    <% @fazendas.where("(id= ?)", @faz_id).each do |fazenda| %>
-    <tr>
-      <td><h3><%= fazenda.nome %></h3></td>
-    </tr>
-  <% @fazenda_id = fazenda.id %>
 
 <table class="table table-condensed table-striped text-center">
   <thead>
     <tr>
+      <th class="text-center">Fazenda</th>
       <th class="text-center">Talhão</th>
       <th class="text-center">Cálcio</th>
       <th class="text-center">Alumínio</th>
@@ -79,9 +86,10 @@
     <% @nca = 0 %>
     <% @ngCorrigido = 0 %>
     <% @ngCorrigidoArea = 0 %>
-    <% @analises.where("(fazenda_id= ? AND ano= ? AND profundidade= ?)", @fazenda_id, @parametro_ano, "20-40").order("talhao_id").each do |analise| %>
+    <% @analises.where("(fazenda_id= ? AND ano= ? AND profundidade= ?)", @faz_id, @parametro_ano, "20-40").order("talhao_id").each do |analise| %>
       
       <tr>
+        <td><%= analise.fazenda.nome%></td>
         <td><%= analise.talhao.nome %></td>
         <td><%= analise.calcio_ca %></td>
         <td><%= analise.aluminio_al %></td>
@@ -117,7 +125,7 @@
     <% @ngCorrigidoTotal += @ngCorrigido %>
     <% @ngCorrigidoTotalArea += @ngCorrigidoArea %>
       <% end %>
-    <% end %>
+
 <div class="col-md-6 col-md-offset-3">
 <table class="table table-condensed table-striped"> <%# Table 4%>
   <thead>

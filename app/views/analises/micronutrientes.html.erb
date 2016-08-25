@@ -62,7 +62,7 @@
             </tr>
           </thead>
 
-<% @analises.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @faz_id, @parametro_ano, "20-40").each do |analise| %>
+<% @analises.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @faz_id, @parametro_ano, "20-40").order("talhao_id ASC").each do |analise| %>
 
 	<% @necBoro = analise.necBoro %>
 	<% @necCobre = analise.necCobre %>

@@ -1,6 +1,11 @@
 class AnalisesController < ApplicationController
   before_action :set_analise, only: [:show, :edit, :update, :destroy]
 
+  def fertilizantes
+
+    
+  end
+
   def micronutrientes
     @search = Analise.where(user_id: current_user.id).ransack(params[:q])
     @analises = @search.result

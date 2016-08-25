@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :parametros
   has_many :variavels
   has_many :vargessos
+  has_many :produtos
   
   def set_default_role
     self.role ||= :user

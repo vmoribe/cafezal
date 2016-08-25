@@ -1,0 +1,2 @@
+json.extract! produto, :id, :user_id, :nome, :tipo, :preco, :custo_op, :nitrogenio_n, :fosforo_p2o5, :potassio_k2o, :calcio_ca, :magnesio_mg, :enxofre_s, :boro_b, :cobre_cu, :ferro_fe, :manganes_mn, :zinco_zn, :created_at, :updated_at
+json.url produto_url(produto, format: :json)

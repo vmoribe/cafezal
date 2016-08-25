@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822012424) do
+ActiveRecord::Schema.define(version: 20160825124254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,29 @@ ActiveRecord::Schema.define(version: 20160822012424) do
     t.datetime "updated_at",        null: false
     t.integer  "user_id"
   end
+
+  create_table "produtos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "nome"
+    t.string   "tipo"
+    t.decimal  "preco",        precision: 10, scale: 2
+    t.decimal  "custo_op",     precision: 10, scale: 2
+    t.decimal  "nitrogenio_n", precision: 10, scale: 2
+    t.decimal  "fosforo_p2o5", precision: 10, scale: 2
+    t.decimal  "potassio_k2o", precision: 10, scale: 2
+    t.decimal  "calcio_ca",    precision: 10, scale: 2
+    t.decimal  "magnesio_mg",  precision: 10, scale: 2
+    t.decimal  "enxofre_s",    precision: 10, scale: 2
+    t.decimal  "boro_b",       precision: 10, scale: 2
+    t.decimal  "cobre_cu",     precision: 10, scale: 2
+    t.decimal  "ferro_fe",     precision: 10, scale: 2
+    t.decimal  "manganes_mn",  precision: 10, scale: 2
+    t.decimal  "zinco_zn",     precision: 10, scale: 2
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "produtos", ["user_id"], name: "index_produtos_on_user_id", using: :btree
 
   create_table "talhaos", force: :cascade do |t|
     t.integer  "fazenda_id"
@@ -149,6 +172,7 @@ ActiveRecord::Schema.define(version: 20160822012424) do
   add_foreign_key "analises", "talhaos"
   add_foreign_key "analises", "users"
   add_foreign_key "fazendas", "users"
+  add_foreign_key "produtos", "users"
   add_foreign_key "talhaos", "fazendas"
   add_foreign_key "talhaos", "users"
   add_foreign_key "vargessos", "users"

@@ -2,8 +2,12 @@ class AnalisesController < ApplicationController
   before_action :set_analise, only: [:show, :edit, :update, :destroy]
 
   def fertilizantes
-
-    
+    @produtos = Produto.where(user_id: current_user.id).order("id ASC")
+    @search = Analise.where(user_id: current_user.id).ransack(params[:q])
+    @analises = @search.result
+    @analises = @analises.where(:ano => nil) unless params[:q]
+    @parametros = Parametro.where(user_id: current_user.id).order("id DESC")
+    @plantio = @analises.where("situacao = ?", "Plantio").order("ano DESC", "talhao_id ASC")
   end
 
   def micronutrientes

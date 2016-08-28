@@ -4,7 +4,7 @@ class ProdutosController < ApplicationController
   # GET /produtos
   # GET /produtos.json
   def index
-    @produtos = Produto.where(user_id: current_user.id).order("id ASC")
+    @produtos = Produto.where(user_id: current_user.id)
   end
 
   # GET /produtos/1
@@ -69,6 +69,6 @@ class ProdutosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def produto_params
-      params.require(:produto).permit(:user_id, :nome, :tipo, :preco, :custo_op, :nitrogenio_n, :fosforo_p2o5, :potassio_k2o, :calcio_ca, :magnesio_mg, :enxofre_s, :boro_b, :cobre_cu, :ferro_fe, :manganes_mn, :zinco_zn)
+      params.require(:produto).permit(:user_id, :nome, :tipo, :preco, :custo_op, :nitrogenio_n, :fosforo_p2o5, :potassio_k2o, :calcio_ca, :magnesio_mg, :enxofre_s, :boro_b, :cobre_cu, :ferro_fe, :manganes_mn, :zinco_zn, :ano)
     end
 end

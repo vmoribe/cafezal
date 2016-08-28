@@ -173,3 +173,12 @@ Vargesso.create!([
   {user_id: 1, ano: 2016, profundidade: "35.0", areaAplicacao: "75.0", teorCalcio: "20.0"}
 ])
 
+
+Produto.create!([
+  {user_id: 1, nome: "08--28--16", tipo: "Nutrição", preco: "1900.0", custo_op: "80.0", nitrogenio_n: "8.0", fosforo_p2o5: "28.0", potassio_k2o: "16.0", calcio_ca: nil, magnesio_mg: nil, enxofre_s: nil, boro_b: nil, cobre_cu: nil, ferro_fe: nil, manganes_mn: nil, zinco_zn: nil, ano: 2016},
+  {user_id: 1, nome: "Uréia", tipo: "Nutrição", preco: "1700.0", custo_op: "20.0", nitrogenio_n: "44.0", fosforo_p2o5: "0.0", potassio_k2o: "0.0", calcio_ca: nil, magnesio_mg: nil, enxofre_s: nil, boro_b: nil, cobre_cu: nil, ferro_fe: nil, manganes_mn: nil, zinco_zn: nil, ano: 2016},
+  {user_id: 1, nome: "Mono Amônio Fosfato (MAP)", tipo: "Nutrição", preco: "1800.0", custo_op: "80.0", nitrogenio_n: "11.0", fosforo_p2o5: "52.0", potassio_k2o: "0.0", calcio_ca: nil, magnesio_mg: nil, enxofre_s: nil, boro_b: nil, cobre_cu: nil, ferro_fe: nil, manganes_mn: nil, zinco_zn: nil, ano: 2016},
+  {user_id: 1, nome: "Superfosfato Simples", tipo: "Nutrição", preco: "800.0", custo_op: "80.0", nitrogenio_n: "0.0", fosforo_p2o5: "19.0", potassio_k2o: "0.0", calcio_ca: nil, magnesio_mg: nil, enxofre_s: nil, boro_b: nil, cobre_cu: nil, ferro_fe: nil, manganes_mn: nil, zinco_zn: nil, ano: 2016},
+  {user_id: 1, nome: "20--00--20", tipo: "Nutrição", preco: "1400.0", custo_op: "80.0", nitrogenio_n: "20.0", fosforo_p2o5: "0.0", potassio_k2o: "20.0", calcio_ca: nil, magnesio_mg: nil, enxofre_s: nil, boro_b: nil, cobre_cu: nil, ferro_fe: nil, manganes_mn: nil, zinco_zn: nil, ano: 2016}
+])
+

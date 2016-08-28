@@ -54,8 +54,6 @@
   <% @analises.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "Plantio").each do |v| %>
   <% @faz_id = v.fazenda_id %>
 
-<h1><%= @parametro_ano %></h1>
-
 <h2>Adubação de Plantio</h2>
 
 <table class="table table-condensed text-center"> <%# Table 1%>
@@ -218,7 +216,7 @@
     <td><%= valor_inteiro(analise.necN1ano)%></td>
     <td class="danger"><%= valor_inteiro(analise.necN1anoemKgha)%></td>
     <td class="success"><%= valor_inteiro(analise.necN1anoTotal)%></td>
-    <td class="active"><%= valor_inteiro(analise.necN1anoTotal * @parametro_parcelamento)%></td>
+    <td class="active"><%= valor_inteiro(analise.necN1anoTotalParcelamento(@parametro_parcelamento))%></td>
     <td><%= valor_inteiro(analise.necK2o1ano) %></td>
     <td class="danger"><%= valor_inteiro(analise.necK2o1anoemKgha) %></td>
     <td class="success"><%= valor_inteiro(analise.necK2o1anoTotal / @parametro_parcelamento)%></td>

@@ -350,7 +350,10 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
     necN1anoemKgha * talhao.area
   end
 
-  
+  def necN1anoTotalParcelamento(parcelamento)
+    necN1anoTotal * parcelamento
+  end
+
   def necK2o1ano
     case potassio_k
     when 0 .. 60
@@ -394,6 +397,9 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
     necN2anoemKgha * talhao.area
   end
 
+  def necN2anoTotalParcelamento(parcelamento)
+    necN2anoTotal * parcelamento
+  end
   
   def necK2o2ano
     case potassio_k

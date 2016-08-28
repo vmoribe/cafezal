@@ -8,6 +8,9 @@ class AnalisesController < ApplicationController
     @analises = @analises.where(:ano => nil) unless params[:q]
     @parametros = Parametro.where(user_id: current_user.id).order("id DESC")
     @plantio = @analises.where("situacao = ?", "Plantio").order("ano DESC", "talhao_id ASC")
+    @primeiroAno = @analises.where("situacao = ?", "1° Ano").order("ano DESC", "talhao_id ASC")
+    @segundoAno = @analises.where("situacao = ?", "2° Ano / Poda").order("ano DESC", "talhao_id ASC")
+    @producao = @analises.where("situacao = ?", "Produção").order("ano DESC", "talhao_id ASC")
   end
 
   def micronutrientes

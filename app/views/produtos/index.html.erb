@@ -2,9 +2,14 @@
 
 <%= link_to 'Novo Produto', new_produto_path,:class => 'btn btn-default' %>
 
+<% @produtos.select("DISTINCT(ano)").each do |p| %>
+<% @parametro_ano = p.ano %>
+
+
 <table class="table table-condensed table-hover text-center">
   <thead>
     <tr>
+      <th>Ano</th>
       <th>Nome</th>
       <th>Tipo</th>
       <th>Preço (R$/ton)</th>
@@ -25,8 +30,9 @@
   </thead>
 
   <tbody>
-    <% @produtos.each do |produto| %>
+    <% @produtos.where("ano= ?", @parametro_ano).each do |produto| %>
       <tr>
+        <td><%= produto.ano %></td>
         <td><%= produto.nome %></td>
         <td><%= produto.tipo %></td>
         <td><%= valor_emreais(produto.preco) %></td>
@@ -50,4 +56,4 @@
 </table>
 
 <br>
-
+<% end %>

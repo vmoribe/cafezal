@@ -4,6 +4,7 @@
   <div class="form-inputs">
     <div class="row">
       <div class="col-md-4">
+    <%= f.input :ano %>
     <%= f.input :nome %>
     <%= f.input :tipo, collection: ["Nutrição","Corretivo", "Foliar"] %>
     <%= f.input :preco, label: "Preço (R$/Ton)" %>

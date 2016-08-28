@@ -7,8 +7,46 @@ puts 'CREATED ADMIN USER: ' << user.email
 #User.create!([
 #  {email: "vmp@viniciusmoribe.com", encrypted_password: "$2a$11$rNmQLuEu5SnKafmaUYYsnO9htrxfaG0jcSnMNNz3YEmcHpZzrQGSG", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2016-08-07 15:51:24", last_sign_in_at: "2016-08-07 15:51:24", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", nome: nil, confirmation_token: nil, confirmed_at: "2016-08-07 15:41:38", confirmation_sent_at: nil, unconfirmed_email: nil, role: 2, invitation_token: nil, invitation_created_at: nil, invitation_sent_at: nil, invitation_accepted_at: nil, invitation_limit: nil, invited_by_id: nil, invited_by_type: nil, invitations_count: 0}
 #])
-
-
+Fazenda.create!([
+  {nome: "Fazenda Agropecuária Frade", descricao: "Nazareno-MG", user_id: 1},
+  {nome: "Fazenda Morro Redondo", descricao: "Nazareno-MG", user_id: 1},
+  {nome: "Fazenda Arião", descricao: "Nazareno-MG", user_id: 1}
+])
+Talhao.create!([
+  {fazenda_id: 1, nome: "L1 - F", cultura: "Café", variedade: "Catuai Vermelho", ano_plantio: 2005, area: "10.3", esp_ruas: "3.5", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 1, nome: "L2 - F", cultura: "Café", variedade: "Mundo Novo", ano_plantio: 2005, area: "2.92", esp_ruas: "3.5", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 1, nome: "L3 - F", cultura: "Café", variedade: "Mundo Novo", ano_plantio: 2006, area: "2.51", esp_ruas: "3.5", esp_plantas: "0.8", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 1, nome: "L4 - F", cultura: "Café", variedade: "Acaiá", ano_plantio: 2008, area: "2.72", esp_ruas: "3.5", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 1, nome: "L5 - F", cultura: "Café", variedade: "Mundo Novo", ano_plantio: 2010, area: "4.97", esp_ruas: "3.5", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 1, nome: "L6 - F", cultura: "Café", variedade: "Catucai Amarelo", ano_plantio: 2006, area: "3.83", esp_ruas: "3.5", esp_plantas: "0.8", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 1, nome: "L6A - F", cultura: "Café", variedade: "Catucai Amarelo", ano_plantio: 2006, area: "1.93", esp_ruas: "2.6", esp_plantas: "0.6", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 1, nome: "L7 - F", cultura: "Café", variedade: "Mundo Novo", ano_plantio: 2006, area: "7.8", esp_ruas: "3.7", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 1, nome: "L8 - F", cultura: "Café", variedade: "Catuai Vermelho", ano_plantio: 2008, area: "6.87", esp_ruas: "3.7", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 1, nome: "L9 - F", cultura: "Café", variedade: "Mundo Novo", ano_plantio: 2010, area: "11.9", esp_ruas: "3.5", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 1, nome: "L10 - F", cultura: "Café", variedade: "Catuai I-99", ano_plantio: 2015, area: "7.6", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 1, nome: "L11 - F", cultura: "Café", variedade: "Catuai I-99", ano_plantio: 2015, area: "10.4", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 2, nome: "L1 - M", cultura: "Café", variedade: "Catuai Vermelho", ano_plantio: 1998, area: "7.52", esp_ruas: "3.7", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 2, nome: "L2 - M", cultura: "Café", variedade: "Icatu", ano_plantio: 1998, area: "4.59", esp_ruas: "3.7", esp_plantas: "0.8", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 2, nome: "L3 - M", cultura: "Café", variedade: "Icatu", ano_plantio: 1997, area: "6.13", esp_ruas: "3.7", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 2, nome: "L4 - M", cultura: "Café", variedade: "Rubi", ano_plantio: 1999, area: "4.79", esp_ruas: "3.7", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 2, nome: "L5 - M", cultura: "Café", variedade: "Rubi", ano_plantio: 2000, area: "6.68", esp_ruas: "3.7", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 2, nome: "L6 - M", cultura: "Café", variedade: "Acaiá", ano_plantio: 1999, area: "11.9", esp_ruas: "3.7", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 2, nome: "L7 - M", cultura: "Café", variedade: "Acaiá", ano_plantio: 1999, area: "7.41", esp_ruas: "3.7", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 2, nome: "L8 - M", cultura: "Café", variedade: "Acaiá", ano_plantio: 2000, area: "3.97", esp_ruas: "3.7", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 2, nome: "L9 - M", cultura: "Café", variedade: "Catuai Vermelho", ano_plantio: 2001, area: "3.54", esp_ruas: "3.5", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 2, nome: "L10 - M", cultura: "Café", variedade: "Topázio", ano_plantio: 2013, area: "13.0", esp_ruas: "3.7", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 3, nome: "L1 - A", cultura: "Café", variedade: "Catucai", ano_plantio: 2014, area: "8.88", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 3, nome: "L2 - A", cultura: "Café", variedade: "Catuai", ano_plantio: 2014, area: "10.8", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 3, nome: "L3 - A", cultura: "Café", variedade: "Catuai", ano_plantio: 2014, area: "8.57", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 3, nome: "L4 - A", cultura: "Café", variedade: "Catuai", ano_plantio: 2015, area: "11.7", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 2, nome: "L11 - M", cultura: "Café", variedade: "Catuai", ano_plantio: 2015, area: "2.19", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 2, nome: "L12 - M", cultura: "Café", variedade: "Catuai", ano_plantio: 2010, area: "7.85", esp_ruas: "3.6", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 2, nome: "L13 - M", cultura: "Café", variedade: "Catucai", ano_plantio: 2015, area: "5.19", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 1, nome: "L12 - F", cultura: "Café", variedade: "Catuai", ano_plantio: 2016, area: "10.6", esp_ruas: "3.6", esp_plantas: "0.75", argila: nil, silte: nil, areia: nil, user_id: 1},
+  {fazenda_id: 1, nome: "L13 - F", cultura: "Café", variedade: "Catuai", ano_plantio: 2016, area: "7.28", esp_ruas: "3.6", esp_plantas: "0.75", argila: nil, silte: nil, areia: nil, user_id: 1},
+  {fazenda_id: 1, nome: "L14 - F", cultura: "Café", variedade: "Catuai", ano_plantio: 2016, area: "4.83", esp_ruas: "3.6", esp_plantas: "0.75", argila: nil, silte: nil, areia: nil, user_id: 1},
+  {fazenda_id: 1, nome: "L15 - F", cultura: "Café", variedade: "Catuai", ano_plantio: 2016, area: "5.08", esp_ruas: "3.6", esp_plantas: "0.75", argila: nil, silte: nil, areia: nil, user_id: 1}
+])
 Analise.create!([
   {user_id: 1, fazenda_id: 1, talhao_id: 2, situacao: "Produção", profundidade: "0-20", ano: 2013, ph: "5.3", potassio_k: "76.0", fosforo_p: "7.21", sodio_na: "0.0", calcio_ca: "1.1", magnesio_mg: "0.4", aluminio_al: "0.1", h_al: "3.24", mat_organica: "2.23", p_rem: "20.22", zinco_zn: "0.99", ferro_fe: "34.07", manganes_mn: "4.1", cobre_cu: "1.56", boro_b: "0.28", enxofre_s: "49.14"},
   {user_id: 1, fazenda_id: 1, talhao_id: 3, situacao: "Produção", profundidade: "0-20", ano: 2013, ph: "5.6", potassio_k: "106.0", fosforo_p: "19.68", sodio_na: "0.0", calcio_ca: "1.3", magnesio_mg: "0.5", aluminio_al: "0.1", h_al: "2.9", mat_organica: "2.87", p_rem: "25.07", zinco_zn: "1.87", ferro_fe: "44.57", manganes_mn: "5.06", cobre_cu: "1.63", boro_b: "0.31", enxofre_s: "33.06"},
@@ -115,11 +153,7 @@ Analise.create!([
   {user_id: 1, fazenda_id: 1, talhao_id: 6, situacao: "Produção", profundidade: "20-40", ano: 2016, ph: "4.2", potassio_k: "95.54", fosforo_p: "14.73", sodio_na: "0.0", calcio_ca: "0.83", magnesio_mg: "0.21", aluminio_al: "0.3", h_al: "5.16", mat_organica: "1.38", p_rem: "12.22", zinco_zn: "2.48", ferro_fe: "42.77", manganes_mn: "9.49", cobre_cu: "1.87", boro_b: "0.06", enxofre_s: "72.85"},
   {user_id: 1, fazenda_id: 2, talhao_id: 18, situacao: "Produção", profundidade: "20-40", ano: 2016, ph: "4.7", potassio_k: "95.54", fosforo_p: "7.93", sodio_na: "0.0", calcio_ca: "1.02", magnesio_mg: "0.28", aluminio_al: "0.2", h_al: "4.13", mat_organica: "2.1", p_rem: "8.7", zinco_zn: "1.88", ferro_fe: "44.76", manganes_mn: "1.94", cobre_cu: "1.21", boro_b: "0.06", enxofre_s: "64.85"}
 ])
-Fazenda.create!([
-  {nome: "Fazenda Agropecuária Frade", descricao: "Nazareno-MG", user_id: 1},
-  {nome: "Fazenda Morro Redondo", descricao: "Nazareno-MG", user_id: 1},
-  {nome: "Fazenda Arião", descricao: "Nazareno-MG", user_id: 1}
-])
+
 Parametro.create!([
   {ano: 2013, parcelamento: 3, producao_esperada: "21 - 30", user_id: 1},
   {ano: 2014, parcelamento: 4, producao_esperada: "31 - 40", user_id: 1},
@@ -135,41 +169,7 @@ Produto.create!([
   {user_id: 1, nome: "Uréia", tipo: "Nutrição", preco: "1700.0", custo_op: "20.0", nitrogenio_n: "44.0", fosforo_p2o5: "0.0", potassio_k2o: "0.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016},
   {user_id: 1, nome: "08--28--16", tipo: "Nutrição", preco: "1900.0", custo_op: "80.0", nitrogenio_n: "8.0", fosforo_p2o5: "28.0", potassio_k2o: "16.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016}
 ])
-Talhao.create!([
-  {fazenda_id: 1, nome: "L1 - F", cultura: "Café", variedade: "Catuai Vermelho", ano_plantio: 2005, area: "10.3", esp_ruas: "3.5", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 1, nome: "L2 - F", cultura: "Café", variedade: "Mundo Novo", ano_plantio: 2005, area: "2.92", esp_ruas: "3.5", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 1, nome: "L3 - F", cultura: "Café", variedade: "Mundo Novo", ano_plantio: 2006, area: "2.51", esp_ruas: "3.5", esp_plantas: "0.8", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 1, nome: "L4 - F", cultura: "Café", variedade: "Acaiá", ano_plantio: 2008, area: "2.72", esp_ruas: "3.5", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 1, nome: "L5 - F", cultura: "Café", variedade: "Mundo Novo", ano_plantio: 2010, area: "4.97", esp_ruas: "3.5", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 1, nome: "L6 - F", cultura: "Café", variedade: "Catucai Amarelo", ano_plantio: 2006, area: "3.83", esp_ruas: "3.5", esp_plantas: "0.8", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 1, nome: "L6A - F", cultura: "Café", variedade: "Catucai Amarelo", ano_plantio: 2006, area: "1.93", esp_ruas: "2.6", esp_plantas: "0.6", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 1, nome: "L7 - F", cultura: "Café", variedade: "Mundo Novo", ano_plantio: 2006, area: "7.8", esp_ruas: "3.7", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 1, nome: "L8 - F", cultura: "Café", variedade: "Catuai Vermelho", ano_plantio: 2008, area: "6.87", esp_ruas: "3.7", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 1, nome: "L9 - F", cultura: "Café", variedade: "Mundo Novo", ano_plantio: 2010, area: "11.9", esp_ruas: "3.5", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 1, nome: "L10 - F", cultura: "Café", variedade: "Catuai I-99", ano_plantio: 2015, area: "7.6", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 1, nome: "L11 - F", cultura: "Café", variedade: "Catuai I-99", ano_plantio: 2015, area: "10.4", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 2, nome: "L1 - M", cultura: "Café", variedade: "Catuai Vermelho", ano_plantio: 1998, area: "7.52", esp_ruas: "3.7", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 2, nome: "L2 - M", cultura: "Café", variedade: "Icatu", ano_plantio: 1998, area: "4.59", esp_ruas: "3.7", esp_plantas: "0.8", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 2, nome: "L3 - M", cultura: "Café", variedade: "Icatu", ano_plantio: 1997, area: "6.13", esp_ruas: "3.7", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 2, nome: "L4 - M", cultura: "Café", variedade: "Rubi", ano_plantio: 1999, area: "4.79", esp_ruas: "3.7", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 2, nome: "L5 - M", cultura: "Café", variedade: "Rubi", ano_plantio: 2000, area: "6.68", esp_ruas: "3.7", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 2, nome: "L6 - M", cultura: "Café", variedade: "Acaiá", ano_plantio: 1999, area: "11.9", esp_ruas: "3.7", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 2, nome: "L7 - M", cultura: "Café", variedade: "Acaiá", ano_plantio: 1999, area: "7.41", esp_ruas: "3.7", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 2, nome: "L8 - M", cultura: "Café", variedade: "Acaiá", ano_plantio: 2000, area: "3.97", esp_ruas: "3.7", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 2, nome: "L9 - M", cultura: "Café", variedade: "Catuai Vermelho", ano_plantio: 2001, area: "3.54", esp_ruas: "3.5", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 2, nome: "L10 - M", cultura: "Café", variedade: "Topázio", ano_plantio: 2013, area: "13.0", esp_ruas: "3.7", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 3, nome: "L1 - A", cultura: "Café", variedade: "Catucai", ano_plantio: 2014, area: "8.88", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 3, nome: "L2 - A", cultura: "Café", variedade: "Catuai", ano_plantio: 2014, area: "10.8", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 3, nome: "L3 - A", cultura: "Café", variedade: "Catuai", ano_plantio: 2014, area: "8.57", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 3, nome: "L4 - A", cultura: "Café", variedade: "Catuai", ano_plantio: 2015, area: "11.7", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 2, nome: "L11 - M", cultura: "Café", variedade: "Catuai", ano_plantio: 2015, area: "2.19", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 2, nome: "L12 - M", cultura: "Café", variedade: "Catuai", ano_plantio: 2010, area: "7.85", esp_ruas: "3.6", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 2, nome: "L13 - M", cultura: "Café", variedade: "Catucai", ano_plantio: 2015, area: "5.19", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 1, nome: "L12 - F", cultura: "Café", variedade: "Catuai", ano_plantio: 2016, area: "10.6", esp_ruas: "3.6", esp_plantas: "0.75", argila: nil, silte: nil, areia: nil, user_id: 1},
-  {fazenda_id: 1, nome: "L13 - F", cultura: "Café", variedade: "Catuai", ano_plantio: 2016, area: "7.28", esp_ruas: "3.6", esp_plantas: "0.75", argila: nil, silte: nil, areia: nil, user_id: 1},
-  {fazenda_id: 1, nome: "L14 - F", cultura: "Café", variedade: "Catuai", ano_plantio: 2016, area: "4.83", esp_ruas: "3.6", esp_plantas: "0.75", argila: nil, silte: nil, areia: nil, user_id: 1},
-  {fazenda_id: 1, nome: "L15 - F", cultura: "Café", variedade: "Catuai", ano_plantio: 2016, area: "5.08", esp_ruas: "3.6", esp_plantas: "0.75", argila: nil, silte: nil, areia: nil, user_id: 1}
-])
+
 Vargesso.create!([
   {user_id: 1, ano: 2016, profundidade: "35.0", areaAplicacao: "75.0", teorCalcio: "20.0"}
 ])

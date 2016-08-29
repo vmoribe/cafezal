@@ -72,14 +72,14 @@
               <th class="text-center">Custo por Ha</th>
             </tr>
           </thead>
-    <% @produtos.each do |produto| %>
+    <% @produtos.where("ano= ?", @parametro_ano).each do |produto| %>
 	      	<% @id1 = produto.id %>
 	        <% @nome1 = produto.nome %>
 	        <% @nitrogenio1 = (produto.nitrogenio_n)/100 %>
 	        <% @fosforo1 = produto.fosforo_p2o5/100 %>
 	        <% @potassio1 = produto.potassio_k2o/100 %>
           <% @adubo1preco = produto.preco %>
-      	<% @produtos.each do |produto2| %>
+      	<% @produtos.where("ano= ?", @parametro_ano).each do |produto2| %>
       		<% if produto2.id == @id1 %>
       			<% break %>
       		<% else %>
@@ -90,7 +90,7 @@
         		<% @potassio2 = produto2.potassio_k2o/100 %>
             <% @adubo2preco = produto2.preco %>
 		      <% end %> 	
-            <% @produtos.each do |produto3| %>
+            <% @produtos.where("ano= ?", @parametro_ano).each do |produto3| %>
               <% if produto3.id == @id1 %>
                 <% break %>
               <% elsif produto3.id == @id2%>
@@ -232,14 +232,14 @@
               <th class="text-center">Custo por Ha</th>
             </tr>
           </thead>
-    <% @produtos.each do |produto| %>
+    <% @produtos.where("ano= ?", @parametro_ano).each do |produto| %>
           <% @id1 = produto.id %>
           <% @nome1 = produto.nome %>
           <% @nitrogenio1 = (produto.nitrogenio_n)/100 %>
           <% @fosforo1 = (produto.fosforo_p2o5)/100 %>
           <% @potassio1 = (produto.potassio_k2o)/100 %>
           <% @adubo1preco = produto.preco %>
-        <% @produtos.each do |produto2| %>
+        <% @produtos.where("ano= ?", @parametro_ano).each do |produto2| %>
           <% if produto2.id == @id1 %>
             <% break %>
           <% else %>
@@ -250,7 +250,7 @@
             <% @potassio2 = (produto2.potassio_k2o)/100 %>
             <% @adubo2preco = produto2.preco %>
           <% end %>   
-            <% @produtos.each do |produto3| %>
+            <% @produtos.where("ano= ?", @parametro_ano).each do |produto3| %>
               <% if produto3.id == @id1%>
                 <% break %>
               <% elsif produto3.id == @id2%>
@@ -393,14 +393,14 @@
               <th class="text-center">Custo por Ha</th>
             </tr>
           </thead>
-    <% @produtos.each do |produto| %>
+    <% @produtos.where("ano= ?", @parametro_ano).each do |produto| %>
           <% @id1 = produto.id %>
           <% @nome1 = produto.nome %>
           <% @nitrogenio1 = (produto.nitrogenio_n)/100 %>
           <% @fosforo1 = produto.fosforo_p2o5/100 %>
           <% @potassio1 = produto.potassio_k2o/100 %>
           <% @adubo1preco = produto.preco %>
-        <% @produtos.each do |produto2| %>
+        <% @produtos.where("ano= ?", @parametro_ano).each do |produto2| %>
           <% if produto2.id == @id1 %>
             <% break %>
           <% else %>
@@ -411,7 +411,7 @@
             <% @potassio2 = produto2.potassio_k2o/100 %>
             <% @adubo2preco = produto2.preco %>
           <% end %>   
-            <% @produtos.each do |produto3| %>
+            <% @produtos.where("ano= ?", @parametro_ano).each do |produto3| %>
               <% if produto3.id == @id1%>
                 <% break %>
               <% elsif produto3.id == @id2%>
@@ -555,14 +555,14 @@
               <th class="text-center">Custo por Ha</th>
             </tr>
           </thead>
-    <% @produtos.each do |produto| %>
+    <% @produtos.where("ano= ?", @parametro_ano).each do |produto| %>
           <% @id1 = produto.id %>
           <% @nome1 = produto.nome %>
           <% @nitrogenio1 = (produto.nitrogenio_n)/100 %>
           <% @fosforo1 = produto.fosforo_p2o5/100 %>
           <% @potassio1 = produto.potassio_k2o/100 %>
           <% @adubo1preco = produto.preco %>
-        <% @produtos.each do |produto2| %>
+        <% @produtos.where("ano= ?", @parametro_ano).each do |produto2| %>
           <% if produto2.id == @id1 %>
             <% break %>
           <% else %>
@@ -573,7 +573,7 @@
             <% @potassio2 = produto2.potassio_k2o/100 %>
             <% @adubo2preco = produto2.preco %>
           <% end %>   
-            <% @produtos.each do |produto3| %>
+            <% @produtos.where("ano= ?", @parametro_ano).each do |produto3| %>
               <% if produto3.id == @id1%>
                 <% break %>
               <% elsif produto3.id == @id2%>

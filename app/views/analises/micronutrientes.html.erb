@@ -26,10 +26,6 @@
 
     </table><%# Table 2%>
 
-  <% @necBoroSomaTotal = 0 %>
-  <% @necCobreSomaTotal = 0 %>
-  <% @necManganesSomaTotal = 0 %>
-  <% @necZincoSomaTotal = 0 %>
   <% @necBoroSomaTotalHa = 0 %>
   <% @necCobreSomaTotalHa = 0 %>
   <% @necManganesSomaTotalHa = 0 %>
@@ -92,23 +88,20 @@
     <td><%= analise.talhao.nome %></td>
     <td><%= analise.talhao.area %></td>
     <td><%= analise.boro_b %></td>
-    <td class="danger text-center"><%= valor_duascasas(@necBoro) %></td>
-    <td><%= valor_duascasas(@necBoroHa) %></td>
+    <td><%= valor_inteiro(@necBoro) %></td>
+    <td class="info text-center"><%= valor_inteiro(@necBoroHa) %></td>
     <td><%= analise.cobre_cu %></td>
-    <td class="danger text-center"><%= valor_duascasas(@necCobre)%></td>
-    <td><%= valor_duascasas(@necCobreHa) %></td>
+    <td><%= valor_inteiro(@necCobre)%></td>
+    <td class="info text-center"><%= valor_inteiro(@necCobreHa) %></td>
     <td><%= analise.manganes_mn %></td>
-    <td class="danger text-center"><%= valor_duascasas(@necManganes) %></td>
-    <td><%= valor_duascasas(@necManganesHa) %></td>
+    <td><%= valor_inteiro(@necManganes) %></td>
+    <td class="info text-center"><%= valor_inteiro(@necManganesHa) %></td>
     <td><%= analise.zinco_zn %></td>
-    <td class="danger text-center"><%= valor_duascasas(@necZinco)%></td>
-    <td><%= valor_duascasas(@necZincoHa) %></td>
+    <td><%= valor_inteiro(@necZinco)%></td>
+    <td class="info text-center"><%= valor_inteiro(@necZincoHa) %></td>
    </tr>  
 
-  <% @necBoroSoma += @necBoro %>
-  <% @necCobreSoma += @necCobre %>
-  <% @necManganesSoma += @necManganes %>
-  <% @necZincoSoma += @necZinco %>
+
   <% @necBoroSomaHa += @necBoroHa %>
   <% @necCobreSomaHa += @necCobreHa %>
   <% @necManganesSomaHa += @necManganesHa %>
@@ -117,24 +110,17 @@
 
   <tr>
     <th class="text-center"><b>Total</b></th>
-    <th colspan="4"></th>
-    <th class="text-center"><%= valor_duascasas(@necBoroSoma) %></th>
-    <th class="text-center"><%= valor_duascasas(@necBoroSomaHa) %></th>
-    <th colspan="1"></th>
-    <th class="text-center"><%= valor_duascasas(@necCobreSoma) %></th>
-    <th class="text-center"><%= valor_duascasas(@necCobreSomaHa) %></th>
-    <th colspan="1"></th>
-    <th class="text-center"><%= valor_duascasas(@necManganesSoma) %></th>
-    <th class="text-center"><%= valor_duascasas(@necManganesSomaHa) %></th>
-    <th colspan="1"></th>
-    <th class="text-center"><%= valor_duascasas(@necZincoSoma) %></th>
-    <th class="text-center"><%= valor_duascasas(@necZincoSomaHa) %></th>
+    <th colspan="5"></th>
+    <th class="text-center"><%= valor_inteiro(@necBoroSomaHa) %></th>
+    <th colspan="2"></th>
+    <th class="text-center"><%= valor_inteiro(@necCobreSomaHa) %></th>
+    <th colspan="2"></th>
+    <th class="text-center"><%= valor_inteiro(@necManganesSomaHa) %></th>
+    <th colspan="2"></th>
+    <th class="text-center"><%= valor_inteiro(@necZincoSomaHa) %></th>
   </tr>
 
-	<% @necBoroSomaTotal += @necBoroSoma %>
-	<% @necCobreSomaTotal += @necCobreSoma %>
-	<% @necManganesSomaTotal += @necManganesSoma %>
-	<% @necZincoSomaTotal += @necZincoSoma %>
+
   <% @necBoroSomaTotalHa += @necBoroSomaHa %>
   <% @necCobreSomaTotalHa += @necCobreSomaHa %>
   <% @necManganesSomaTotalHa += @necManganesSomaHa %>

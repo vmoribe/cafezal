@@ -1,46 +1,37 @@
+<%= wicked_pdf_stylesheet_link_tag 'application' %>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<% @analises.select("DISTINCT(ano)").each do |p| %>
+<% @parametro_ano = p.ano %>
 <div class="row">
 <h1 class="text-center">Necessidade de Adubação NPK</h1>
 <div class="col-md-6">
 <table class="table table-condensed text-center">
   <thead>
-    <tr>
+    <tr style="page-break-inside: avoid">
       <th class="text-center">Ano</th>
       <th class="text-center">Parcelamento</th>
       <th class="text-center">Produção Esperada</th>
       <th colspan="1"></th>
     </tr>
   </thead>
-  <%= link_to 'Novo Parâmetro', new_parametro_path,:class => 'btn btn-default' %>
-  <%= link_to "Gerar PDF", analises_fertilidade_path(params.merge(:format => "pdf")), class: "btn btn-primary", :target => "_blank"%>
   <tbody>
-      <% @parametros.each do |parametro| %>
-    <tr>
+      <% @parametros.where("(ano= ?)", @parametro_ano).each do |parametro| %>
+    <tr style="page-break-inside: avoid">
         <td><%= parametro.ano %></td>
         <td><%= parametro.parcelamento %></td>
         <td><%= parametro.producao_esperada %></td>
-        <td><%= link_to 'Edit', edit_parametro_path(parametro),:class => 'btn btn-default' %></td>
+        <td><% link_to 'Edit', edit_parametro_path(parametro),:class => 'btn btn-default' %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
-</div>
-<div class="col-md-6">
-<%= search_form_for @search, :class => "form-inline", url: analises_fertilidade_path do |f| %>
-<h3>Filtro</h3>
-  <%= f.label :ano_eq, "Ano:" %>
-  <%= f.search_field :ano_eq, :class => "text-center form-control"%>
-  <%= f.label :fazenda_nome_cont, "Fazenda:" %>
-  <%= f.search_field :fazenda_nome_cont, :class => "text-center form-control" %>
-  <%= f.submit :class => 'btn btn-primary' %>
-<% end %>
 </div>
 </div>
 
 <%# Bloco Plantio%>
 <table class="table table-condensed">
 
-<% @analises.select("DISTINCT(ano)").each do |p| %>
-<% @parametro_ano = p.ano %>
 
 <div class="col-xs-12 col-md-12"> <%# Divisão 1%>
 
@@ -68,25 +59,22 @@
 
 <table class="table table-condensed text-center"> <%# Table 3%>
           <thead>
-            <tr>
+            <tr style="page-break-inside: avoid">
               <th>Fazenda</th>
               <th>Ano</th>
               <th>Talhão</th>
               <th>Área</th>
-              <th>P rem</th>
-              <th>Fosforo</th>
-              <th>Potássio</th>
               <th>Nec N (g/ cova)</th>
-              <th>Nec N (kg/ha) Aplicação</th>
-              <th>Nec N Área / Aplicação (kg)</th>
+              <th>Nec N (kg/ha) Apl</th>
+              <th>Nec N Área / Apl (kg)</th>
               <th>Nec N Total (kg)</th>
               <th>Nec P2O5 (g/ cova)</th>
               <th>Nec P2O5 (kg/ha)</th>
               <th>Nec Total P2O5 (Kg) </th>
               <th>Nec K2O (g/ cova)</th>
               <th>Nec K2O (kg/ha /ano)</th>
-              <th>Nec K2O/ Aplicação (kg/ha)</th>
-              <th>Nec K2O Área / Aplicação (kg)</th>
+              <th>Nec K2O/ Apl (kg/ha)</th>
+              <th>Nec K2O Área / Apl (kg)</th>
               <th>Nec K2O Total (kg)</th>
             </tr>
           </thead>
@@ -103,14 +91,11 @@
 <% end %><%# End do parametro%>
 
   <tbody>
-   <tr>
+   <tr style="page-break-inside: avoid">
     <td><%= analise.fazenda.nome %></td>
     <td><%= analise.ano %></td>
     <td><%= analise.talhao.nome %></td>
     <td><%= analise.talhao.area %></td>
-    <td><%= analise.p_rem %></td>
-    <td><%= analise.fosforo_p %></td>
-    <td><%= analise.potassio_k %></td>
     <td><%= valor_inteiro(analise.necNplantio)%></td>
     <td class="danger text-center"><%= valor_inteiro(analise.necNplantioemKgha)%></td>
     <td class="success text-center"><%= valor_inteiro(analise.necNPlantioAplicacao) %></td>
@@ -131,9 +116,9 @@
   <% @necK2oplantioSoma += analise.necK2oPlantioTotal(@parametro_parcelamento) %>
   
 <% end %>
-  <tr>
+  <tr style="page-break-inside: avoid">
     <th class="text-center"><b>Total</b></th>
-    <th colspan="9"></th>
+    <th colspan="6"></th>
     <th class="text-center"><%= valor_inteiro(@necNplantioSoma) %></th>
     <th colspan="2"></th>
     <th class="text-center"><%= valor_inteiro(@necP2o5plantioSoma) %></th>
@@ -180,7 +165,7 @@
 
 <table class="table table-condensed text-center"> <%# Table 3%>
           <thead>
-            <tr>
+            <tr style="page-break-inside: avoid">
               <th>Fazenda</th>
               <th>Ano</th>
               <th>Talhão</th>
@@ -208,7 +193,7 @@
 <% end %>
 
   <tbody>
-   <tr>
+   <tr style="page-break-inside: avoid">
     <td><%= analise.fazenda.nome %></td>
     <td><%= analise.ano %></td>
     <td><%= analise.talhao.nome %></td>
@@ -229,7 +214,7 @@
   
 <% end %>
 
-  <tr>
+  <tr style="page-break-inside: avoid">
     <th class="text-center"><b>Total</b></th>
     <th colspan="7"></th>
     <th class="text-center"><%= valor_inteiro(@necN1anoSoma) %></th>
@@ -271,7 +256,7 @@
 
 <table class="table table-condensed text-center"> <%# Table 3%>
           <thead>
-            <tr>
+            <tr style="page-break-inside: avoid">
               <th>Fazenda</th>
               <th>Ano</th>
               <th>Talhão</th>
@@ -299,7 +284,7 @@
 <% end %>
 
   <tbody>
-   <tr>
+   <tr style="page-break-inside: avoid">
     <td><%= analise.fazenda.nome %></td>
     <td><%= analise.ano %></td>
     <td><%= analise.talhao.nome %></td>
@@ -320,7 +305,7 @@
   
 <% end %>
 
-  <tr>
+  <tr style="page-break-inside: avoid">
     <th class="text-center"><b>Total</b></th>
     <th colspan="7"></th>
     <th class="text-center"><%= valor_inteiro(@necN2anoSoma) %></th>
@@ -365,14 +350,11 @@
 
 <table class="table table-condensed text-center"> <%# Table 3%>
           <thead>
-            <tr>
+            <tr style="page-break-inside: avoid">
               <th>Fazenda</th>
               <th>Ano</th>
               <th>Talhão</th>
               <th>Área</th>
-              <th>P rem</th>
-              <th>Fosforo</th>
-              <th>Potássio</th>
               <th>Nec N (g/m linear)</th>
               <th>Nec N (kg/ha)</th>
               <th>Nec N/ Aplicação</th>
@@ -399,14 +381,11 @@
 <% end %>
 
   <tbody>
-   <tr>
+   <tr style="page-break-inside: avoid">
     <td><%= analise.fazenda.nome %></td>
     <td><%= analise.ano %></td>
     <td><%= analise.talhao.nome %></td>
     <td><%= analise.talhao.area %></td>
-    <td><%= analise.p_rem %></td>
-    <td><%= analise.fosforo_p %></td>
-    <td><%= analise.potassio_k %></td>
     <td><%= valor_inteiro(analise.necNProducaoemMetroLinear(@parametro_producao_esperada))%></td>
     <td class="danger"><%= valor_inteiro(analise.necNProducaoKgha(@parametro_producao_esperada))%></td>
     <td class="success"><%= valor_inteiro(analise.necNProducaoAplicacao(@parametro_producao_esperada,@parametro_parcelamento))%></td>
@@ -425,9 +404,9 @@
   <% @necK2oProducaoSoma += analise.necK2oProducaoTotal(@parametro_producao_esperada) %>
 
 <% end %>
-  <tr>
+  <tr style="page-break-inside: avoid">
     <th class="text-center"><b>Total</b></th>
-    <th colspan="9"></th>
+    <th colspan="6"></th>
     <th class="text-center"><%= valor_inteiro(@necNProducaoSoma) %></th>
     <th colspan="2"></th>
     <th class="text-center"><%= valor_inteiro(@necP2o5ProducaoSoma) %></th>
@@ -451,7 +430,7 @@
 <div class="col-md-6 col-md-offset-3">
 <table class="table table-condensed table-striped"> <%# Table 4%>
   <thead>
-  <tr>
+  <tr style="page-break-inside: avoid">
     <th class="text-center"><%= @parametro_ano%></th>
     <th class="text-center"><b>Total N fazendas</b></th>
     <th class="text-center"><b>Total P2O5 Fazendas</b></th>
@@ -459,25 +438,25 @@
   </tr> 
   </thead>
   <tbody>
-  <tr>
+  <tr style="page-break-inside: avoid">
     <td class="text-center"><b>Plantio</b></td>
     <td class="text-center"><%= valor_inteiro(@necNplantioSomaTotal) %></td>
     <td class="text-center"><%= valor_inteiro(@necP2o5plantioSomaTotal) %></td>
     <td class="text-center"><%= valor_inteiro(@necK2oplantioSomaTotal) %></td>
   </tr>
-  <tr>
+  <tr style="page-break-inside: avoid">
     <td class="text-center"><b>1° Ano</b></td>
     <td class="text-center"><%= valor_inteiro(@necN1anoSomaTotal) %></td>
     <td class="text-center"></td>
     <td class="text-center"><%= valor_inteiro(@necK2o1anoSomaTotal) %></td>
   </tr>
-  <tr>
+  <tr style="page-break-inside: avoid">
     <td class="text-center"><b>2° Ano</b></td>
     <td class="text-center"><%= valor_inteiro(@necN2anoSomaTotal) %></td>
     <td class="text-center"></td>
     <td class="text-center"><%= valor_inteiro(@necK2o2anoSomaTotal) %></td>
   </tr>
-    <tr>
+    <tr style="page-break-inside: avoid">
     <td class="text-center"><b>Produção</b></td>
     <td class="text-center"><%= valor_inteiro(@necNProducaoSomaTotal) %></td>
     <td class="text-center"><%= valor_inteiro(@necP2o5ProducaoSomaTotal) %></td>
@@ -486,7 +465,7 @@
   <% @nTotal = @necNplantioSomaTotal + @necN1anoSomaTotal + @necN2anoSomaTotal + @necNProducaoSomaTotal %>
   <% @P2o5Total = @necP2o5plantioSomaTotal + @necP2o5ProducaoSomaTotal %>
   <% @K2oTotal = @necK2oplantioSomaTotal + @necK2o1anoSomaTotal + @necK2o2anoSomaTotal + @necK2oProducaoSomaTotal %>
-    <tr>
+    <tr style="page-break-inside: avoid">
     <td class="text-center"><b>Total</b></td>
     <td class="text-center"><%= valor_inteiro(@nTotal) %></td>
     <td class="text-center"><%= valor_inteiro(@P2o5Total) %></td>

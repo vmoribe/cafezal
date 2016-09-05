@@ -11,12 +11,30 @@ class AnalisesController < ApplicationController
     @primeiroAno = @analises.where("situacao = ?", "1° Ano").order("ano DESC", "talhao_id ASC")
     @segundoAno = @analises.where("situacao = ?", "2° Ano / Poda").order("ano DESC", "talhao_id ASC")
     @producao = @analises.where("situacao = ?", "Produção").order("ano DESC", "talhao_id ASC")
+
+    respond_to do |format|
+      format.html
+      format.pdf { render pdf: "necessidade-fertilizantes",
+        footer: { center: "[page] of [topage]"},
+        zoom: 0.60
+        }
+    end
+
   end
 
   def micronutrientes
     @search = Analise.where(user_id: current_user.id).ransack(params[:q])
     @analises = @search.result
     @analises = @analises.where(:ano => nil) unless params[:q]
+
+    respond_to do |format|
+      format.html
+      format.pdf { render pdf: "necessidade-micronutrientes",
+        footer: { center: "[page] of [topage]"},
+        zoom: 0.60
+        }
+    end
+
   end
   
   def gessagem
@@ -24,6 +42,15 @@ class AnalisesController < ApplicationController
     @analises = @search.result
     @analises = @analises.where(:ano => nil) unless params[:q]
     @vargessos = Vargesso.where(user_id: current_user.id).order("id DESC")
+
+    respond_to do |format|
+      format.html
+      format.pdf { render pdf: "necessidade-gessagem",
+        footer: { center: "[page] of [topage]"},
+        zoom: 0.60
+        }
+    end
+
   end
 
   def fertilidade
@@ -35,6 +62,16 @@ class AnalisesController < ApplicationController
     @primeiroAno = @analises.where("situacao = ?", "1° Ano").order("ano DESC", "talhao_id ASC")
     @segundoAno = @analises.where("situacao = ?", "2° Ano / Poda").order("ano DESC", "talhao_id ASC")
     @producao = @analises.where("situacao = ?", "Produção").order("ano DESC", "talhao_id ASC")
+
+    respond_to do |format|
+      format.html
+
+      format.pdf { render pdf: "necessidade-npk",
+        footer: { center: "[page] of [topage]"},
+        zoom: 0.60
+        }
+    end
+
   end
 
   def calagem
@@ -49,9 +86,9 @@ class AnalisesController < ApplicationController
       format.html
 
       format.pdf { render pdf: "necessidade-calagem",
-        footer: { center: "[page] of [topage]"}
+        footer: { center: "[page] of [topage]"},
+        zoom: 0.60
         }
-      
     end
 
   end

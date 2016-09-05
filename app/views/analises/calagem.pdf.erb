@@ -3,6 +3,8 @@
 
 <div class="row">
 <h1 class="text-center">Necessidade de Calagem</h1>
+<% @analises.select("DISTINCT(ano)").each do |p| %>
+<% @parametro_ano = p.ano %>
 <div class="col-md-6">
 <table class="table table-condensed text-center">
   <thead>
@@ -15,7 +17,7 @@
     </tr>
     <% link_to 'Nova Variável', new_variavel_path,:class => 'btn btn-default' %>
   </thead>
-    <% @variavels.each do |variavel| %>
+    <% @variavels.where("(ano= ?)", @parametro_ano).each do |variavel| %>
   <tbody>
     <tr>
         <td><%= variavel.ano %></td>
@@ -32,8 +34,6 @@
 </div>
 
 
-<% @analises.select("DISTINCT(ano)").each do |p| %>
-<% @parametro_ano = p.ano %>
 
     <% @ncPlantiototal = 0 %>
     <% @nctotalPlantiocorrigida = 0 %>

@@ -1,19 +1,8 @@
-<div class="row">
-<h1 class="text-center">Necessidade de Fertilizantes</h1>
-<div class="col-md-6">
-<%= link_to "Gerar PDF", analises_fertilizantes_path(params.merge(:format => "pdf")), class: "btn btn-primary", :target => "_blank"%>
-</div>
-<div class="col-md-6">
-<%= search_form_for @search, :class => "form-inline", url: analises_fertilizantes_path do |f| %>
-<h3>Filtro</h3>
-  <%= f.label :ano_eq, "Ano:" %>
-  <%= f.search_field :ano_eq, :class => "text-center form-control"%>
-  <%= f.label :fazenda_nome_cont, "Fazenda:" %>
-  <%= f.search_field :fazenda_nome_cont, :class => "text-center form-control" %>
-  <%= f.submit :class => 'btn btn-primary' %>
-<% end %>
-</div>
+<%= wicked_pdf_stylesheet_link_tag 'application' %>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
+<table class="table table-condensed">
+<h1 class="text-center">Necessidade de Fertilizantes</h1>
 
 <%# Bloco Plantio%>
 <% @analises.select("DISTINCT(ano)").each do |p| %>
@@ -62,7 +51,7 @@
 
 <table class="table table-condensed text-center"> <%# Table 3%>
           <thead>
-            <tr>
+            <tr style="page-break-inside: avoid">
               <th class="text-center">Adubo 1</th>
               <th class="text-center">Adubo 2</th>
               <th class="text-center">Adubo 3</th>
@@ -162,7 +151,7 @@
          <% @precoTotal = ((@adubo1 * (@adubo1preco/1000))) + ((@adubo2 * (@adubo2preco/1000))) + ((@adubo3 * (@adubo3preco/1000))) %>
          <% @precoHa = @precoTotal / analise.talhao.area %>
        <tbody>
-       <tr>
+       <tr style="page-break-inside: avoid">
         <td><%= @nome1 %></td>
         <td><%= @nome2 %></td>
         <td><%= @nome3 %></td>
@@ -222,7 +211,7 @@
 
 <table class="table table-condensed text-center"> <%# Table 3%>
           <thead>
-            <tr>
+            <tr style="page-break-inside: avoid">
               <th class="text-center">Adubo 1</th>
               <th class="text-center">Adubo 2</th>
               <th class="text-center">Adubo 3</th>
@@ -322,7 +311,7 @@
          <% @precoTotal = ((@adubo1 * (@adubo1preco/1000))) + ((@adubo2 * (@adubo2preco/1000))) + ((@adubo3 * (@adubo3preco/1000))) %>
          <% @precoHa = @precoTotal / analise.talhao.area %>
        <tbody>
-       <tr>
+       <tr style="page-break-inside: avoid">
         <td><%= @nome1 %></td>
         <td><%= @nome2 %></td>
         <td><%= @nome3 %></td>
@@ -383,7 +372,7 @@
 
 <table class="table table-condensed text-center"> <%# Table 3%>
           <thead>
-            <tr>
+            <tr style="page-break-inside: avoid">
               <th class="text-center">Adubo 1</th>
               <th class="text-center">Adubo 2</th>
               <th class="text-center">Adubo 3</th>
@@ -483,7 +472,7 @@
          <% @precoTotal = ((@adubo1 * (@adubo1preco/1000))) + ((@adubo2 * (@adubo2preco/1000))) + ((@adubo3 * (@adubo3preco/1000))) %>
          <% @precoHa = @precoTotal / analise.talhao.area %>
        <tbody>
-       <tr>
+       <tr style="page-break-inside: avoid">
         <td><%= @nome1 %></td>
         <td><%= @nome2 %></td>
         <td><%= @nome3 %></td>
@@ -545,7 +534,7 @@
 
 <table class="table table-condensed text-center"> <%# Table 3%>
           <thead>
-            <tr>
+            <tr style="page-break-inside: avoid">
               <th class="text-center">Adubo 1</th>
               <th class="text-center">Adubo 2</th>
               <th class="text-center">Adubo 3</th>
@@ -646,7 +635,7 @@
          <% @precoTotal = ((@adubo1 * (@adubo1preco/1000))) + ((@adubo2 * (@adubo2preco/1000))) + ((@adubo3 * (@adubo3preco/1000))) %>
          <% @precoHa = @precoTotal / analise.talhao.area %>
        <tbody>
-       <tr>
+       <tr style="page-break-inside: avoid">
         <td><%= @nome1 %></td>
         <td><%= @nome2 %></td>
         <td><%= @nome3 %></td>
@@ -670,4 +659,4 @@
 <%end%> <%# ano %>
 
 
-
+</table>

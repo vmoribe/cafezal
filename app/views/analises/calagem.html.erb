@@ -11,7 +11,7 @@
       <th colspan="1"></th>
     </tr>
     <%= link_to 'Nova Variável', new_variavel_path,:class => 'btn btn-default' %>
-    <%= link_to "Gerar PDF", analises_calagem_path(params.merge(:format => "pdf")), class: "btn btn-primary" %>
+    <%= link_to "Gerar PDF", analises_calagem_path(params.merge(:format => "pdf")), class: "btn btn-primary", :target => "_blank"%>
   </thead>
     <% @variavels.each do |variavel| %>
   <tbody>

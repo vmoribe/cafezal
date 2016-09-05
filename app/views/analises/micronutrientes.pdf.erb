@@ -1,17 +1,10 @@
+<%= wicked_pdf_stylesheet_link_tag 'application' %>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
 <div class="row">
 <h1 class="text-center">Necessidade de Adubação Micronutrientes</h1>
 <div class="col-md-6">
-  <%= link_to "Gerar PDF", analises_micronutrientes_path(params.merge(:format => "pdf")), class: "btn btn-primary", :target => "_blank"%>
 </div>
-<div class="col-md-6">
-<%= search_form_for @search, :class => "form-inline", url: analises_micronutrientes_path do |f| %>
-<h3>Filtro</h3>
-  <%= f.label :ano_eq, "Ano:" %>
-  <%= f.search_field :ano_eq, :class => "text-center form-control"%>
-  <%= f.label :fazenda_nome_cont, "Fazenda:" %>
-  <%= f.search_field :fazenda_nome_cont, :class => "text-center form-control" %>
-  <%= f.submit :class => 'btn btn-primary' %>
-<% end %>
 </div>
 
 
@@ -51,7 +44,7 @@
 
 <table class="table table-condensed text-center"> <%# Table 3%>
           <thead>
-            <tr>
+            <tr style="page-break-inside: avoid">
               <th>Fazenda</th>
               <th>Ano</th>
               <th>Talhão</th>
@@ -83,7 +76,7 @@
   <% @necZincoHa = analise.necZinco * analise.talhao.area%>  
 
   <tbody>
-   <tr>
+   <tr style="page-break-inside: avoid">
     <td><%= analise.fazenda.nome %></td>
     <td><%= analise.ano %></td>
     <td><%= analise.talhao.nome %></td>
@@ -109,7 +102,7 @@
   <% @necZincoSomaHa += @necZincoHa %>  
 <% end %>
 
-  <tr>
+  <tr style="page-break-inside: avoid">
     <th class="text-center"><b>Total</b></th>
     <th colspan="5"></th>
     <th class="text-center"><%= valor_inteiro(@necBoroSomaHa) %></th>
@@ -139,7 +132,7 @@
 <div class="col-md-6 col-md-offset-3">
 <table class="table table-condensed table-striped"> <%# Table 4%>
   <thead>
-  <tr>
+  <tr style="page-break-inside: avoid">
     <th class="text-center"><%= @parametro_ano%></th>
     <th class="text-center"><b>Total Boro</b></th>
     <th class="text-center"><b>Total Cobre</b></th>
@@ -148,7 +141,7 @@
   </tr> 
   </thead>
   <tbody>
-    <tr>
+    <tr style="page-break-inside: avoid">
     <td class="text-center"><b>Total</b></td>
     <td class="text-center"><%= valor_duascasas(@necBoroSomaTotalHa) %></td>
     <td class="text-center"><%= valor_duascasas(@necCobreSomaTotalHa) %></td>

@@ -10,6 +10,8 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'bourbon'
 gem 'seed_dump'
+gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf'
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'

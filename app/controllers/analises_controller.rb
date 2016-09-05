@@ -44,6 +44,16 @@ class AnalisesController < ApplicationController
     @plantio = @analises.where("situacao = ?", "Plantio").order("ano DESC")
     @correcao = @analises.where("situacao != ?", "Plantio").order("ano DESC")
     @variavels = Variavel.where(user_id: current_user.id).order("id DESC")
+
+    respond_to do |format|
+      format.html
+
+      format.pdf { render pdf: "necessidade-calagem",
+        footer: { center: "[page] of [topage]"}
+        }
+      
+    end
+
   end
   # GET /analises
   # GET /analises.json

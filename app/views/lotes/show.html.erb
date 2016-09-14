@@ -1,0 +1,42 @@
+<p>
+  <strong>Fazenda:</strong>
+  <%= @lote.fazenda.nome %>
+</p>
+
+<p>
+  <strong>Talhao:</strong>
+  <%= @lote.talhao.nome %>
+</p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @lote.tipo %>
+</p>
+
+<p>
+  <strong>Local:</strong>
+  <%= @lote.local %>
+</p>
+
+<p>
+  <strong>Numero:</strong>
+  <%= @lote.numero %>
+</p>
+
+<p>
+  <strong>Numeroorigem:</strong>
+  <%= @lote.numeroOrigem %>
+</p>
+
+<p>
+  <strong>Dataentrada:</strong>
+  <%= @lote.dataEntrada %>
+</p>
+
+<p>
+  <strong>Quantidade:</strong>
+  <%= @lote.quantidade %>
+</p>
+
+<%= link_to 'Edit', edit_lote_path(@lote) %> |
+<%= link_to 'Back', lotes_path %>

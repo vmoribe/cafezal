@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :lotes
+
   resources :produtos
 
   resources :vargessos

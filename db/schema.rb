@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160826153504) do
+ActiveRecord::Schema.define(version: 20160914133909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,25 @@ ActiveRecord::Schema.define(version: 20160826153504) do
   end
 
   add_index "fazendas", ["user_id"], name: "index_fazendas_on_user_id", using: :btree
+
+  create_table "lotes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "fazenda_id"
+    t.integer  "talhao_id"
+    t.string   "tipo"
+    t.string   "local"
+    t.integer  "numero"
+    t.integer  "numeroOrigem"
+    t.date     "dataEntrada"
+    t.decimal  "quantidade",   precision: 10, scale: 2
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.string   "safra"
+  end
+
+  add_index "lotes", ["fazenda_id"], name: "index_lotes_on_fazenda_id", using: :btree
+  add_index "lotes", ["talhao_id"], name: "index_lotes_on_talhao_id", using: :btree
+  add_index "lotes", ["user_id"], name: "index_lotes_on_user_id", using: :btree
 
   create_table "parametros", force: :cascade do |t|
     t.integer  "ano"
@@ -173,6 +192,9 @@ ActiveRecord::Schema.define(version: 20160826153504) do
   add_foreign_key "analises", "talhaos"
   add_foreign_key "analises", "users"
   add_foreign_key "fazendas", "users"
+  add_foreign_key "lotes", "fazendas"
+  add_foreign_key "lotes", "talhaos"
+  add_foreign_key "lotes", "users"
   add_foreign_key "produtos", "users"
   add_foreign_key "talhaos", "fazendas"
   add_foreign_key "talhaos", "users"

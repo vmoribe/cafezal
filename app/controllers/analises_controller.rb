@@ -14,7 +14,7 @@ class AnalisesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.pdf { render pdf: "necessidade-fertilizantes",
+      format.pdf { render pdf: "Fertilizantes",
         footer: { center: "[page] of [topage]"},
         zoom: 0.60
         }
@@ -29,7 +29,7 @@ class AnalisesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.pdf { render pdf: "necessidade-micronutrientes",
+      format.pdf { render pdf: "Necessidade micronutrientes",
         footer: { center: "[page] of [topage]"},
         zoom: 0.60
         }
@@ -45,7 +45,7 @@ class AnalisesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.pdf { render pdf: "necessidade-gessagem",
+      format.pdf { render pdf: "Necessidade gessagem",
         footer: { center: "[page] of [topage]"},
         zoom: 0.60
         }
@@ -66,7 +66,7 @@ class AnalisesController < ApplicationController
     respond_to do |format|
       format.html
 
-      format.pdf { render pdf: "necessidade-npk",
+      format.pdf { render pdf: "Necessidade npk",
         footer: { center: "[page] of [topage]"},
         zoom: 0.60
         }
@@ -85,7 +85,7 @@ class AnalisesController < ApplicationController
     respond_to do |format|
       format.html
 
-      format.pdf { render pdf: "necessidade-calagem",
+      format.pdf { render pdf: "Necessidade calagem",
         footer: { center: "[page] of [topage]"},
         zoom: 0.60
         }

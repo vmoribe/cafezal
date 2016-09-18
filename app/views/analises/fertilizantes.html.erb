@@ -32,6 +32,7 @@
 				<th class="text-center">Ano</th>
 				<th class="text-center">Talhao</th>
 				<th class="text-center">Area</th>
+        <th class="text-center">Metros lineares</th>
 				<th class="text-center">N</th>
 				<th class="text-center">P</th>
 				<th class="text-center">K</th>
@@ -55,6 +56,7 @@
 		    <td class="active text-center"><%= analise.ano %></td>
 		    <td class="active text-center"><%= analise.talhao.nome %></td>
 		    <td class="active text-center"><%= analise.talhao.area %></td>
+        <td class="active text-center"><%= valor_inteiro(analise.metrosLineares) %></td>
 		    <td class="active text-center"><%= valor_inteiro(@necNplantioTotal)%></td>
 		    <td class="active text-center"><%= valor_inteiro(@necP2o5plantioTotal)%></td>
 		    <td class="active"><%= valor_inteiro(@necK2oPlantioTotal)%></td>
@@ -66,9 +68,12 @@
               <th class="text-center">Adubo 1</th>
               <th class="text-center">Adubo 2</th>
               <th class="text-center">Adubo 3</th>
-              <th class="text-center">Qtde Adubo1</th>
-              <th class="text-center">Qtde Adubo2</th>
-              <th class="text-center">Qtde Adubo3</th>
+              <th class="text-center">Adubo1 (Kg)</th>
+              <th class="text-center">Adubo1 g/m</th>
+              <th class="text-center">Adubo2 (Kg)</th>
+              <th class="text-center">Adubo2 g/m</th>
+              <th class="text-center">Adubo3 (Kg)</th>
+              <th class="text-center">Adubo3 g/m</th>
               <th class="text-center">Custo Total</th>
               <th class="text-center">Custo por Ha</th>
             </tr>
@@ -161,14 +166,20 @@
 <% else %>
          <% @precoTotal = ((@adubo1 * (@adubo1preco/1000))) + ((@adubo2 * (@adubo2preco/1000))) + ((@adubo3 * (@adubo3preco/1000))) %>
          <% @precoHa = @precoTotal / analise.talhao.area %>
+         <% @adubo1gm = ((@adubo1 / analise.talhao.area) * 1000) / analise.metrosLineares %>
+         <% @adubo2gm = ((@adubo2 / analise.talhao.area) * 1000) / analise.metrosLineares %>
+         <% @adubo3gm = ((@adubo3 / analise.talhao.area) * 1000) / analise.metrosLineares %>
        <tbody>
        <tr>
         <td><%= @nome1 %></td>
         <td><%= @nome2 %></td>
         <td><%= @nome3 %></td>
-        <td><%= valor_duascasas(@adubo1) %></td>
-        <td><%= valor_duascasas(@adubo2) %></td>
-        <td><%= valor_duascasas(@adubo3) %></td> 
+        <td><%= valor_inteiro(@adubo1) %></td>
+        <td><%= valor_inteiro(@adubo1gm) %></td>
+        <td><%= valor_inteiro(@adubo2) %></td>
+        <td><%= valor_inteiro(@adubo2gm) %></td>
+        <td><%= valor_inteiro(@adubo3) %></td>
+        <td><%= valor_inteiro(@adubo3gm) %></td> 
         <td><%= valor_emreais(@precoTotal) %></td>
         <td><%= valor_emreais(@precoHa) %></td>               
        </tr>
@@ -193,6 +204,7 @@
         <th class="text-center">Ano</th>
         <th class="text-center">Talhao</th>
         <th class="text-center">Area</th>
+        <th class="text-center">Metros lineares</th>
         <th class="text-center">N</th>
         <th class="text-center">P</th>
         <th class="text-center">K</th>
@@ -215,6 +227,7 @@
         <td class="active text-center"><%= analise.ano %></td>
         <td class="active text-center"><%= analise.talhao.nome %></td>
         <td class="active text-center"><%= analise.talhao.area %></td>
+        <td class="active text-center"><%= valor_inteiro(analise.metrosLineares) %></td>
         <td class="active text-center"><%= valor_inteiro(@necN1anoTotal)%></td>
         <td class="active text-center"></td>
         <td class="active"><%= valor_inteiro(@necK2o1anoTotal)%></td>
@@ -226,9 +239,12 @@
               <th class="text-center">Adubo 1</th>
               <th class="text-center">Adubo 2</th>
               <th class="text-center">Adubo 3</th>
-              <th class="text-center">Qtde Adubo1</th>
-              <th class="text-center">Qtde Adubo2</th>
-              <th class="text-center">Qtde Adubo3</th>
+              <th class="text-center">Adubo1 (Kg)</th>
+              <th class="text-center">Adubo1 g/m</th>
+              <th class="text-center">Adubo2 (Kg)</th>
+              <th class="text-center">Adubo2 g/m</th>
+              <th class="text-center">Adubo3 (Kg)</th>
+              <th class="text-center">Adubo3 g/m</th>
               <th class="text-center">Custo Total</th>
               <th class="text-center">Custo por Ha</th>
             </tr>
@@ -321,14 +337,20 @@
 <% else %>
          <% @precoTotal = ((@adubo1 * (@adubo1preco/1000))) + ((@adubo2 * (@adubo2preco/1000))) + ((@adubo3 * (@adubo3preco/1000))) %>
          <% @precoHa = @precoTotal / analise.talhao.area %>
+         <% @adubo1gm = ((@adubo1 / analise.talhao.area) * 1000) / analise.metrosLineares %>
+         <% @adubo2gm = ((@adubo2 / analise.talhao.area) * 1000) / analise.metrosLineares %>
+         <% @adubo3gm = ((@adubo3 / analise.talhao.area) * 1000) / analise.metrosLineares %>
        <tbody>
        <tr>
         <td><%= @nome1 %></td>
         <td><%= @nome2 %></td>
         <td><%= @nome3 %></td>
-        <td><%= valor_duascasas(@adubo1) %></td>
-        <td><%= valor_duascasas(@adubo2) %></td>
-        <td><%= valor_duascasas(@adubo3) %></td> 
+        <td><%= valor_inteiro(@adubo1) %></td>
+        <td><%= valor_inteiro(@adubo1gm) %></td>
+        <td><%= valor_inteiro(@adubo2) %></td>
+        <td><%= valor_inteiro(@adubo2gm) %></td>
+        <td><%= valor_inteiro(@adubo3) %></td>
+        <td><%= valor_inteiro(@adubo3gm) %></td> 
         <td><%= valor_emreais(@precoTotal) %></td>
         <td><%= valor_emreais(@precoHa) %></td>               
        </tr>
@@ -354,6 +376,7 @@
         <th class="text-center">Ano</th>
         <th class="text-center">Talhao</th>
         <th class="text-center">Area</th>
+        <th class="text-center">Metros lineares</th>
         <th class="text-center">N</th>
         <th class="text-center">P</th>
         <th class="text-center">K</th>
@@ -376,6 +399,7 @@
         <td class="active text-center"><%= analise.ano %></td>
         <td class="active text-center"><%= analise.talhao.nome %></td>
         <td class="active text-center"><%= analise.talhao.area %></td>
+        <td class="active text-center"><%= valor_inteiro(analise.metrosLineares) %></td>
         <td class="active text-center"><%= valor_inteiro(@necN2anoTotal)%></td>
         <td class="active text-center"></td>
         <td class="active"><%= valor_inteiro(@necK2o2anoTotal)%></td>
@@ -387,9 +411,12 @@
               <th class="text-center">Adubo 1</th>
               <th class="text-center">Adubo 2</th>
               <th class="text-center">Adubo 3</th>
-              <th class="text-center">Qtde Adubo1</th>
-              <th class="text-center">Qtde Adubo2</th>
-              <th class="text-center">Qtde Adubo3</th>
+              <th class="text-center">Adubo1 (Kg)</th>
+              <th class="text-center">Adubo1 g/m</th>
+              <th class="text-center">Adubo2 (Kg)</th>
+              <th class="text-center">Adubo2 g/m</th>
+              <th class="text-center">Adubo3 (Kg)</th>
+              <th class="text-center">Adubo3 g/m</th>
               <th class="text-center">Custo Total</th>
               <th class="text-center">Custo por Ha</th>
             </tr>
@@ -482,14 +509,20 @@
 <% else %>
          <% @precoTotal = ((@adubo1 * (@adubo1preco/1000))) + ((@adubo2 * (@adubo2preco/1000))) + ((@adubo3 * (@adubo3preco/1000))) %>
          <% @precoHa = @precoTotal / analise.talhao.area %>
+         <% @adubo1gm = ((@adubo1 / analise.talhao.area) * 1000) / analise.metrosLineares %>
+         <% @adubo2gm = ((@adubo2 / analise.talhao.area) * 1000) / analise.metrosLineares %>
+         <% @adubo3gm = ((@adubo3 / analise.talhao.area) * 1000) / analise.metrosLineares %>
        <tbody>
        <tr>
         <td><%= @nome1 %></td>
         <td><%= @nome2 %></td>
         <td><%= @nome3 %></td>
-        <td><%= valor_duascasas(@adubo1) %></td>
-        <td><%= valor_duascasas(@adubo2) %></td>
-        <td><%= valor_duascasas(@adubo3) %></td> 
+        <td><%= valor_inteiro(@adubo1) %></td>
+        <td><%= valor_inteiro(@adubo1gm) %></td>
+        <td><%= valor_inteiro(@adubo2) %></td>
+        <td><%= valor_inteiro(@adubo2gm) %></td>
+        <td><%= valor_inteiro(@adubo3) %></td>
+        <td><%= valor_inteiro(@adubo3gm) %></td> 
         <td><%= valor_emreais(@precoTotal) %></td>
         <td><%= valor_emreais(@precoHa) %></td>               
        </tr>
@@ -515,6 +548,7 @@
         <th class="text-center">Ano</th>
         <th class="text-center">Talhao</th>
         <th class="text-center">Area</th>
+        <th class="text-center">Metros lineares</th>
         <th class="text-center">N</th>
         <th class="text-center">P</th>
         <th class="text-center">K</th>
@@ -538,6 +572,7 @@
         <td class="active text-center"><%= analise.ano %></td>
         <td class="active text-center"><%= analise.talhao.nome %></td>
         <td class="active text-center"><%= analise.talhao.area %></td>
+        <td class="active text-center"><%= valor_inteiro(analise.metrosLineares)%></td>        
         <td class="active text-center"><%= valor_inteiro(@necNproducaoTotal)%></td>
         <td class="active text-center"><%= valor_inteiro(@necP2o5producaoTotal)%></td>
         <td class="active"><%= valor_inteiro(@necK2oproducaoTotal)%></td>
@@ -549,9 +584,12 @@
               <th class="text-center">Adubo 1</th>
               <th class="text-center">Adubo 2</th>
               <th class="text-center">Adubo 3</th>
-              <th class="text-center">Qtde Adubo1</th>
-              <th class="text-center">Qtde Adubo2</th>
-              <th class="text-center">Qtde Adubo3</th>
+              <th class="text-center">Adubo1 (Kg)</th>
+              <th class="text-center">Adubo1 g/m</th>
+              <th class="text-center">Adubo2 (Kg)</th>
+              <th class="text-center">Adubo2 g/m</th>
+              <th class="text-center">Adubo3 (Kg)</th>
+              <th class="text-center">Adubo3 g/m</th>
               <th class="text-center">Custo Total</th>
               <th class="text-center">Custo por Ha</th>
             </tr>
@@ -645,14 +683,20 @@
 <% else %>
          <% @precoTotal = ((@adubo1 * (@adubo1preco/1000))) + ((@adubo2 * (@adubo2preco/1000))) + ((@adubo3 * (@adubo3preco/1000))) %>
          <% @precoHa = @precoTotal / analise.talhao.area %>
+         <% @adubo1gm = ((@adubo1 / analise.talhao.area) * 1000) / analise.metrosLineares %>
+         <% @adubo2gm = ((@adubo2 / analise.talhao.area) * 1000) / analise.metrosLineares %>
+         <% @adubo3gm = ((@adubo3 / analise.talhao.area) * 1000) / analise.metrosLineares %>
        <tbody>
        <tr>
         <td><%= @nome1 %></td>
         <td><%= @nome2 %></td>
         <td><%= @nome3 %></td>
-        <td><%= valor_duascasas(@adubo1) %></td>
-        <td><%= valor_duascasas(@adubo2) %></td>
-        <td><%= valor_duascasas(@adubo3) %></td> 
+        <td><%= valor_inteiro(@adubo1) %></td>
+        <td><%= valor_inteiro(@adubo1gm) %></td>
+        <td><%= valor_inteiro(@adubo2) %></td>
+        <td><%= valor_inteiro(@adubo2gm) %></td>
+        <td><%= valor_inteiro(@adubo3) %></td>
+        <td><%= valor_inteiro(@adubo3gm) %></td> 
         <td><%= valor_emreais(@precoTotal) %></td>
         <td><%= valor_emreais(@precoHa) %></td>               
        </tr>

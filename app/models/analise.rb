@@ -61,7 +61,7 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
   end
 
   def saturacaoBase
-    (somaDasBases / ctcApH7) * 100
+    (somaDasBases * 100) / ctcApH7
   end
 
   def necessidadeCalagem
@@ -103,7 +103,7 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
 
   def ncTotalComAreaCorrigida(profundidade, areaAplicacao, prnt)
     if situacao == "Plantio"
-      nctotalcomarea * ((profundidade / 20)*(100/prnt))
+      nctotalcomarea * (100/prnt)
     else
       nctotalcomarea * ((profundidade / 20)*(areaAplicacao / 100)*(100/prnt))
     end
@@ -111,7 +111,7 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
 
   def somaCalcario(profundidade, areaAplicacao, prnt)
     if situacao == "Plantio"
-      (nctotalcomarea * ((profundidade / 20)*(100/prnt))) + necCalagemCompAreaTotal
+      (nctotalcomarea * (100/prnt)) + necCalagemCompAreaTotal
     else
       (nctotalcomarea * ((profundidade / 20)*(areaAplicacao / 100)*(100/prnt))) + necCalagemCompAreaTotal
     end

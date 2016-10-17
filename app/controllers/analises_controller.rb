@@ -16,6 +16,8 @@ class AnalisesController < ApplicationController
       format.html
       format.pdf { render pdf: "Fertilizantes",
         footer: { center: "[page] of [topage]"},
+        orientation: 'Landscape',
+        page_size: 'A4',
         zoom: 0.60
         }
     end

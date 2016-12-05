@@ -41,7 +41,7 @@
       <th class="text-center">S</th>
       <th colspan="2"></th>
     </tr>
-      <tr>
+    <tr>
       <th class="text-center" colspan="5"></th>
       <th class="text-center" colspan="3">mg/ dm³</th>
       <th class="text-center" colspan="4">cmol/ dm³</th>
@@ -49,6 +49,29 @@
       <th class="text-center" >mg/ L</th>
       <th class="text-center" colspan="6">mg/ dm³</th>
       <th class="text-center" colspan="2"></th>
+    </tr>
+    <tr>
+      <th class="text-center"></th>
+      <th class="text-center"></th>
+      <th class="text-center"></th>
+      <th class="text-center"></th>
+      <th class="text-center">5.5 - 6</th>
+      <th class="text-center">K</th>
+      <th class="text-center">10 - 20</th>
+      <th class="text-center"></th>
+      <th class="text-center">2.2 - 3.7</th>
+      <th class="text-center">0.6 - 1</th>
+      <th class="text-center">0 - 0.5</th>
+      <th class="text-center">3 - 5</th>
+      <th class="text-center">MO</th>
+      <th class="text-center">P_rem</th>
+      <th class="text-center">4 - 6</th>
+      <th class="text-center">50 - 100</th>
+      <th class="text-center">10 - 15</th>
+      <th class="text-center">1 - 1.5</th>
+      <th class="text-center">0.6 - 1</th>
+      <th class="text-center">S</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -59,9 +82,17 @@
         <td><%= analise.situacao %></td>
         <td><%= analise.profundidade %></td>
         <td><%= analise.ano %></td>
-        <td><%= analise.ph %></td>
+        <% if analise.ph >= 5.5 && analise.ph <= 6 %>
+          <td class="success"><%= analise.ph %></td>
+        <% else %>
+          <td class="danger"><%= analise.ph %></td>
+        <% end %>
         <td><%= analise.potassio_k %></td>
-        <td><%= analise.fosforo_p %></td>
+        <% if analise.fosforo_p >= 10 && analise.fosforo_p <= 20 %>
+          <td class="success"><%= analise.fosforo_p %></td>
+        <% else %>
+          <td class="danger"><%= analise.fosforo_p %></td>
+        <% end %>
         <td><%= analise.sodio_na %></td>
         <td><%= analise.calcio_ca %></td>
         <td><%= analise.magnesio_mg %></td>

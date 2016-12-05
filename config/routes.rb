@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  
+  get 'lotes/consolidado'
   resources :lotes
 
   resources :produtos

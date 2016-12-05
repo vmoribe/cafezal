@@ -8,7 +8,7 @@
     <%= f.association :fazenda, label_method: :nome, collection: Fazenda.where(user_id: current_user.id) %>
     <%= f.association :talhao, label_method: :nome, collection: Talhao.where(user_id: current_user.id) %>
     <%= f.input :safra, collection: ["2016/2017","2017/2018", "2018/2019"] %>
-    <%= f.input :tipo, collection: ["A classificar","Café da Roça", "CD", "Café Bóia", "Verde"] %>
+    <%= f.input :tipo, collection: ["A classificar","Café da Roça", "CD", "Café Bóia", "Verde", "Varrição"] %>
     <%= f.input :local, collection: ["Colheita Manual","Colheita Mecanizada", "Terreiro", "Descascador", "Secador", "Tulha", "Benefício"] %>
         </div>
         <div class="col-md-6">

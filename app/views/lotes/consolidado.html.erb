@@ -1,0 +1,124 @@
+<div class="row">
+<h1 class="text-center">Rastreabilidade</h1>
+<div class="col-md-12">
+<%= search_form_for @search, :class => "form-inline", url: lotes_consolidado_path do |f| %>
+<h3>Filtro</h3>
+  <%= f.label :safra_eq, "Safra:" %>
+  <%= f.search_field :safra_eq, :class => "text-center form-control"%>
+  <%= f.label :fazenda_nome_cont, "Fazenda:" %>
+  <%= f.search_field :fazenda_nome_cont, :class => "text-center form-control" %>
+  <%= f.label :local_cont, "Local:" %>
+  <%= f.search_field :local_cont, :class => "text-center form-control" %>
+  <%= f.submit :class => 'btn btn-primary' %>
+<% end %>
+</div>
+</div>
+
+
+<h1>Listagem dos Lotes</h1>
+
+<%= link_to 'Novo Lote', new_lote_path,:class => 'btn btn-default' %>
+
+<% @lotes.select("DISTINCT(fazenda_id)").each do |v| %>
+  <% @faz_id = v.fazenda_id %>
+  <% @quantidadeFazenda = 0 %>
+  <% @qtdeSacasFazenda = 0 %>
+<% @lotes.where("(fazenda_id= ?)", @faz_id).select("DISTINCT(talhao_id)").each do |v| %>
+  <% @talhao_id = v.talhao_id %>
+  <% @quantidade = 0 %>
+  <% @qtdeSacas = 0 %>
+  <% @qtdeSacasHa = 0 %>
+
+<table class="table table-condensed table-hover text-center">
+  <thead>
+    <tr>
+      <th>Fazenda</th>
+      <th>Talhao</th>
+      <th>Safra</th>
+      <th>Tipo</th>
+      <th>Local</th>
+      <th>Numero</th>
+      <th>Lote Origem</th>
+      <th>Data Entrada</th>
+      <th>Quantidade</th>
+      <th>Sacas</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% @lotes.where("(fazenda_id= ? AND talhao_id= ?)", @faz_id, @talhao_id).each do |lote| %>
+<% @numeroOrigem = lote.numeroOrigem %>
+      <tr>
+        <td><%= lote.fazenda.nome %></td>
+        <td><%= lote.talhao.nome %></td>
+        <td><%= lote.safra %></td>
+        <td><%= lote.tipo %></td>
+        <td><%= lote.local %></td>
+        <td><%= lote.numero %></td>
+        <td><%= lote.numeroOrigem %></td>
+        <td><%= lote.dataEntrada %></td>
+        <td><%= valor_inteiro(lote.quantidade) %></td>
+        <td><%= valor_inteiro(lote.qtdeSacas) %></td>
+        <td><% link_to 'Show', lote %></td>
+        <td><%= link_to 'Edit', edit_lote_path(lote) %></td>
+        <td><%= link_to 'Destroy', lote, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% @qtde = lote.quantidade %>
+<% @lotes.where("(fazenda_id= ? AND talhao_id= ? AND numero= ?)", @faz_id, @talhao_id, @numeroOrigem).each do |lote| %>
+      <tr>
+        <td><%= lote.fazenda.nome %></td>
+        <td><%= lote.talhao.nome %></td>
+        <td><%= lote.safra %></td>
+        <td><%= lote.tipo %></td>
+        <td><%= lote.local %></td>
+        <td><%= lote.numero %></td>
+        <td><%= lote.numeroOrigem %></td>
+        <td><%= lote.dataEntrada %></td>
+        <td><%= valor_inteiro(lote.quantidade) %></td>
+        <td><%= valor_inteiro(lote.qtdeSacas) %></td>
+        <td><%= lote.quantidade - @qtde %></td>
+        <td><% link_to 'Show', lote %></td>
+        <td><%= link_to 'Edit', edit_lote_path(lote) %></td>
+        <td><%= link_to 'Destroy', lote, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+ <% @quantidade += lote.quantidade %>
+ <% @qtdeSacas += lote.qtdeSacas %>
+ <% @qtdeSacasHa = @qtdeSacas / lote.talhao.area %>
+<% end %>
+      <tr>
+        <td><b>Total</b></td>
+        <td>Sacas por ha</td>
+        <td><%= valor_inteiro(@qtdeSacasHa) %></td>
+        <td colspan="5"></td>
+        <td><b><%= valor_inteiro(@quantidade) %></b></td>
+        <td><b><%= valor_inteiro(@qtdeSacas)%></b></td>
+      </tr>
+  </tbody>
+<% @quantidadeFazenda += @quantidade %>
+<% @qtdeSacasFazenda += @qtdeSacas %>
+</table>
+<% end %>
+
+<div class="col-md-6 col-md-offset-3">
+<table class="table table-condensed table-striped"> <%# Table 4%>
+  <thead>
+  <tr>
+    <th class="text-center"></th>
+    <th class="text-center"><b>Quantidade Litros</b></th>    
+    <th class="text-center"><b>Quantidade Sacas</b></th>    
+  </tr> 
+  </thead>
+  <tbody>
+  <tr>
+    <td class="text-center"><b>Total</b></td>
+    <td class="text-center"><%= valor_inteiro(@quantidadeFazenda) %></td>
+    <td class="text-center"><%= valor_inteiro(@qtdeSacasFazenda) %></td>
+  </tr>
+</tbody>
+</table><%# Fim Table 4%>
+</div><%# Fim Div%>
+<%end%>
+<br>
+

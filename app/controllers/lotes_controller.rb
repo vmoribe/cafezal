@@ -6,6 +6,11 @@ class LotesController < ApplicationController
   def index
     @search = Lote.where(user_id: current_user.id).ransack(params[:q])
     @lotes = @search.result
+  end
+
+  def consolidado
+    @search = Lote.where(user_id: current_user.id).ransack(params[:q])
+    @lotes = @search.result
     @lotes = @lotes.where(:safra => nil) unless params[:q]
   end
 
@@ -61,6 +66,7 @@ class LotesController < ApplicationController
       format.html { redirect_to lotes_url, notice: 'Lote was successfully destroyed.' }
       format.json { head :no_content }
     end
+
   end
 
   private

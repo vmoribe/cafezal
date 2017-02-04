@@ -15,4 +15,5 @@ module ApplicationHelper
 	def valor_inteiro(number)
 		number_with_precision number, precision: 0
 	end
+
 end

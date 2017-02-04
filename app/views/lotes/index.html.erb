@@ -1,23 +1,20 @@
 <div class="row">
 <h1 class="text-center">Rastreabilidade</h1>
-<div class="col-md-12">
 <%= search_form_for @search, :class => "form-inline", url: lotes_path do |f| %>
 <h3>Filtro</h3>
   <%= f.label :safra_eq, "Safra:" %>
-  <%= f.search_field :safra_eq, :class => "text-center form-control"%>
+  <%= f.search_field :safra_eq, :class => "form-control"%>
   <%= f.label :fazenda_nome_cont, "Fazenda:" %>
-  <%= f.search_field :fazenda_nome_cont, :class => "text-center form-control" %>
+  <%= f.search_field :fazenda_nome_cont, :class => "form-control" %>
   <%= f.label :local_cont, "Talhão:" %>
-  <%= f.search_field :talhao_nome_cont, :class => "text-center form-control" %>
-  <%= f.label :local_cont, "Tipo:" %>
-  <%= f.search_field :tipo_cont, :class => "text-center form-control" %>
+  <%= f.search_field :talhao_nome_cont, :class => "form-control" %>
+  <%= f.label :tipo_cont, "Tipo:" %>
+  <%= f.search_field :tipo_cont, :class => "form-control" %>
   <%= f.label :local_cont, "Local:" %>
-  <%= f.search_field :local_cont, :class => "text-center form-control" %>
+  <%= f.search_field :local_cont, :class => "form-control" %>
   <%= f.submit :class => 'btn btn-primary' %>
 <% end %>
 </div>
-</div>
-
 
 <h1>Listagem dos Lotes</h1>
 

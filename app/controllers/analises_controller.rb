@@ -1,6 +1,12 @@
 class AnalisesController < ApplicationController
   before_action :set_analise, only: [:show, :edit, :update, :destroy]
 
+  def relacoes
+    @analises = Analise.where(user_id: current_user.id).order( "profundidade ASC", "talhao_id ASC")
+    @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
+    @parametros = Parametro.where(user_id: current_user.id).order("id DESC")        
+  end
+
   def fertilizantes
     @produtos = Produto.where(user_id: current_user.id).order("id ASC")
     @search = Analise.where(user_id: current_user.id).ransack(params[:q])

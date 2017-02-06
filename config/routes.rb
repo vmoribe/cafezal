@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :parametros
 
-
+    get 'analises/relacoes'
     get 'analises/fertilizantes'
     get 'analises/micronutrientes'
     get 'analises/gessagem'

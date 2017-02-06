@@ -1,0 +1,119 @@
+
+<h1>Listagem Análises</h1>
+
+<%= link_to 'Nova Analise', new_analise_path,:class => 'btn btn-default' %>
+
+<p></p>
+<p>K/Ca - Excesso de potássio no solo ou na adubação bloqueia a absorção de cálcio</p>
+<p>K/Mg - Potássio em excesso dificulta a absorção do magnésio</p>
+<p>K/Mn - Muito potássio causa diminuição do manganês</p>
+<p>P/Mn - Excesso de fósforo diminui a disponibilidade de  manganês  no solo</p>
+<p>P/Zn - Excesso de fósforo na adubação ou no solo causa deficiência de zinco</p>
+<p>Ca/Mn - Excesso de cálcio dificulta a absorção de manganês</p>
+<p>Fe/Mn - Excesso de ferro nos solos ácidos ou inundados pode  causar deficiência de manganês e vice-versa</p>
+
+
+<% @parametros.each do |parametro| %>
+   <tr>
+     <td><h2  class="text-center"><%= parametro.ano %></h2></td>
+   </tr>      
+<% @parametro_ano = parametro.ano %>
+
+  <% @fazendas.each do |fazenda| %>
+    <tr>
+      <td><h3><%= fazenda.nome %></h3></td>
+    </tr>
+  <% @fazenda_id = fazenda.id %>
+ 
+<table class="table table-condensed table-hover text-center">
+  <thead>
+    <tr>
+      <th class="text-center">Talhão</th>
+      <th class="text-center">Situação</th>
+      <th class="text-center">Profundidade</th>
+      <th class="text-center">K/Ca</th>
+      <th class="text-center">K/Mg</th>
+      <th class="text-center">K/Mn</th>
+      <th class="text-center">P/Mn</th>
+      <th class="text-center">P/Zn</th>
+      <th class="text-center">Ca/Mg</th>
+      <th class="text-center">Ca/Mn</th>
+      <th class="text-center">Fe/Mn</th>
+    </tr>
+    <tr>
+      <th class="text-center"></th>
+      <th class="text-center"></th>
+      <th class="text-center"></th>
+      <th class="text-center">0.1 - 0.2</th>
+      <th class="text-center">0.2 - 0.6</th>
+      <th class="text-center">5.5 - 13.7</th>
+      <th class="text-center">0.7 - 2.0</th>
+      <th class="text-center">1.5 - 5.0</th>
+      <th class="text-center">2.2 - 6.2</th>
+      <th class="text-center">29.3 - 74.0</th>
+      <th class="text-center">3.3 - 10.0</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+    <% @analises.where("(fazenda_id= ? AND ano= ?)", @fazenda_id, @parametro_ano).each do |analise| %>
+
+    <% @relacaokca = analise.relacaokca(analise.potassio_k,analise.calcio_ca) %>
+    <% @relacaokmg = analise.relacaokmg(analise.potassio_k,analise.magnesio_mg) %>
+    <% @relacaokmn = analise.relacaokmn(analise.potassio_k,analise.manganes_mn) %>
+    <% @relacaopmn = analise.relacaopmn(analise.fosforo_p,analise.manganes_mn) %>
+    <% @relacaopzn = analise.relacaopzn(analise.fosforo_p,analise.zinco_zn) %>
+    <% @relacaocamg = analise.relacaocamg(analise.calcio_ca,analise.magnesio_mg) %>
+    <% @relacaocamn = analise.relacaocamn(analise.calcio_ca,analise.manganes_mn) %>
+<% @relacaofemn = analise.relacaofemn(analise.ferro_fe,analise.manganes_mn) %>
+
+        <td><%= analise.talhao.nome %></td>
+        <td><%= analise.situacao %></td>
+        <td><%= analise.profundidade %></td>
+        <% if @relacaokca >= 0.1 && @relacaokca <= 0.2 %>
+          <td class="alert-success"><%= valor_duascasas(@relacaokca) %></td>
+        <% else %>
+          <td class="alert-danger"><%= valor_duascasas(@relacaokca) %></td>
+        <% end %>
+        <% if @relacaokmg >= 0.2 && @relacaokmg <= 0.6 %>
+          <td class="alert-success"><%= valor_duascasas(@relacaokmg) %></td>
+        <% else %>
+          <td class="alert-danger"><%= valor_duascasas(@relacaokmg) %></td>
+        <% end %>
+        <% if @relacaokmn >= 5.5 && @relacaokmn <= 13.7 %>
+          <td class="alert-success"><%= valor_duascasas(@relacaokmn) %></td>
+        <% else %>
+          <td class="alert-danger"><%= valor_duascasas(@relacaokmn) %></td>
+        <% end %>
+        <% if @relacaopmn >= 0.7 && @relacaopmn <= 2.0 %>
+          <td class="alert-success"><%= valor_duascasas(@relacaopmn) %></td>
+        <% else %>
+          <td class="alert-danger"><%= valor_duascasas(@relacaopmn) %></td>
+        <% end %>
+        <% if @relacaopzn >= 1.5 && @relacaopzn <= 5.0 %>
+          <td class="alert-success"><%= valor_duascasas(@relacaopzn) %></td>
+        <% else %>
+          <td class="alert-danger"><%= valor_duascasas(@relacaopzn) %></td>
+        <% end %>
+        <% if @relacaocamg >= 2.2 && @relacaocamg <= 6.2 %>
+          <td class="alert-success"><%= valor_duascasas(@relacaocamg) %></td>
+        <% else %>
+          <td class="alert-danger"><%= valor_duascasas(@relacaocamg) %></td>
+        <% end %>
+        <% if @relacaocamn >= 29.3 && @relacaocamn <= 74.0 %>
+          <td class="alert-success"><%= valor_duascasas(@relacaocamn) %></td>
+        <% else %>
+          <td class="alert-danger"><%= valor_duascasas(@relacaocamn) %></td>
+        <% end %>
+        <% if @relacaofemn >= 3.3 && @relacaofemn <= 10.0 %>
+          <td class="alert-success"><%= valor_duascasas(@relacaofemn) %></td>
+        <% else %>
+          <td class="alert-danger"><%= valor_duascasas(@relacaofemn) %></td>
+        <% end %>
+      </tr>
+  </tbody>
+<% end %>
+</table>
+<%end%>
+<%end%>

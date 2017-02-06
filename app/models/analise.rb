@@ -7,7 +7,41 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
 
 #Relações
 
+  def relacaokca(potassio_k,calcio_ca)
+    kcmolcConvertido/calcio_ca
+  end
 
+  def relacaokmg(potassio_k,magnesio_mg)
+    kcmolcConvertido/magnesio_mg
+  end
+
+  def relacaokmn(potassio_k,manganes_mn)
+    potassio_k/manganes_mn
+  end
+
+  def relacaopmn(fosforo_p,manganes_mn)
+    fosforo_p/manganes_mn
+  end
+
+  def relacaopzn(fosforo_p,zinco_zn)
+    fosforo_p/zinco_zn
+  end 
+
+  def relacaocamg(calcio_ca,magnesio_mg)
+    calcio_ca/magnesio_mg
+  end
+
+  def conversaocacmolmg
+    calcio_ca * 200.4
+  end
+
+  def relacaocamn(calcio_ca,manganes_mn)
+    conversaocacmolmg/manganes_mn
+  end
+
+  def relacaofemn(ferro_fe,manganes_mn)
+    ferro_fe/manganes_mn
+  end
 
 #Gessagem
   def gessoTotalCorrigido(correcaoGesso,areaTalhao)

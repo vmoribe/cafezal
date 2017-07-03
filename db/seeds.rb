@@ -36,17 +36,48 @@ Talhao.create!([
   {fazenda_id: 2, nome: "L9 - M", cultura: "Café", variedade: "Catuai Vermelho", ano_plantio: 2001, area: "3.54", esp_ruas: "3.5", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
   {fazenda_id: 2, nome: "L10 - M", cultura: "Café", variedade: "Topázio", ano_plantio: 2013, area: "13.0", esp_ruas: "3.7", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
   {fazenda_id: 3, nome: "L1 - A", cultura: "Café", variedade: "Catucai", ano_plantio: 2014, area: "8.88", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 3, nome: "L2 - A", cultura: "Café", variedade: "Catuai", ano_plantio: 2014, area: "10.8", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 3, nome: "L3 - A", cultura: "Café", variedade: "Catuai", ano_plantio: 2014, area: "8.57", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 3, nome: "L4 - A", cultura: "Café", variedade: "Catuai", ano_plantio: 2015, area: "11.7", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
   {fazenda_id: 2, nome: "L11 - M", cultura: "Café", variedade: "Catuai", ano_plantio: 2015, area: "2.19", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
   {fazenda_id: 2, nome: "L12 - M", cultura: "Café", variedade: "Catuai", ano_plantio: 2010, area: "7.85", esp_ruas: "3.6", esp_plantas: "0.7", argila: 0, silte: 0, areia: 0, user_id: 1},
   {fazenda_id: 2, nome: "L13 - M", cultura: "Café", variedade: "Catucai", ano_plantio: 2015, area: "5.19", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
-  {fazenda_id: 1, nome: "L12 - F", cultura: "Café", variedade: "Catuai", ano_plantio: 2016, area: "10.6", esp_ruas: "3.6", esp_plantas: "0.75", argila: nil, silte: nil, areia: nil, user_id: 1},
-  {fazenda_id: 1, nome: "L13 - F", cultura: "Café", variedade: "Catuai", ano_plantio: 2016, area: "7.28", esp_ruas: "3.6", esp_plantas: "0.75", argila: nil, silte: nil, areia: nil, user_id: 1},
-  {fazenda_id: 1, nome: "L14 - F", cultura: "Café", variedade: "Catuai", ano_plantio: 2016, area: "4.83", esp_ruas: "3.6", esp_plantas: "0.75", argila: nil, silte: nil, areia: nil, user_id: 1},
-  {fazenda_id: 1, nome: "L15 - F", cultura: "Café", variedade: "Catuai", ano_plantio: 2016, area: "5.08", esp_ruas: "3.6", esp_plantas: "0.75", argila: nil, silte: nil, areia: nil, user_id: 1}
+  {fazenda_id: 1, nome: "L12 - F", cultura: "Café", variedade: "Catuai", ano_plantio: 2016, area: "10.6", esp_ruas: "3.6", esp_plantas: "0.6", argila: nil, silte: nil, areia: nil, user_id: 1},
+  {fazenda_id: 1, nome: "L13 - F", cultura: "Café", variedade: "Catuai", ano_plantio: 2016, area: "7.28", esp_ruas: "3.6", esp_plantas: "0.6", argila: nil, silte: nil, areia: nil, user_id: 1},
+  {fazenda_id: 1, nome: "L14 - F", cultura: "Café", variedade: "Catuai", ano_plantio: 2016, area: "4.83", esp_ruas: "3.6", esp_plantas: "0.6", argila: nil, silte: nil, areia: nil, user_id: 1},
+  {fazenda_id: 1, nome: "L15 - F", cultura: "Café", variedade: "Catuai", ano_plantio: 2016, area: "5.08", esp_ruas: "3.6", esp_plantas: "0.6", argila: nil, silte: nil, areia: nil, user_id: 1},
+  {fazenda_id: 3, nome: "L2 - A", cultura: "Café", variedade: "Catuai", ano_plantio: 2014, area: "5.61", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 3, nome: "L3 - A", cultura: "Café", variedade: "Catuai", ano_plantio: 2014, area: "9.75", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 3, nome: "L4 - A", cultura: "Café", variedade: "Catuai", ano_plantio: 2014, area: "3.71", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
+  {fazenda_id: 3, nome: "L5 - A", cultura: "Café", variedade: "Catuai", ano_plantio: 2016, area: "11.5", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1}
 ])
+Parametro.create!([
+  {ano: 2013, parcelamento: 3, producao_esperada: "21 - 30", user_id: 1},
+  {ano: 2014, parcelamento: 4, producao_esperada: "31 - 40", user_id: 1},
+  {ano: 2015, parcelamento: 4, producao_esperada: "31 - 40", user_id: 1},
+  {ano: 2016, parcelamento: 3, producao_esperada: "21 - 30", user_id: 1}
+])
+Produto.create!([
+  {user_id: 1, nome: "20--05-20", tipo: "Nutrição", preco: "1700.0", custo_op: "80.0", nitrogenio_n: "20.0", fosforo_p2o5: "5.0", potassio_k2o: "20.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016},
+  {user_id: 1, nome: "10--10--10", tipo: "Nutrição", preco: "1800.0", custo_op: "80.0", nitrogenio_n: "10.0", fosforo_p2o5: "10.0", potassio_k2o: "10.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016},
+  {user_id: 1, nome: "20--00--20", tipo: "Nutrição", preco: "1400.0", custo_op: "80.0", nitrogenio_n: "20.0", fosforo_p2o5: "0.0", potassio_k2o: "20.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016},
+  {user_id: 1, nome: "Superfosfato Simples", tipo: "Nutrição", preco: "800.0", custo_op: "80.0", nitrogenio_n: "0.0", fosforo_p2o5: "19.0", potassio_k2o: "0.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016},
+  {user_id: 1, nome: "Mono Amônio Fosfato (MAP)", tipo: "Nutrição", preco: "1800.0", custo_op: "80.0", nitrogenio_n: "11.0", fosforo_p2o5: "52.0", potassio_k2o: "0.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016},
+  {user_id: 1, nome: "Uréia", tipo: "Nutrição", preco: "1700.0", custo_op: "20.0", nitrogenio_n: "44.0", fosforo_p2o5: "0.0", potassio_k2o: "0.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016},
+  {user_id: 1, nome: "08--28--16", tipo: "Nutrição", preco: "1900.0", custo_op: "80.0", nitrogenio_n: "8.0", fosforo_p2o5: "28.0", potassio_k2o: "16.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016},
+  {user_id: 1, nome: "Biorin", tipo: "Nutrição", preco: "840.0", custo_op: "80.0", nitrogenio_n: "0.0", fosforo_p2o5: "18.0", potassio_k2o: "0.0", calcio_ca: "15.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016},
+  {user_id: 1, nome: "Biorin Plus", tipo: "Nutrição", preco: "940.0", custo_op: "80.0", nitrogenio_n: "0.0", fosforo_p2o5: "18.0", potassio_k2o: "0.0", calcio_ca: "15.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.1", cobre_cu: "0.05", ferro_fe: "0.0", manganes_mn: "0.1", zinco_zn: "0.5", ano: 2016},
+  {user_id: 1, nome: "Ferthium Phós HF", tipo: "Nutrição", preco: "1200.0", custo_op: "80.0", nitrogenio_n: "3.0", fosforo_p2o5: "16.0", potassio_k2o: "6.0", calcio_ca: "0.0", magnesio_mg: "1.0", enxofre_s: "3.0", boro_b: "0.1", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.05", zinco_zn: "0.15", ano: 2016},
+  {user_id: 1, nome: "Ferthium NK + S", tipo: "Nutrição", preco: "1200.0", custo_op: "80.0", nitrogenio_n: "8.0", fosforo_p2o5: "0.0", potassio_k2o: "10.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "8.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016}
+])
+Vargesso.create!([
+  {user_id: 1, ano: 2016, profundidade: "35.0", areaAplicacao: "75.0", teorCalcio: "20.0"}
+])
+Variavel.create!([
+  {user_id: 1, ano: 2013, profundidade: "7.0", areaAplicacao: "75.0", prnt: "90.0"},
+  {user_id: 1, ano: 2014, profundidade: "7.0", areaAplicacao: "75.0", prnt: "90.0"},
+  {user_id: 1, ano: 2015, profundidade: "10.0", areaAplicacao: "100.0", prnt: "90.0"},
+  {user_id: 1, ano: 2016, profundidade: "7.0", areaAplicacao: "100.0", prnt: "90.0"}
+])
+
+
 Analise.create!([
   {user_id: 1, fazenda_id: 1, talhao_id: 2, situacao: "Produção", profundidade: "0-20", ano: 2013, ph: "5.3", potassio_k: "76.0", fosforo_p: "7.21", sodio_na: "0.0", calcio_ca: "1.1", magnesio_mg: "0.4", aluminio_al: "0.1", h_al: "3.24", mat_organica: "2.23", p_rem: "20.22", zinco_zn: "0.99", ferro_fe: "34.07", manganes_mn: "4.1", cobre_cu: "1.56", boro_b: "0.28", enxofre_s: "49.14"},
   {user_id: 1, fazenda_id: 1, talhao_id: 3, situacao: "Produção", profundidade: "0-20", ano: 2013, ph: "5.6", potassio_k: "106.0", fosforo_p: "19.68", sodio_na: "0.0", calcio_ca: "1.3", magnesio_mg: "0.5", aluminio_al: "0.1", h_al: "2.9", mat_organica: "2.87", p_rem: "25.07", zinco_zn: "1.87", ferro_fe: "44.57", manganes_mn: "5.06", cobre_cu: "1.63", boro_b: "0.31", enxofre_s: "33.06"},
@@ -152,34 +183,6 @@ Analise.create!([
   {user_id: 1, fazenda_id: 1, talhao_id: 1, situacao: "Produção", profundidade: "20-40", ano: 2016, ph: "4.5", potassio_k: "99.9", fosforo_p: "6.86", sodio_na: "0.0", calcio_ca: "1.04", magnesio_mg: "0.31", aluminio_al: "0.2", h_al: "3.42", mat_organica: "1.54", p_rem: "22.96", zinco_zn: "1.37", ferro_fe: "40.82", manganes_mn: "2.64", cobre_cu: "1.38", boro_b: "0.08", enxofre_s: "72.27"},
   {user_id: 1, fazenda_id: 1, talhao_id: 6, situacao: "Produção", profundidade: "20-40", ano: 2016, ph: "4.2", potassio_k: "95.54", fosforo_p: "14.73", sodio_na: "0.0", calcio_ca: "0.83", magnesio_mg: "0.21", aluminio_al: "0.3", h_al: "5.16", mat_organica: "1.38", p_rem: "12.22", zinco_zn: "2.48", ferro_fe: "42.77", manganes_mn: "9.49", cobre_cu: "1.87", boro_b: "0.06", enxofre_s: "72.85"},
   {user_id: 1, fazenda_id: 2, talhao_id: 18, situacao: "Produção", profundidade: "20-40", ano: 2016, ph: "4.7", potassio_k: "95.54", fosforo_p: "7.93", sodio_na: "0.0", calcio_ca: "1.02", magnesio_mg: "0.28", aluminio_al: "0.2", h_al: "4.13", mat_organica: "2.1", p_rem: "8.7", zinco_zn: "1.88", ferro_fe: "44.76", manganes_mn: "1.94", cobre_cu: "1.21", boro_b: "0.06", enxofre_s: "64.85"}
-])
-Parametro.create!([
-  {ano: 2013, parcelamento: 3, producao_esperada: "21 - 30", user_id: 1},
-  {ano: 2014, parcelamento: 4, producao_esperada: "31 - 40", user_id: 1},
-  {ano: 2015, parcelamento: 4, producao_esperada: "31 - 40", user_id: 1},
-  {ano: 2016, parcelamento: 3, producao_esperada: "21 - 30", user_id: 1}
-])
-Produto.create!([
-  {user_id: 1, nome: "20--05-20", tipo: "Nutrição", preco: "1700.0", custo_op: "80.0", nitrogenio_n: "20.0", fosforo_p2o5: "5.0", potassio_k2o: "20.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016},
-  {user_id: 1, nome: "10--10--10", tipo: "Nutrição", preco: "1800.0", custo_op: "80.0", nitrogenio_n: "10.0", fosforo_p2o5: "10.0", potassio_k2o: "10.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016},
-  {user_id: 1, nome: "20--00--20", tipo: "Nutrição", preco: "1400.0", custo_op: "80.0", nitrogenio_n: "20.0", fosforo_p2o5: "0.0", potassio_k2o: "20.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016},
-  {user_id: 1, nome: "Superfosfato Simples", tipo: "Nutrição", preco: "800.0", custo_op: "80.0", nitrogenio_n: "0.0", fosforo_p2o5: "19.0", potassio_k2o: "0.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016},
-  {user_id: 1, nome: "Mono Amônio Fosfato (MAP)", tipo: "Nutrição", preco: "1800.0", custo_op: "80.0", nitrogenio_n: "11.0", fosforo_p2o5: "52.0", potassio_k2o: "0.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016},
-  {user_id: 1, nome: "Uréia", tipo: "Nutrição", preco: "1700.0", custo_op: "20.0", nitrogenio_n: "44.0", fosforo_p2o5: "0.0", potassio_k2o: "0.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016},
-  {user_id: 1, nome: "08--28--16", tipo: "Nutrição", preco: "1900.0", custo_op: "80.0", nitrogenio_n: "8.0", fosforo_p2o5: "28.0", potassio_k2o: "16.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016},
-  {user_id: 1, nome: "Biorin", tipo: "Nutrição", preco: "840.0", custo_op: "80.0", nitrogenio_n: "0.0", fosforo_p2o5: "18.0", potassio_k2o: "0.0", calcio_ca: "15.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016},
-  {user_id: 1, nome: "Biorin Plus", tipo: "Nutrição", preco: "940.0", custo_op: "80.0", nitrogenio_n: "0.0", fosforo_p2o5: "18.0", potassio_k2o: "0.0", calcio_ca: "15.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.1", cobre_cu: "0.05", ferro_fe: "0.0", manganes_mn: "0.1", zinco_zn: "0.5", ano: 2016},
-  {user_id: 1, nome: "Ferthium Phós HF", tipo: "Nutrição", preco: "1200.0", custo_op: "80.0", nitrogenio_n: "3.0", fosforo_p2o5: "16.0", potassio_k2o: "6.0", calcio_ca: "0.0", magnesio_mg: "1.0", enxofre_s: "3.0", boro_b: "0.1", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.05", zinco_zn: "0.15", ano: 2016},
-  {user_id: 1, nome: "Ferthium NK + S", tipo: "Nutrição", preco: "1200.0", custo_op: "80.0", nitrogenio_n: "8.0", fosforo_p2o5: "0.0", potassio_k2o: "10.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "8.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016}
-])
-Vargesso.create!([
-  {user_id: 1, ano: 2016, profundidade: "35.0", areaAplicacao: "75.0", teorCalcio: "20.0"}
-])
-Variavel.create!([
-  {user_id: 1, ano: 2013, profundidade: "7.0", areaAplicacao: "75.0", prnt: "90.0"},
-  {user_id: 1, ano: 2014, profundidade: "7.0", areaAplicacao: "75.0", prnt: "90.0"},
-  {user_id: 1, ano: 2015, profundidade: "10.0", areaAplicacao: "100.0", prnt: "90.0"},
-  {user_id: 1, ano: 2016, profundidade: "7.0", areaAplicacao: "100.0", prnt: "90.0"}
 ])
 Lote.create!([
   {user_id: 1, fazenda_id: 1, talhao_id: 1, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 387762, numeroOrigem: 0, dataEntrada: "2016-09-02", quantidade: "31500.0", safra: "2016/2017"},
@@ -379,5 +382,41 @@ Lote.create!([
   {user_id: 1, fazenda_id: 2, talhao_id: 15, tipo: "Varrição", local: "Colheita Mecanizada", numero: 387522, numeroOrigem: 0, dataEntrada: "2016-09-28", quantidade: "13500.0", safra: "2016/2017"},
   {user_id: 1, fazenda_id: 2, talhao_id: 15, tipo: "Varrição", local: "Colheita Mecanizada", numero: 387523, numeroOrigem: 0, dataEntrada: "2016-09-29", quantidade: "6750.0", safra: "2016/2017"},
   {user_id: 1, fazenda_id: 2, talhao_id: 19, tipo: "Varrição", local: "Colheita Mecanizada", numero: 387524, numeroOrigem: 0, dataEntrada: "2016-09-30", quantidade: "13500.0", safra: "2016/2017"},
-  {user_id: 1, fazenda_id: 2, talhao_id: 19, tipo: "Varrição", local: "Colheita Mecanizada", numero: 387525, numeroOrigem: 0, dataEntrada: "2016-10-03", quantidade: "4500.0", safra: "2016/2017"}
+  {user_id: 1, fazenda_id: 2, talhao_id: 19, tipo: "Varrição", local: "Colheita Mecanizada", numero: 387525, numeroOrigem: 0, dataEntrada: "2016-10-03", quantidade: "4500.0", safra: "2016/2017"},
+  {user_id: 1, fazenda_id: 1, talhao_id: 12, tipo: "Café da Roça", local: "Colheita Manual", numero: 135251, numeroOrigem: nil, dataEntrada: "2017-05-29", quantidade: "4200.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 1, talhao_id: 12, tipo: "Café da Roça", local: "Colheita Manual", numero: 135252, numeroOrigem: nil, dataEntrada: "2017-05-30", quantidade: "11690.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 1, talhao_id: 12, tipo: "Café da Roça", local: "Colheita Manual", numero: 135253, numeroOrigem: nil, dataEntrada: "2017-05-31", quantidade: "10710.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 1, talhao_id: 12, tipo: "Café da Roça", local: "Colheita Manual", numero: 135254, numeroOrigem: nil, dataEntrada: "2017-06-01", quantidade: "11305.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 1, talhao_id: 12, tipo: "Café da Roça", local: "Colheita Manual", numero: 135255, numeroOrigem: nil, dataEntrada: "2017-06-02", quantidade: "12215.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 1, talhao_id: 12, tipo: "Café da Roça", local: "Colheita Manual", numero: 135257, numeroOrigem: nil, dataEntrada: "2017-06-06", quantidade: "7910.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 1, talhao_id: 12, tipo: "Café da Roça", local: "Colheita Manual", numero: 135258, numeroOrigem: nil, dataEntrada: "2017-06-07", quantidade: "3465.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 1, talhao_id: 12, tipo: "Varrição", local: "Colheita Manual", numero: 135259, numeroOrigem: nil, dataEntrada: "2017-06-08", quantidade: "4795.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 1, talhao_id: 11, tipo: "Café da Roça", local: "Colheita Manual", numero: 135260, numeroOrigem: nil, dataEntrada: "2017-06-09", quantidade: "7945.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 1, talhao_id: 12, tipo: "Café da Roça", local: "Colheita Manual", numero: 135256, numeroOrigem: nil, dataEntrada: "2017-06-05", quantidade: "8750.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 1, talhao_id: 11, tipo: "Café da Roça", local: "Colheita Manual", numero: 135261, numeroOrigem: nil, dataEntrada: "2017-06-12", quantidade: "7910.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 1, talhao_id: 11, tipo: "Café da Roça", local: "Colheita Manual", numero: 135262, numeroOrigem: nil, dataEntrada: "2017-06-13", quantidade: "8785.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 1, talhao_id: 11, tipo: "Varrição", local: "Colheita Manual", numero: 135264, numeroOrigem: nil, dataEntrada: "2017-06-17", quantidade: "910.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 14, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20001, numeroOrigem: nil, dataEntrada: "2017-06-19", quantidade: "8000.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 14, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20002, numeroOrigem: nil, dataEntrada: "2017-06-20", quantidade: "21000.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 14, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20003, numeroOrigem: nil, dataEntrada: "2017-06-21", quantidade: "17000.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 14, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20004, numeroOrigem: nil, dataEntrada: "2017-06-20", quantidade: "16500.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 14, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20005, numeroOrigem: nil, dataEntrada: "2017-06-23", quantidade: "16500.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 29, tipo: "Café da Roça", local: "Colheita Manual", numero: 135264, numeroOrigem: nil, dataEntrada: "2017-06-16", quantidade: "13335.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 29, tipo: "Café da Roça", local: "Colheita Manual", numero: 135265, numeroOrigem: nil, dataEntrada: "2017-06-19", quantidade: "11515.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 29, tipo: "Café da Roça", local: "Colheita Manual", numero: 135266, numeroOrigem: nil, dataEntrada: "2017-06-20", quantidade: "13335.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 29, tipo: "Café da Roça", local: "Colheita Manual", numero: 135267, numeroOrigem: nil, dataEntrada: "2017-06-21", quantidade: "6405.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 29, tipo: "Café da Roça", local: "Colheita Manual", numero: 135268, numeroOrigem: nil, dataEntrada: "2017-06-21", quantidade: "5320.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 20, tipo: "Café da Roça", local: "Colheita Manual", numero: 135269, numeroOrigem: nil, dataEntrada: "2017-06-23", quantidade: "14910.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 20, tipo: "Café da Roça", local: "Colheita Manual", numero: 135270, numeroOrigem: nil, dataEntrada: "2017-06-26", quantidade: "9975.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 20, tipo: "Café da Roça", local: "Colheita Manual", numero: 135271, numeroOrigem: nil, dataEntrada: "2017-06-27", quantidade: "11270.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 20, tipo: "Café da Roça", local: "Colheita Manual", numero: 135272, numeroOrigem: nil, dataEntrada: "2017-06-28", quantidade: "12915.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 20, tipo: "Café da Roça", local: "Colheita Manual", numero: 135273, numeroOrigem: nil, dataEntrada: "2017-06-29", quantidade: "8960.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 20, tipo: "Café da Roça", local: "Colheita Manual", numero: 135274, numeroOrigem: nil, dataEntrada: "2017-06-30", quantidade: "5670.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 20, tipo: "Varrição", local: "Colheita Manual", numero: 135275, numeroOrigem: nil, dataEntrada: "2017-06-30", quantidade: "3290.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 14, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20006, numeroOrigem: nil, dataEntrada: "2017-06-24", quantidade: "12500.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 14, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20007, numeroOrigem: nil, dataEntrada: "2017-06-25", quantidade: "8000.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 17, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20008, numeroOrigem: nil, dataEntrada: "2017-06-25", quantidade: "6000.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 17, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20009, numeroOrigem: nil, dataEntrada: "2017-06-27", quantidade: "8000.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 16, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20010, numeroOrigem: nil, dataEntrada: "2017-06-28", quantidade: "12500.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 16, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20011, numeroOrigem: nil, dataEntrada: "2017-06-29", quantidade: "4000.0", safra: "2017/2018"}
 ])

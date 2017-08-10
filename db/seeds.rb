@@ -48,6 +48,7 @@ Talhao.create!([
   {fazenda_id: 3, nome: "L4 - A", cultura: "Café", variedade: "Catuai", ano_plantio: 2014, area: "3.71", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1},
   {fazenda_id: 3, nome: "L5 - A", cultura: "Café", variedade: "Catuai", ano_plantio: 2016, area: "11.5", esp_ruas: "3.6", esp_plantas: "0.75", argila: 0, silte: 0, areia: 0, user_id: 1}
 ])
+
 Parametro.create!([
   {ano: 2013, parcelamento: 3, producao_esperada: "21 - 30", user_id: 1},
   {ano: 2014, parcelamento: 4, producao_esperada: "31 - 40", user_id: 1},
@@ -68,7 +69,6 @@ Produto.create!([
   {user_id: 1, nome: "Ferthium Phós HF", tipo: "Nutrição", preco: "1200.0", custo_op: "80.0", nitrogenio_n: "3.0", fosforo_p2o5: "16.0", potassio_k2o: "6.0", calcio_ca: "0.0", magnesio_mg: "1.0", enxofre_s: "3.0", boro_b: "0.1", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.05", zinco_zn: "0.15", ano: 2016},
   {user_id: 1, nome: "Ferthium NK + S", tipo: "Nutrição", preco: "1200.0", custo_op: "80.0", nitrogenio_n: "8.0", fosforo_p2o5: "0.0", potassio_k2o: "10.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "8.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2016},
   {user_id: 1, nome: "10--10--10", tipo: "Nutrição", preco: "1800.0", custo_op: "80.0", nitrogenio_n: "10.0", fosforo_p2o5: "10.0", potassio_k2o: "10.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017},
-  {user_id: 1, nome: "20--00--20", tipo: "Nutrição", preco: "1400.0", custo_op: "80.0", nitrogenio_n: "20.0", fosforo_p2o5: "0.0", potassio_k2o: "20.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017},
   {user_id: 1, nome: "Superfosfato Simples", tipo: "Nutrição", preco: "800.0", custo_op: "80.0", nitrogenio_n: "0.0", fosforo_p2o5: "19.0", potassio_k2o: "0.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017},
   {user_id: 1, nome: "Mono Amônio Fosfato (MAP)", tipo: "Nutrição", preco: "1800.0", custo_op: "80.0", nitrogenio_n: "11.0", fosforo_p2o5: "52.0", potassio_k2o: "0.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017},
   {user_id: 1, nome: "Uréia", tipo: "Nutrição", preco: "1700.0", custo_op: "20.0", nitrogenio_n: "44.0", fosforo_p2o5: "0.0", potassio_k2o: "0.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017},
@@ -77,7 +77,11 @@ Produto.create!([
   {user_id: 1, nome: "Biorin Plus", tipo: "Nutrição", preco: "940.0", custo_op: "80.0", nitrogenio_n: "0.0", fosforo_p2o5: "18.0", potassio_k2o: "0.0", calcio_ca: "15.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.1", cobre_cu: "0.05", ferro_fe: "0.0", manganes_mn: "0.1", zinco_zn: "0.5", ano: 2017},
   {user_id: 1, nome: "Ferthium Phós HF", tipo: "Nutrição", preco: "1200.0", custo_op: "80.0", nitrogenio_n: "3.0", fosforo_p2o5: "16.0", potassio_k2o: "6.0", calcio_ca: "0.0", magnesio_mg: "1.0", enxofre_s: "3.0", boro_b: "0.1", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.05", zinco_zn: "0.15", ano: 2017},
   {user_id: 1, nome: "Ferthium NK + S", tipo: "Nutrição", preco: "1200.0", custo_op: "80.0", nitrogenio_n: "8.0", fosforo_p2o5: "0.0", potassio_k2o: "10.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "8.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017},
-  {user_id: 1, nome: "20--05-20", tipo: "Nutrição", preco: "1300.0", custo_op: "80.0", nitrogenio_n: "20.0", fosforo_p2o5: "5.0", potassio_k2o: "20.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017}
+  {user_id: 1, nome: "Nitrato de Amônio - GO", tipo: "Nutrição", preco: "1594.19", custo_op: "80.0", nitrogenio_n: "33.0", fosforo_p2o5: "0.0", potassio_k2o: "0.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017},
+  {user_id: 1, nome: "30-00-18 Ureia Protegida - GO", tipo: "Nutrição", preco: "1802.38", custo_op: "80.0", nitrogenio_n: "30.0", fosforo_p2o5: "0.0", potassio_k2o: "18.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017},
+  {user_id: 1, nome: "20--05-20 - GO - Nitrato", tipo: "Nutrição", preco: "1801.4", custo_op: "80.0", nitrogenio_n: "20.0", fosforo_p2o5: "5.0", potassio_k2o: "20.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017},
+  {user_id: 1, nome: "20--00-20 - GO - Nitrato", tipo: "Nutrição", preco: "1707.0", custo_op: "80.0", nitrogenio_n: "20.0", fosforo_p2o5: "0.0", potassio_k2o: "20.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017},
+  {user_id: 1, nome: "30-00-10", tipo: "Nutrição", preco: "1300.0", custo_op: "80.0", nitrogenio_n: "30.0", fosforo_p2o5: "0.0", potassio_k2o: "10.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017}
 ])
 Vargesso.create!([
   {user_id: 1, ano: 2016, profundidade: "35.0", areaAplicacao: "75.0", teorCalcio: "20.0"},
@@ -88,8 +92,9 @@ Variavel.create!([
   {user_id: 1, ano: 2014, profundidade: "7.0", areaAplicacao: "75.0", prnt: "90.0"},
   {user_id: 1, ano: 2015, profundidade: "10.0", areaAplicacao: "100.0", prnt: "90.0"},
   {user_id: 1, ano: 2016, profundidade: "7.0", areaAplicacao: "100.0", prnt: "90.0"},
-  {user_id: 1, ano: 2017, profundidade: "10.0", areaAplicacao: "75.0", prnt: "85.0"}
+  {user_id: 1, ano: 2017, profundidade: "10.0", areaAplicacao: "100.0", prnt: "85.0"}
 ])
+
 
 Analise.create!([
   {user_id: 1, fazenda_id: 1, talhao_id: 2, situacao: "Produção", profundidade: "0-20", ano: 2013, ph: "5.3", potassio_k: "76.0", fosforo_p: "7.21", sodio_na: "0.0", calcio_ca: "1.1", magnesio_mg: "0.4", aluminio_al: "0.1", h_al: "3.24", mat_organica: "2.23", p_rem: "20.22", zinco_zn: "0.99", ferro_fe: "34.07", manganes_mn: "4.1", cobre_cu: "1.56", boro_b: "0.28", enxofre_s: "49.14"},
@@ -228,7 +233,6 @@ Analise.create!([
   {user_id: 1, fazenda_id: 3, talhao_id: 33, situacao: "Produção", profundidade: "0-20", ano: 2017, ph: "4.6", potassio_k: "81.3", fosforo_p: "3.99", sodio_na: "0.0", calcio_ca: "0.74", magnesio_mg: "0.22", aluminio_al: "0.73", h_al: "5.46", mat_organica: "2.53", p_rem: "19.27", zinco_zn: "0.41", ferro_fe: "76.24", manganes_mn: "5.2", cobre_cu: "1.95", boro_b: "0.1", enxofre_s: "73.42"},
   {user_id: 1, fazenda_id: 3, talhao_id: 34, situacao: "2° Ano / Poda", profundidade: "0-20", ano: 2017, ph: "5.4", potassio_k: "181.6", fosforo_p: "3.99", sodio_na: "0.0", calcio_ca: "1.02", magnesio_mg: "0.37", aluminio_al: "0.19", h_al: "4.32", mat_organica: "2.05", p_rem: "23.32", zinco_zn: "0.21", ferro_fe: "69.55", manganes_mn: "10.11", cobre_cu: "1.94", boro_b: "0.16", enxofre_s: "49.52"}
 ])
-
 Lote.create!([
   {user_id: 1, fazenda_id: 1, talhao_id: 1, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 387762, numeroOrigem: 0, dataEntrada: "2016-09-02", quantidade: "31500.0", safra: "2016/2017"},
   {user_id: 1, fazenda_id: 1, talhao_id: 1, tipo: "Varrição", local: "Colheita Mecanizada", numero: 387505, numeroOrigem: 0, dataEntrada: "2016-09-06", quantidade: "18000.0", safra: "2016/2017"},

@@ -82,6 +82,11 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
     calcio_ca / magnesio_mg
   end
 
+  def proporcaoCaMgApos(calcio,magnesio)
+    calcio / magnesio
+  end
+
+
   def kcmolcConvertido
     potassio_k / 390
   end
@@ -155,6 +160,13 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
     nctotalcomarea / talhao.area
   end
 
+  def caAposCalagem(cao,ncTotalComAreaCorrigida,caantes)
+    ((cao * 0.01783)*ncTotalComAreaCorrigida)+caantes
+  end
+
+  def mgAposCalagem(mgo,ncTotalComAreaCorrigida,mgantes)
+    ((mgo * 0.0248)*ncTotalComAreaCorrigida)+mgantes
+  end
 #Fertilidade - Micronutrientes
 
   def necBoro #Extrator Água quente

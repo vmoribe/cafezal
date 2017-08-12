@@ -25,6 +25,9 @@
       <th>Ferro fe</th>
       <th>Manganes mn</th>
       <th>Zinco zn</th>
+      <th>CaO</th>
+      <th>MgO</th>
+      <th>PRNT</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -48,6 +51,9 @@
         <td><%= produto.ferro_fe %></td>
         <td><%= produto.manganes_mn %></td>
         <td><%= produto.zinco_zn %></td>
+        <td><%= produto.cao %></td>
+        <td><%= produto.mgo %></td>
+        <td><%= produto.prnt %></td>
         <td><%= link_to 'Edit', edit_produto_path(produto) %></td>
         <td><%= link_to 'Destroy', produto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

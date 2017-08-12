@@ -7,19 +7,20 @@
       <th class="text-center">Ano</th>
       <th class="text-center">Profundidade</th>
       <th class="text-center">Área de aplicação</th>
-      <th class="text-center">PRNT</th>
+      <th class="text-center">Produto</th>
       <th colspan="1"></th>
     </tr>
     <%= link_to 'Nova Variável', new_variavel_path,:class => 'btn btn-default' %>
     <%= link_to "Gerar PDF", analises_calagem_path(params.merge(:format => "pdf")), class: "btn btn-primary", :target => "_blank"%>
   </thead>
     <% @variavels.each do |variavel| %>
+
   <tbody>
     <tr>
         <td><%= variavel.ano %></td>
         <td><%= variavel.profundidade %></td>
         <td><%= variavel.areaAplicacao %></td>
-        <td><%= variavel.prnt %></td>
+        <td><%= variavel.produto.nome %></td>
         <td><%= link_to 'Edit', edit_variavel_path(variavel),:class => 'btn btn-default' %></td>
     </tr>
   </tbody>
@@ -59,8 +60,7 @@
 
   <% @variavel_profundidade = variavel.profundidade %>
   <% @variavel_areaAplicacao = variavel.areaAplicacao %>
-  <% @variavel_prnt = variavel.prnt %>
-
+  
     
 <% @analises.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "Plantio").each do |v| %>
   <% @faz_id = v.fazenda_id %>
@@ -75,21 +75,27 @@
       <th>Ph</th>
       <th>CTC a Ph 7</th>
       <th>V%</th>
-      <th>Ca/Mg</th>
       <th>NC/ha Método SP</th>
       <th>Talhão area</th>
-      <th>NC/Total</th>
+      <th>CaO (%)</th>
+      <th>MgO (%)</th>
+      <th>PRNT</th>
       <th>NC/Total - Corrigida</th>
       <th>NC/ha - Corrigida</th>
       <th>NC g/m linear compl</th>
       <th>Calagem Compl (t/ha)</th>
       <th>Total CC area total</th>
       <th>Total Calcário</th>
+      <th>Ca Antes</th>
+      <th>Ca Após</th>
+      <th>Mg Antes</th>
+      <th>Mg Após</th>
+      <th>Ca/Mg Antes</th>
+      <th>Ca/Mg Após</th>
     </tr>
   </thead>
   <tbody>
 
-    <% @nctotal = 0 %>
     <% @nctotalcorrigida = 0 %>
     <% @nctotalcomplementar = 0 %>
     <% @totalcalcario = 0 %>
@@ -101,21 +107,30 @@
         <td><%= analise.ph %></td>
         <td><%= valor_duascasas(analise.ctcApH7) %></td>
         <td><%= valor_duascasas(analise.saturacaoBase) %></td>
-        <td><%= valor_duascasas(analise.proporcaoCaMg) %></td>
         <td class="info"><%= valor_duascasas(analise.necessidadeCalagem) %></td>
         <td><%= analise.talhao.area %></td>
-        <td><%= valor_duascasas(analise.nctotalcomarea) %></td>
-        <td class="danger"><%= valor_duascasas(analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt)) %></td>
-        <td><%= valor_duascasas((analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt))/analise.talhao.area ) %></td>
+        <td><%= valor_duascasas(variavel.produto.cao) %></td>
+        <td><%= valor_duascasas(variavel.produto.mgo) %></td>
+        <td><%= valor_duascasas(variavel.produto.prnt) %></td>
+        <td class="danger"><%= valor_duascasas(analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, variavel.produto.prnt)) %></td>
+        <td><%= valor_duascasas((analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, variavel.produto.prnt))/analise.talhao.area ) %></td>
+        <% @ncTotalComAreaCorrigida = analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, variavel.produto.prnt)/analise.talhao.area %>
         <td><%= valor_duascasas(analise.necCalagemCompl) %></td>
         <td><%= valor_duascasas(analise.calagemComplementar) %></td>
         <td><%= valor_duascasas(analise.necCalagemCompAreaTotal)%></td>
-        <td><%= valor_duascasas(analise.somaCalcario(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt))%></td>
+        <td><%= valor_duascasas(analise.somaCalcario(@variavel_profundidade, @variavel_areaAplicacao, variavel.produto.prnt))%></td>
+        <td><%= valor_duascasas(analise.calcio_ca) %></td>
+        <td><%= valor_duascasas(analise.caAposCalagem(variavel.produto.cao,@ncTotalComAreaCorrigida,analise.calcio_ca)) %></td>
+        <% @caAposCalagem = analise.caAposCalagem(variavel.produto.cao,@ncTotalComAreaCorrigida,analise.calcio_ca) %>
+        <% @mgAposCalagem = analise.mgAposCalagem(variavel.produto.mgo,@ncTotalComAreaCorrigida,analise.magnesio_mg) %>
+        <td><%= valor_duascasas(analise.magnesio_mg) %></td>
+        <td><%= valor_duascasas(analise.mgAposCalagem(variavel.produto.mgo,@ncTotalComAreaCorrigida,analise.magnesio_mg)) %></td>
+        <td><%= valor_duascasas(analise.proporcaoCaMg) %></td>
+        <td><%= valor_duascasas(analise.proporcaoCaMgApos(@caAposCalagem,@mgAposCalagem)) %></td>
       </tr>
-      <% @nctotal += analise.necessidadeCalagem %>
-      <% @nctotalcorrigida += (analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt)) %>
+      <% @nctotalcorrigida += (analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, variavel.produto.prnt)) %>
       <% @nctotalcomplementar += analise.necCalagemCompAreaTotal %>
-      <% @totalcalcario += (analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt) + analise.necCalagemCompAreaTotal) %>
+      <% @totalcalcario += (analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, variavel.produto.prnt) + analise.necCalagemCompAreaTotal) %>
     <% end %>
 
     <tr>
@@ -125,7 +140,8 @@
         <th></th>
         <th></th>
         <th></th>
-        <th><b><%= valor_duascasas(@nctotal) %></b></th>
+        <th></th>
+        <th></th>
         <th></th>
         <th></th>
         <th><b><%= valor_duascasas(@nctotalcorrigida) %></b></th>     
@@ -134,11 +150,11 @@
         <th></th>
         <th><b><%= valor_duascasas(@nctotalcomplementar) %></b></th>
         <th><b><%= valor_duascasas(@totalcalcario) %></b></th>
+        <th></th>
     </tr>
   </tbody>
 </table>
 
-    <% @ncPlantiototal += @nctotal %>
     <% @nctotalPlantiocorrigida += @nctotalcorrigida %>
     <% @nctotalPlantiocomplementar += @nctotalcomplementar %>
     <% @totalPlantiocalcario += @totalcalcario %>
@@ -161,7 +177,7 @@
 
   <% @variavel_profundidade = variavel.profundidade %>
   <% @variavel_areaAplicacao = variavel.areaAplicacao %>
-  <% @variavel_prnt = variavel.prnt %>
+  <% @variavel_prnt = variavel.produto.prnt %>
 
 <% @analises.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao != ?)", @parametro_ano, "Plantio").each do |v| %>
   <% @faz_id = v.fazenda_id %>
@@ -175,17 +191,23 @@
       <th>Ph</th>
       <th>CTC a Ph 7</th>
       <th>V%</th>
-      <th>Ca/Mg</th>
       <th>NC/ha Método SP</th>
       <th>Talhão area</th>
-      <th>NC/Total</th>
+      <th>CaO (%)</th>
+      <th>MgO (%)</th>
+      <th>PRNT</th>
       <th>NC/Total - Corrigida</th>
       <th>NC/ha - Corrigida</th>
+      <th>Ca Antes</th>
+      <th>Ca Após</th>
+      <th>Mg Antes</th>
+      <th>Mg Após</th>
+      <th>Ca/Mg Antes</th>
+      <th>Ca/Mg Após</th>
     </tr>
   </thead>
   <tbody class="text-center">
 
-    <% @nctotal = 0 %>
     <% @nctotalcorrigida = 0 %>
     <% @nctotalcomplementar = 0 %>
     <% @totalcalcario = 0 %>
@@ -197,14 +219,24 @@
         <td><%= analise.ph %></td>
         <td><%= valor_duascasas(analise.ctcApH7) %></td>
         <td><%= valor_duascasas(analise.saturacaoBase) %></td>
-        <td><%= valor_duascasas(analise.proporcaoCaMg) %></td>
         <td class="info"><%= valor_duascasas(analise.necessidadeCalagem) %></td>
         <td><%= analise.talhao.area %></td>
-        <td><%= valor_duascasas(analise.nctotalcomarea) %></td>
+        <td><%= valor_duascasas(variavel.produto.cao) %></td>
+        <td><%= valor_duascasas(variavel.produto.mgo) %></td>
+        <td><%= valor_duascasas(variavel.produto.prnt) %></td>
         <td class="danger"><%= valor_duascasas(analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt)) %></td>
         <td><%= valor_duascasas((analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt))/analise.talhao.area ) %></td>
+        <% @ncTotalComAreaCorrigida = analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, variavel.produto.prnt)/analise.talhao.area %>
+        <td><%= valor_duascasas(analise.calcio_ca) %></td>
+        <td><%= valor_duascasas(analise.caAposCalagem(variavel.produto.cao,@ncTotalComAreaCorrigida,analise.calcio_ca)) %></td>
+        <% @caAposCalagem = analise.caAposCalagem(variavel.produto.cao,@ncTotalComAreaCorrigida,analise.calcio_ca) %>
+        <% @mgAposCalagem = analise.mgAposCalagem(variavel.produto.mgo,@ncTotalComAreaCorrigida,analise.magnesio_mg) %>
+        <td><%= valor_duascasas(analise.magnesio_mg) %></td>
+        <td><%= valor_duascasas(analise.mgAposCalagem(variavel.produto.mgo,@ncTotalComAreaCorrigida,analise.magnesio_mg)) %></td>
+        <td><%= valor_duascasas(analise.proporcaoCaMg) %></td>
+        <td><%= valor_duascasas(analise.proporcaoCaMgApos(@caAposCalagem,@mgAposCalagem)) %></td>
+
       </tr>
-      <% @nctotal += analise.necessidadeCalagem %>
       <% @nctotalcorrigida += (analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt)) %>
       <% @totalcalcario += (analise.ncTotalComAreaCorrigida(@variavel_profundidade, @variavel_areaAplicacao, @variavel_prnt) + analise.necCalagemCompAreaTotal) %>
     <% end %>
@@ -216,7 +248,8 @@
         <th></th>
         <th></th>
         <th></th>
-        <th class="text-center"><b><%= valor_duascasas(@nctotal) %></b></th>
+        <th></th>
+        <th></th>
         <th></th>
         <th></th>
         <th class="text-center"><b><%= valor_duascasas(@nctotalcorrigida) %></b></th>  
@@ -224,7 +257,6 @@
     </tr>
   </tbody>
 </table>
-  <% @ncProducaototal += @nctotal %>
   <% @nctotalProducaocorrigida += @nctotalcorrigida %>
   <% @totalProducaocalcario += @totalcalcario %>
 <% end %>
@@ -236,7 +268,6 @@
   <thead>
   <tr>
     <th class="text-center"><%= @parametro_ano%></th>
-    <th class="text-center"><b>Total Calcario/ha</b></th>
     <th class="text-center"><b>Total Calcario Corrigido</b></th>
     <th class="text-center"><b>Total Complementar</b></th>    
     <th class="text-center"><b></b>Total Geral</th>
@@ -245,25 +276,21 @@
   <tbody>
   <tr>
     <td class="text-center"><b>Plantio</b></td>
-    <td class="text-center"><%= valor_duascasas(@ncPlantiototal) %></td>
     <td class="text-center"><%= valor_duascasas(@nctotalPlantiocorrigida) %></td>
     <td class="text-center"><%= valor_duascasas(@nctotalPlantiocomplementar) %></td>
     <td class="text-center"><%= valor_duascasas(@totalPlantiocalcario)%></td>
   </tr>
     <tr>
     <td class="text-center"><b>Produção</b></td>
-    <td class="text-center"><%= valor_duascasas(@ncProducaototal) %></td>
     <td class="text-center"><%= valor_duascasas(@nctotalProducaocorrigida) %></td>
     <td class="text-center"></td>
     <td class="text-center"><%= valor_duascasas(@totalProducaocalcario)%></td>
   </tr>
-  <% @ncTotal = @ncPlantiototal + @ncProducaototal %>
   <% @corrigidaTotal = @nctotalPlantiocorrigida + @nctotalProducaocorrigida %>
   <% @complementarTotal = @nctotalPlantiocomplementar %>
   <% @total = @totalPlantiocalcario + @totalProducaocalcario %>
     <tr>
     <td class="text-center"><b>Total</b></td>
-    <td class="text-center"><%= valor_duascasas(@ncTotal) %></td>
     <td class="text-center"><%= valor_duascasas(@corrigidaTotal) %></td>
     <td class="text-center"><%= valor_duascasas(@complementarTotal) %></td>
     <td class="text-center"><%= valor_duascasas(@total) %></td>

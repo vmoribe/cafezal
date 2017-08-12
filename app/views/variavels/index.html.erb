@@ -8,7 +8,7 @@
       <th class="text-center">Ano</th>
       <th class="text-center">Profundidade</th>
       <th class="text-center">Área de aplicação</th>
-      <th class="text-center">PRNT</th>
+      <th class="text-center">Produto</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -19,7 +19,7 @@
         <td><%= variavel.ano %></td>
         <td><%= variavel.profundidade %></td>
         <td><%= variavel.areaAplicacao %></td>
-        <td><%= variavel.prnt %></td>
+        <td><%= variavel.produto %></td>
         <td><% link_to 'Show', variavel %></td>
         <td><%= link_to 'Edit', edit_variavel_path(variavel) %></td>
         <td><%= link_to 'Destroy', variavel, method: :delete, data: { confirm: 'Are you sure?' } %></td>

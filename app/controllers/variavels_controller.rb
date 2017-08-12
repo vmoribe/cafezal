@@ -69,6 +69,6 @@ class VariavelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def variavel_params
-      params.require(:variavel).permit(:user_id, :ano, :profundidade, :areaAplicacao, :prnt)
+      params.require(:variavel).permit(:user_id, :ano, :profundidade, :areaAplicacao, :produto_id)
     end
 end

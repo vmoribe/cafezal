@@ -527,6 +527,7 @@
           <% end %> 
 
 <% if @adubo1 < 0 || @adubo2 < 0 || @adubo3 < 0 %>
+
 <% else %>
          <% @precoTotal = ((@adubo1 * (@adubo1preco/1000))) + ((@adubo2 * (@adubo2preco/1000))) + ((@adubo3 * (@adubo3preco/1000))) %>
          <% @precoHa = @precoTotal / analise.talhao.area %>

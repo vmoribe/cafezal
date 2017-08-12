@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160914133909) do
+ActiveRecord::Schema.define(version: 20170811020952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,9 @@ ActiveRecord::Schema.define(version: 20160914133909) do
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
     t.integer  "ano"
+    t.decimal  "cao",          precision: 10, scale: 2
+    t.decimal  "mgo",          precision: 10, scale: 2
+    t.decimal  "prnt",         precision: 10, scale: 2
   end
 
   add_index "produtos", ["user_id"], name: "index_produtos_on_user_id", using: :btree
@@ -184,8 +187,10 @@ ActiveRecord::Schema.define(version: 20160914133909) do
     t.decimal  "prnt",          precision: 10, scale: 2
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.integer  "produto_id"
   end
 
+  add_index "variavels", ["produto_id"], name: "index_variavels_on_produto_id", using: :btree
   add_index "variavels", ["user_id"], name: "index_variavels_on_user_id", using: :btree
 
   add_foreign_key "analises", "fazendas"
@@ -199,5 +204,6 @@ ActiveRecord::Schema.define(version: 20160914133909) do
   add_foreign_key "talhaos", "fazendas"
   add_foreign_key "talhaos", "users"
   add_foreign_key "vargessos", "users"
+  add_foreign_key "variavels", "produtos"
   add_foreign_key "variavels", "users"
 end

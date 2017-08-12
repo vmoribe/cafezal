@@ -19,7 +19,7 @@
         <td><%= variavel.ano %></td>
         <td><%= variavel.profundidade %></td>
         <td><%= variavel.areaAplicacao %></td>
-        <td><%= variavel.produto %></td>
+        <td><%= variavel.produto.nome %></td>
         <td><% link_to 'Show', variavel %></td>
         <td><%= link_to 'Edit', edit_variavel_path(variavel) %></td>
         <td><%= link_to 'Destroy', variavel, method: :delete, data: { confirm: 'Are you sure?' } %></td>

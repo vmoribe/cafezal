@@ -86,17 +86,19 @@ Produto.create!([
   {user_id: 1, nome: "Calcário Dolomítico B", tipo: "Corretivo", preco: "45.0", custo_op: "60.0", nitrogenio_n: "0.0", fosforo_p2o5: "0.0", potassio_k2o: "0.0", calcio_ca: "28.36", magnesio_mg: "8.03", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017, cao: "39.7", mgo: "13.38", prnt: "87.03"},
   {user_id: 1, nome: "Calcário Dolomítico A", tipo: "Corretivo", preco: "38.0", custo_op: "60.0", nitrogenio_n: "0.0", fosforo_p2o5: "0.0", potassio_k2o: "0.0", calcio_ca: "32.05", magnesio_mg: "5.61", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017, cao: "44.86", mgo: "9.35", prnt: "91.31"}
 ])
+
 Vargesso.create!([
   {user_id: 1, ano: 2016, profundidade: "35.0", areaAplicacao: "75.0", teorCalcio: "20.0"},
   {user_id: 1, ano: 2017, profundidade: "35.0", areaAplicacao: "75.0", teorCalcio: "20.0"}
 ])
 Variavel.create!([
-  {user_id: 1, ano: 2016, profundidade: "7.0", areaAplicacao: "100.0", produto_id: 29},
-  {user_id: 1, ano: 2014, profundidade: "7.0", areaAplicacao: "75.0", produto_id: 28},
-  {user_id: 1, ano: 2013, profundidade: "7.0", areaAplicacao: "75.0", produto_id: 28},
-  {user_id: 1, ano: 2015, profundidade: "10.0", areaAplicacao: "100.0", produto_id: 28},
-  {user_id: 1, ano: 2017, profundidade: "10.0", areaAplicacao: "100.0", produto_id: 28}
+  {user_id: 1, ano: 2016, profundidade: "7.0", areaAplicacao: "100.0", prnt: "90.0", produto_id: 29},
+  {user_id: 1, ano: 2014, profundidade: "7.0", areaAplicacao: "75.0", prnt: "90.0", produto_id: 28},
+  {user_id: 1, ano: 2013, profundidade: "7.0", areaAplicacao: "75.0", prnt: "90.0", produto_id: 28},
+  {user_id: 1, ano: 2015, profundidade: "10.0", areaAplicacao: "100.0", prnt: "90.0", produto_id: 28},
+  {user_id: 1, ano: 2017, profundidade: "10.0", areaAplicacao: "100.0", prnt: "87.03", produto_id: 28}
 ])
+
 
 
 Analise.create!([

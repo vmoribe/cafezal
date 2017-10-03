@@ -23,7 +23,7 @@
   <% @faz_id = v.fazenda_id %>
   <% @quantidadeFazenda = 0 %>
   <% @qtdeSacasFazenda = 0 %>
-<% @lotes.where("(fazenda_id= ?)", @faz_id).select("DISTINCT(talhao_id)").each do |v| %>
+<% @lotes.where("(fazenda_id= ?)", @faz_id).select("DISTINCT(talhao_id)").order("talhao_id").each do |v| %>
   <% @talhao_id = v.talhao_id %>
   <% @quantidade = 0 %>
   <% @qtdeSacas = 0 %>
@@ -65,7 +65,7 @@
         <td><%= link_to 'Destroy', lote, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% @qtde = lote.quantidade %>
-<% @lotes.where("(fazenda_id= ? AND talhao_id= ? AND numero= ?)", @faz_id, @talhao_id, @numeroOrigem).each do |lote| %>
+<% @lotes.where("(fazenda_id= ? AND talhao_id= ? AND numero= ?)", @faz_id, @talhao_id, @numeroOrigem).order("fazenda_id", "talhao_id").each do |lote| %>
       <tr>
         <td><%= lote.fazenda.nome %></td>
         <td><%= lote.talhao.nome %></td>

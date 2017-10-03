@@ -102,6 +102,10 @@ class AnalisesController < ApplicationController
   end
   # GET /analises
   # GET /analises.json
+  def historico
+    @analises = Analise.where(user_id: current_user.id)
+    @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
+  end
   def index
     @analises = Analise.where(user_id: current_user.id).order( "profundidade ASC", "talhao_id ASC")
     @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")

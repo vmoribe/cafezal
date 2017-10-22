@@ -80,18 +80,8 @@ Produto.create!([
   {user_id: 1, nome: "30-00-10", tipo: "Nutrição", preco: "1300.0", custo_op: "80.0", nitrogenio_n: "30.0", fosforo_p2o5: "0.0", potassio_k2o: "10.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017, cao: nil, mgo: nil, prnt: nil},
   {user_id: 1, nome: "Calcário Dolomítico C", tipo: "Corretivo", preco: "52.0", custo_op: "60.0", nitrogenio_n: "0.0", fosforo_p2o5: "0.0", potassio_k2o: "0.0", calcio_ca: "24.03", magnesio_mg: "10.64", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017, cao: "33.65", mgo: "17.74", prnt: "85.72"},
   {user_id: 1, nome: "Calcário Dolomítico B", tipo: "Corretivo", preco: "45.0", custo_op: "60.0", nitrogenio_n: "0.0", fosforo_p2o5: "0.0", potassio_k2o: "0.0", calcio_ca: "28.36", magnesio_mg: "8.03", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017, cao: "39.7", mgo: "13.38", prnt: "87.03"},
-  {user_id: 1, nome: "Calcário Dolomítico A", tipo: "Corretivo", preco: "38.0", custo_op: "60.0", nitrogenio_n: "0.0", fosforo_p2o5: "0.0", potassio_k2o: "0.0", calcio_ca: "32.05", magnesio_mg: "5.61", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017, cao: "44.86", mgo: "9.35", prnt: "91.31"}
-])
-Vargesso.create!([
-  {user_id: 1, ano: 2016, profundidade: "35.0", areaAplicacao: "75.0", teorCalcio: "20.0"},
-  {user_id: 1, ano: 2017, profundidade: "35.0", areaAplicacao: "75.0", teorCalcio: "20.0"}
-])
-Variavel.create!([
-  {user_id: 1, ano: 2016, profundidade: "7.0", areaAplicacao: "100.0", prnt: "90.0", produto_id: 29},
-  {user_id: 1, ano: 2014, profundidade: "7.0", areaAplicacao: "75.0", prnt: "90.0", produto_id: 28},
-  {user_id: 1, ano: 2013, profundidade: "7.0", areaAplicacao: "75.0", prnt: "90.0", produto_id: 28},
-  {user_id: 1, ano: 2015, profundidade: "10.0", areaAplicacao: "100.0", prnt: "90.0", produto_id: 28},
-  {user_id: 1, ano: 2017, profundidade: "10.0", areaAplicacao: "100.0", prnt: "87.03", produto_id: 28}
+  {user_id: 1, nome: "Calcário Dolomítico A - SoloFértil", tipo: "Corretivo", preco: "38.0", custo_op: "60.0", nitrogenio_n: "0.0", fosforo_p2o5: "0.0", potassio_k2o: "0.0", calcio_ca: "32.05", magnesio_mg: "5.61", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017, cao: "44.86", mgo: "9.35", prnt: "91.31"},
+  {user_id: 1, nome: "21-00-21", tipo: "Nutrição", preco: "1200.0", custo_op: "80.0", nitrogenio_n: "21.0", fosforo_p2o5: "0.0", potassio_k2o: "21.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017, cao: "0.0", mgo: "0.0", prnt: "0.0"}
 ])
 Parametro.create!([
   {ano: 2013, parcelamento: 3, producao_esperada: "21 - 30", user_id: 1},
@@ -100,7 +90,17 @@ Parametro.create!([
   {ano: 2016, parcelamento: 3, producao_esperada: "21 - 30", user_id: 1},
   {ano: 2017, parcelamento: 3, producao_esperada: "31 - 40", user_id: 1}
 ])
-
+Vargesso.create!([
+  {user_id: 1, ano: 2016, profundidade: "35.0", areaAplicacao: "75.0", teorCalcio: "20.0"},
+  {user_id: 1, ano: 2017, profundidade: "35.0", areaAplicacao: "75.0", teorCalcio: "20.0"}
+])
+Variavel.create!([
+  {user_id: 1, ano: 2016, profundidade: "7.0", areaAplicacao: "100.0", prnt: "90.0", produto_id: 29},
+  {user_id: 1, ano: 2015, profundidade: "10.0", areaAplicacao: "100.0", prnt: "90.0", produto_id: 13},
+  {user_id: 1, ano: 2013, profundidade: "7.0", areaAplicacao: "75.0", prnt: "90.0", produto_id: 30},
+  {user_id: 1, ano: 2014, profundidade: "7.0", areaAplicacao: "75.0", prnt: "90.0", produto_id: 30},
+  {user_id: 1, ano: 2017, profundidade: "10.0", areaAplicacao: "100.0", prnt: "87.03", produto_id: 30}
+])
 Analise.create!([
   {user_id: 1, fazenda_id: 1, talhao_id: 2, situacao: "Produção", profundidade: "0-20", ano: 2013, ph: "5.3", potassio_k: "76.0", fosforo_p: "7.21", sodio_na: "0.0", calcio_ca: "1.1", magnesio_mg: "0.4", aluminio_al: "0.1", h_al: "3.24", mat_organica: "2.23", p_rem: "20.22", zinco_zn: "0.99", ferro_fe: "34.07", manganes_mn: "4.1", cobre_cu: "1.56", boro_b: "0.28", enxofre_s: "49.14"},
   {user_id: 1, fazenda_id: 1, talhao_id: 3, situacao: "Produção", profundidade: "0-20", ano: 2013, ph: "5.6", potassio_k: "106.0", fosforo_p: "19.68", sodio_na: "0.0", calcio_ca: "1.3", magnesio_mg: "0.5", aluminio_al: "0.1", h_al: "2.9", mat_organica: "2.87", p_rem: "25.07", zinco_zn: "1.87", ferro_fe: "44.57", manganes_mn: "5.06", cobre_cu: "1.63", boro_b: "0.31", enxofre_s: "33.06"},
@@ -337,7 +337,6 @@ Lote.create!([
   {user_id: 1, fazenda_id: 2, talhao_id: 22, tipo: "Café da Roça", local: "Colheita Manual", numero: 72737, numeroOrigem: 0, dataEntrada: "2016-07-29", quantidade: "10115.0", safra: "2016/2017"},
   {user_id: 1, fazenda_id: 2, talhao_id: 22, tipo: "Café da Roça", local: "Colheita Manual", numero: 72738, numeroOrigem: 0, dataEntrada: "2016-08-01", quantidade: "5075.0", safra: "2016/2017"},
   {user_id: 1, fazenda_id: 2, talhao_id: 22, tipo: "Café da Roça", local: "Colheita Manual", numero: 72739, numeroOrigem: 0, dataEntrada: "2016-08-02", quantidade: "4445.0", safra: "2016/2017"},
-  {user_id: 1, fazenda_id: 2, talhao_id: 28, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 144090, numeroOrigem: 0, dataEntrada: "2016-08-06", quantidade: "18000.0", safra: "2016/2017"},
   {user_id: 1, fazenda_id: 2, talhao_id: 28, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 144091, numeroOrigem: 0, dataEntrada: "2016-08-07", quantidade: "15750.0", safra: "2016/2017"},
   {user_id: 1, fazenda_id: 2, talhao_id: 28, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 144092, numeroOrigem: 0, dataEntrada: "2016-08-08", quantidade: "27000.0", safra: "2016/2017"},
   {user_id: 1, fazenda_id: 2, talhao_id: 28, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 144093, numeroOrigem: 0, dataEntrada: "2016-08-09", quantidade: "22500.0", safra: "2016/2017"},
@@ -472,5 +471,7 @@ Lote.create!([
   {user_id: 1, fazenda_id: 2, talhao_id: 17, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20008, numeroOrigem: nil, dataEntrada: "2017-06-25", quantidade: "6000.0", safra: "2017/2018"},
   {user_id: 1, fazenda_id: 2, talhao_id: 17, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20009, numeroOrigem: nil, dataEntrada: "2017-06-27", quantidade: "8000.0", safra: "2017/2018"},
   {user_id: 1, fazenda_id: 2, talhao_id: 16, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20010, numeroOrigem: nil, dataEntrada: "2017-06-28", quantidade: "12500.0", safra: "2017/2018"},
-  {user_id: 1, fazenda_id: 2, talhao_id: 16, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20011, numeroOrigem: nil, dataEntrada: "2017-06-29", quantidade: "4000.0", safra: "2017/2018"}
+  {user_id: 1, fazenda_id: 2, talhao_id: 16, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20011, numeroOrigem: nil, dataEntrada: "2017-06-29", quantidade: "4000.0", safra: "2017/2018"},
+  {user_id: 1, fazenda_id: 2, talhao_id: 26, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 144090, numeroOrigem: 0, dataEntrada: "2016-08-06", quantidade: "18000.0", safra: "2016/2017"}
 ])
+

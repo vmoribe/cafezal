@@ -7,6 +7,18 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
 
 #Relações
 
+  def caNaCtc
+    (calcio_ca / ctcEfetiva) * 100
+  end
+
+  def mgNaCtc
+    (magnesio_mg / ctcEfetiva) * 100
+  end
+
+  def kNaCtc
+    (kcmolcConvertido / ctcEfetiva) * 100
+  end  
+
   def relacaokca(potassio_k,calcio_ca)
     kcmolcConvertido/calcio_ca
   end
@@ -104,10 +116,11 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
   end
 
   def necessidadeCalagem
+    @fatorCorrecao = 2
     if (((60 - saturacaoBase) * ctcApH7) / 100) < 0
     0
     else
-    ((60 - saturacaoBase) * ctcApH7) / 100
+    (((60 - saturacaoBase) * ctcApH7) / 100) * @fatorCorrecao
     end 
   end
 

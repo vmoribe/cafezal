@@ -1,6 +1,45 @@
+<%= wicked_pdf_stylesheet_link_tag 'pdf_stylesheet' %>
+<%= wicked_pdf_stylesheet_link_tag 'application' %>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<p></p>
 <div class="row">
 <h1 class="text-center">Necessidade de Gessagem</h1>
-<div class="col-md-6">
+<% unless request.format.to_sym == :pdf %>
+<div class="col-xs-6">
+    <%= link_to 'Nova Variável gesso', new_vargesso_path,:class => 'btn btn-default' %>
+    <%= link_to "Gerar PDF", analises_gessagem_path(params.merge(:format => "pdf")), class: "btn btn-primary", :target => "_blank"%>
+</div>
+<div class="col-xs-6">
+<%= search_form_for @search, :class => "form-inline", url: analises_gessagem_path do |f| %>
+<h3>Filtro</h3>
+  <%= f.label :ano_eq, "Ano:" %>
+  <%= f.select :ano_eq, options_for_select(@ano), {:include_blank => true}, { :class => "form-control" }%>
+  <%= f.label :fazenda_nome_cont, "Fazenda:" %>
+  <%= f.select :fazenda_nome_cont, options_for_select(@fazenda), {:include_blank => true}, { :class => "form-control" } %>
+  <%= f.submit :class => 'btn btn-primary' %>
+<% end %>
+</div>
+</div>
+<%end%>
+
+
+<% @analises.select("DISTINCT(ano)").order("ano desc").each do |p| %>
+<% @parametro_ano = p.ano %>
+
+    <% @ngtotal = 0 %>
+    <% @ncaGessagem = 0 %>
+    <% @ngCorrigidoTotal = 0 %>
+    <% @ngCorrigidoTotalArea = 0 %>
+
+
+<%# Bloco Gesso%>
+
+
+
+<div class="row">
+<div class="col-xs-6 col-xs-offset-3">
+<h3 class="text-center"><%= @parametro_ano %></h3>
 <table class="table table-condensed text-center">
   <thead>
     <tr>
@@ -10,10 +49,8 @@
       <th class="text-center">Teor de Cálcio</th>
       <th colspan="1"></th>
     </tr>
-    <%= link_to 'Nova Variável gesso', new_vargesso_path,:class => 'btn btn-default' %>
-    <%= link_to "Gerar PDF", analises_gessagem_path(params.merge(:format => "pdf")), class: "btn btn-primary", :target => "_blank"%>
   </thead>
-    <% @vargessos.each do |vargesso| %>
+    <% @vargessos.where("(ano= ?)", @parametro_ano).each do |vargesso| %>
   <tbody>
     <tr>
         <td><%= vargesso.ano %></td>
@@ -26,32 +63,7 @@
 <% end %>
 </table>
 </div>
-<div class="col-md-6">
-<%= search_form_for @search, :class => "form-inline", url: analises_gessagem_path do |f| %>
-<h3>Filtro</h3>
-  <%= f.label :ano_eq, "Ano:" %>
-  <%= f.search_field :ano_eq, :class => "text-center form-control"%>
-  <%= f.label :fazenda_nome_cont, "Fazenda:" %>
-  <%= f.search_field :fazenda_nome_cont, :class => "text-center form-control" %>
-  <%= f.submit :class => 'btn btn-primary' %>
-<% end %>
 </div>
-</div>
-
-
-<% @analises.select("DISTINCT(ano)").each do |p| %>
-<% @parametro_ano = p.ano %>
-
-    <% @ngtotal = 0 %>
-    <% @ncaGessagem = 0 %>
-    <% @ngCorrigidoTotal = 0 %>
-    <% @ngCorrigidoTotalArea = 0 %>
-
-<%# Bloco Gesso%>
-<table class="table table-condensed">
-<tr>
-<td><h3 class="text-center"><%= @parametro_ano %></h3></td>
-</tr>
 
 
 <% @vargessos.where("(ano= ?)", @parametro_ano).each do |variavel| %>

@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+tr {
+ page-break-inside: avoid;
+}
+p {
+ page-break-after: always;
+}
+
+@media print {
+ 
+  .print_friendly{
+ 
+     display:hidden;
+ 
+  }
+ 
+}

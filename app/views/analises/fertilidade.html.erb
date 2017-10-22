@@ -1,6 +1,36 @@
+<%= wicked_pdf_stylesheet_link_tag 'pdf_stylesheet' %>
+<%= wicked_pdf_stylesheet_link_tag 'application' %>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<% unless request.format.to_sym == :pdf %>
 <div class="row">
+<div class="col-xs-6">
+  <h3>Opções</h3>
+  <%= link_to 'Novo Parâmetro', new_parametro_path,:class => 'btn btn-default' %>
+  <%= link_to "Gerar PDF", analises_fertilidade_path(params.merge(:format => "pdf")), class: "btn btn-primary", :target => "_blank"%>
+
+</div>
+<div class="col-xs-6">
+<%= search_form_for @search, :class => "form-inline", url: analises_fertilidade_path do |f| %>
+<h3>Filtro</h3>
+  <%= f.label :ano_eq, "Ano:" %>
+  <%= f.select :ano_eq, options_for_select(@ano), {:include_blank => true}, { :class => "form-control" }%>
+  <%= f.label :fazenda_nome_cont, "Fazenda:" %>
+  <%= f.select :fazenda_nome_cont, options_for_select(@fazenda), {:include_blank => true}, { :class => "form-control" } %>
+  <%= f.submit :class => 'btn btn-primary' %>
+<% end %>
+</div>
+</div>
+<%end%>
+<%# Bloco Plantio%>
+
+<% @analises.select("DISTINCT(ano)").order("ano desc").each do |p| %>
+<% @parametro_ano = p.ano %>
+
+<p></p>  
+<div class="row">
+<div class="col-xs-6 col-xs-offset-3">
 <h1 class="text-center">Necessidade de Adubação NPK</h1>
-<div class="col-md-6">
+
 <table class="table table-condensed text-center">
   <thead>
     <tr>
@@ -10,43 +40,25 @@
       <th colspan="1"></th>
     </tr>
   </thead>
-  <%= link_to 'Novo Parâmetro', new_parametro_path,:class => 'btn btn-default' %>
-  <%= link_to "Gerar PDF", analises_fertilidade_path(params.merge(:format => "pdf")), class: "btn btn-primary", :target => "_blank"%>
   <tbody>
-      <% @parametros.each do |parametro| %>
+      <% @parametros.where("(ano= ?)", @parametro_ano).each do |parametro| %>
     <tr>
         <td><%= parametro.ano %></td>
         <td><%= parametro.parcelamento %></td>
         <td><%= parametro.producao_esperada %></td>
+      <% unless request.format.to_sym == :pdf %>
         <td><%= link_to 'Edit', edit_parametro_path(parametro),:class => 'btn btn-default' %></td>
+      <%end%>  
     </tr>
     <% end %>
   </tbody>
 </table>
 </div>
-<div class="col-md-6">
-<%= search_form_for @search, :class => "form-inline", url: analises_fertilidade_path do |f| %>
-<h3>Filtro</h3>
-  <%= f.label :ano_eq, "Ano:" %>
-  <%= f.search_field :ano_eq, :class => "text-center form-control"%>
-  <%= f.label :fazenda_nome_cont, "Fazenda:" %>
-  <%= f.search_field :fazenda_nome_cont, :class => "text-center form-control" %>
-  <%= f.submit :class => 'btn btn-primary' %>
-<% end %>
-</div>
 </div>
 
-<%# Bloco Plantio%>
-<table class="table table-condensed">
-
-<% @analises.select("DISTINCT(ano)").each do |p| %>
-<% @parametro_ano = p.ano %>
 
 <div class="col-xs-12 col-md-12"> <%# Divisão 1%>
 
-    <table class="table table-condensed text-center"><%# Table 2%>
-
-    </table><%# Table 2%>
 
   <% @necNplantioSomaTotal = 0 %>
   <% @necP2o5plantioSomaTotal = 0 %>
@@ -55,7 +67,9 @@
   <% @analises.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "Plantio").each do |v| %>
   <% @faz_id = v.fazenda_id %>
 
-<h2>Adubação de Plantio</h2>
+<tr>
+<td><h2><b>Adubação de Plantio</b></h3></td>
+</tr>
 
 <table class="table table-condensed text-center"> <%# Table 1%>
   
@@ -70,7 +84,6 @@
           <thead>
             <tr>
               <th>Fazenda</th>
-              <th>Ano</th>
               <th>Talhão</th>
               <th>Área</th>
               <th>P rem</th>
@@ -105,7 +118,6 @@
   <tbody>
    <tr>
     <td><%= analise.fazenda.nome %></td>
-    <td><%= analise.ano %></td>
     <td><%= analise.talhao.nome %></td>
     <td><%= analise.talhao.area %></td>
     <td><%= analise.p_rem %></td>
@@ -133,7 +145,7 @@
 <% end %>
   <tr>
     <th class="text-center"><b>Total</b></th>
-    <th colspan="9"></th>
+    <th colspan="8"></th>
     <th class="text-center"><%= valor_inteiro(@necNplantioSoma) %></th>
     <th colspan="2"></th>
     <th class="text-center"><%= valor_inteiro(@necP2o5plantioSoma) %></th>
@@ -159,18 +171,20 @@
 <%# Bloco 1 Ano%>
 
 <div class="col-xs-12 col-md-12"> <%# Divisão 1%>
-    <table class="table table-condensed"><%# Table 2%>
 
-    </table><%# Table 2%>
-
-<table class="table table-condensed"> <%# Table 1%>
   <% @necN1anoSomaTotal = 0 %>
   <% @necK2o1anoSomaTotal = 0 %>
 
 
   <% @analises.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "1° Ano").each do |v| %>
 
-    <h2>Adubação de 1° Ano</h2>
+<tr>
+<td><h2><b>Adubação de 1° Ano</b></h3></td>
+</tr>
+  
+<table class="table table-condensed"> <%# Table 1%>
+
+
   <% @faz_id = v.fazenda_id %>
   
   <% @necN1anoSoma = 0 %>
@@ -182,7 +196,6 @@
           <thead>
             <tr>
               <th>Fazenda</th>
-              <th>Ano</th>
               <th>Talhão</th>
               <th>Área</th>
               <th>Potássio</th>
@@ -210,7 +223,6 @@
   <tbody>
    <tr>
     <td><%= analise.fazenda.nome %></td>
-    <td><%= analise.ano %></td>
     <td><%= analise.talhao.nome %></td>
     <td><%= analise.talhao.area %></td>
     <td><%= analise.potassio_k %></td>
@@ -231,7 +243,7 @@
 
   <tr>
     <th class="text-center"><b>Total</b></th>
-    <th colspan="7"></th>
+    <th colspan="6"></th>
     <th class="text-center"><%= valor_inteiro(@necN1anoSoma) %></th>
     <th colspan="3"></th>
     <th class="text-center"><%= valor_inteiro(@necK2o1anoSoma) %></th>
@@ -251,16 +263,17 @@
 
 <%# Bloco 2 Ano%>
 <div class="col-xs-12 col-md-12"> <%# Divisão 1%>
-    <table class="table table-condensed"><%# Table 2%>
-    </table><%# Table 2%>
 
-<table class="table table-condensed text-center"> <%# Table 1%>
   <% @necN2anoSomaTotal = 0 %>
   <% @necK2o2anoSomaTotal = 0 %>
 
     <% @analises.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "2° Ano / Poda").each do |v| %>
 
-    <h2>Adubação de 2° Ano / Poda</h2>
+<tr>
+<td><h2><b>Adubação de 2° Ano / Poda</b></h3></td>
+</tr>
+<table class="table table-condensed text-center"> <%# Table 1%>
+
   <% @faz_id = v.fazenda_id %>
   
       <tbody><%# Body 1%>
@@ -273,7 +286,6 @@
           <thead>
             <tr>
               <th>Fazenda</th>
-              <th>Ano</th>
               <th>Talhão</th>
               <th>Área</th>
               <th>Potássio</th>
@@ -301,7 +313,6 @@
   <tbody>
    <tr>
     <td><%= analise.fazenda.nome %></td>
-    <td><%= analise.ano %></td>
     <td><%= analise.talhao.nome %></td>
     <td><%= analise.talhao.area %></td>
     <td><%= analise.potassio_k %></td>
@@ -322,7 +333,7 @@
 
   <tr>
     <th class="text-center"><b>Total</b></th>
-    <th colspan="7"></th>
+    <th colspan="6"></th>
     <th class="text-center"><%= valor_inteiro(@necN2anoSoma) %></th>
     <th colspan="3"></th>
     <th class="text-center"><%= valor_inteiro(@necK2o2anoSoma) %></th>
@@ -340,20 +351,18 @@
 
 <%# Bloco Producao%>
 <div class="col-xs-12 col-md-12"> <%# Divisão 1%>
-    <table class="table table-condensed"><%# Table 2%>
 
-
-    </table><%# Table 2%>
-
-<table class="table table-condensed"> <%# Table 1%>
   <% @necNProducaoSomaTotal = 0 %>
   <% @necP2o5ProducaoSomaTotal = 0 %>
   <% @necK2oProducaoSomaTotal = 0 %>
   
 
   <% @analises.select("DISTINCT(fazenda_id)").where("(ano= ? AND situacao = ?)", @parametro_ano, "Produção").each do |v| %>
+<tr>
+<td><h2><b>Adubação de Producao</b></h3></td>
+</tr>
+<table class="table table-condensed"> <%# Table 1%>
 
-    <h2>Adubação de Producao</h2>
 	<% @faz_id = v.fazenda_id %>
 
       <tbody><%# Body 1%>
@@ -367,7 +376,6 @@
           <thead>
             <tr>
               <th>Fazenda</th>
-              <th>Ano</th>
               <th>Talhão</th>
               <th>Área</th>
               <th>P rem</th>
@@ -401,7 +409,6 @@
   <tbody>
    <tr>
     <td><%= analise.fazenda.nome %></td>
-    <td><%= analise.ano %></td>
     <td><%= analise.talhao.nome %></td>
     <td><%= analise.talhao.area %></td>
     <td><%= analise.p_rem %></td>
@@ -427,7 +434,7 @@
 <% end %>
   <tr>
     <th class="text-center"><b>Total</b></th>
-    <th colspan="9"></th>
+    <th colspan="8"></th>
     <th class="text-center"><%= valor_inteiro(@necNProducaoSoma) %></th>
     <th colspan="2"></th>
     <th class="text-center"><%= valor_inteiro(@necP2o5ProducaoSoma) %></th>

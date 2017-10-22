@@ -6,12 +6,22 @@ class LotesController < ApplicationController
   def index
     @search = Lote.where(user_id: current_user.id).ransack(params[:q])
     @lotes = @search.result
+    @safra = Lote.uniq.pluck(:safra)
+    @fazenda = Fazenda.uniq.pluck(:nome)
+    @talhao = Talhao.order("nome ASC").uniq.pluck(:nome)
+    @tipo = Lote.uniq.pluck(:tipo)
+    @local = Lote.uniq.pluck(:local) 
   end
 
   def consolidado
     @search = Lote.where(user_id: current_user.id).ransack(params[:q])
     @lotes = @search.result
     @lotes = @lotes.where(:safra => nil) unless params[:q]
+    @safra = Lote.uniq.pluck(:safra)
+    @fazenda = Fazenda.uniq.pluck(:nome)
+    @talhao = Talhao.order("nome ASC").uniq.pluck(:nome)
+    @tipo = Lote.uniq.pluck(:tipo)
+    @local = Lote.uniq.pluck(:local)
   end
 
   # GET /lotes/1

@@ -1,23 +1,20 @@
 <div class="row">
-<h1 class="text-center">Rastreabilidade</h1>
-<div class="col-md-12">
+<h1 class="text-center">Consolidado</h1>
 <%= search_form_for @search, :class => "form-inline", url: lotes_consolidado_path do |f| %>
 <h3>Filtro</h3>
   <%= f.label :safra_eq, "Safra:" %>
-  <%= f.search_field :safra_eq, :class => "text-center form-control"%>
+  <%= f.select :safra_eq, options_for_select(@safra), {:include_blank => true}, { :class => "form-control" } %>
   <%= f.label :fazenda_nome_cont, "Fazenda:" %>
-  <%= f.search_field :fazenda_nome_cont, :class => "text-center form-control" %>
+  <%= f.select :fazenda_nome_cont, options_for_select(@fazenda), {:include_blank => true}, { :class => "form-control" } %>
+  <%= f.label :local_cont, "Talhão:" %>
+  <%= f.select :talhao_nome_cont, options_for_select(@talhao), {:include_blank => true}, { :class => "form-control" } %>
+  <%= f.label :tipo_cont, "Tipo:" %>
+  <%= f.select :tipo_cont, options_for_select(@tipo), {:include_blank => true}, { :class => "form-control" } %>
   <%= f.label :local_cont, "Local:" %>
-  <%= f.search_field :local_cont, :class => "text-center form-control" %>
+  <%= f.select :local_cont, options_for_select(@local), {:include_blank => true}, { :class => "form-control" } %>
   <%= f.submit :class => 'btn btn-primary' %>
 <% end %>
 </div>
-</div>
-
-
-<h1>Listagem dos Lotes</h1>
-
-<%= link_to 'Novo Lote', new_lote_path,:class => 'btn btn-default' %>
 
 <% @lotes.select("DISTINCT(fazenda_id)").each do |v| %>
   <% @faz_id = v.fazenda_id %>
@@ -31,6 +28,7 @@
 
 <table class="table table-condensed table-hover text-center">
   <thead>
+
     <tr>
       <th>Fazenda</th>
       <th>Talhao</th>

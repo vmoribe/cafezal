@@ -2,3 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+div.alwaysbreak { page-break-before: always; }
+div.nobreak:before { clear:both; }
+div.nobreak { page-break-inside: avoid; }
+
+tr {
+ page-break-inside: avoid;
+}
+
+@media print {
+ 
+  .print_friendly{
+ 
+     display:hidden;
+ 
+  }
+ 
+}
+
+p {
+ page-break-after: always;
+}
+

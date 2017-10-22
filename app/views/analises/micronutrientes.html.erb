@@ -1,18 +1,26 @@
+<%= wicked_pdf_stylesheet_link_tag 'pdf_stylesheet' %>
+<%= wicked_pdf_stylesheet_link_tag 'application' %>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+   <% unless request.format.to_sym == :pdf %>
+
 <div class="row">
-<h1 class="text-center">Necessidade de Adubação Micronutrientes</h1>
 <div class="col-md-6">
+<h3>Opções</h3>
   <%= link_to "Gerar PDF", analises_micronutrientes_path(params.merge(:format => "pdf")), class: "btn btn-primary", :target => "_blank"%>
 </div>
-<div class="col-md-6">
+<div class="col-xs-6">
 <%= search_form_for @search, :class => "form-inline", url: analises_micronutrientes_path do |f| %>
 <h3>Filtro</h3>
   <%= f.label :ano_eq, "Ano:" %>
-  <%= f.search_field :ano_eq, :class => "text-center form-control"%>
+  <%= f.select :ano_eq, options_for_select(@ano), {:include_blank => true}, { :class => "form-control" }%>
   <%= f.label :fazenda_nome_cont, "Fazenda:" %>
-  <%= f.search_field :fazenda_nome_cont, :class => "text-center form-control" %>
+  <%= f.select :fazenda_nome_cont, options_for_select(@fazenda), {:include_blank => true}, { :class => "form-control" } %>
   <%= f.submit :class => 'btn btn-primary' %>
 <% end %>
 </div>
+</div>
+<%end%>
 
 
 <%# Bloco Micronutrientes%>
@@ -31,6 +39,8 @@
   <% @necCobreSomaTotalHa = 0 %>
   <% @necManganesSomaTotalHa = 0 %>
   <% @necZincoSomaTotalHa = 0 %>
+
+<h1 class="text-center">Necessidade de Adubação Micronutrientes</h1>
 
   <% @analises.select("DISTINCT(fazenda_id)").where("(ano= ?)", @parametro_ano).each do |v| %>
   <% @faz_id = v.fazenda_id %>

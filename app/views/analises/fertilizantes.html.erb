@@ -1,20 +1,28 @@
+<%= wicked_pdf_stylesheet_link_tag 'pdf_stylesheet' %>
+<%= wicked_pdf_stylesheet_link_tag 'application' %>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<% unless request.format.to_sym == :pdf %>
 <div class="row">
 <h1 class="text-center">Necessidade de Fertilizantes</h1>
-<div class="col-md-6">
+<div class="col-xs-6">
+<h3>Opções</h3>
 <%= link_to "Gerar PDF", analises_fertilizantes_path(params.merge(:format => "pdf")), class: "btn btn-primary", :target => "_blank"%>
 </div>
-<div class="col-md-6">
+
+<div class="col-xs-6">
 <%= search_form_for @search, :class => "form-inline", url: analises_fertilizantes_path do |f| %>
 <h3>Filtro</h3>
   <%= f.label :ano_eq, "Ano:" %>
-  <%= f.search_field :ano_eq, :class => "text-center form-control"%>
+  <%= f.select :ano_eq, options_for_select(@ano), {:include_blank => true}, { :class => "form-control" }%>
   <%= f.label :fazenda_nome_cont, "Fazenda:" %>
-  <%= f.search_field :fazenda_nome_cont, :class => "text-center form-control" %>
+  <%= f.select :fazenda_nome_cont, options_for_select(@fazenda), {:include_blank => true}, { :class => "form-control" } %>
   <%= f.submit :class => 'btn btn-primary' %>
 <% end %>
 </div>
-
-
+</div>
+<%end%>
+<p></p>
 <%# Bloco Plantio%>
 <% @analises.select("DISTINCT(ano)").each do |p| %>
 <% @parametro_ano = p.ano %>
@@ -22,8 +30,8 @@
 <% @analises.select("DISTINCT(fazenda_id)").where("(ano= ?)", @parametro_ano).each do |v| %>
 <% @faz_id = v.fazenda_id %>
 
-<h2>Necessidade para Plantio</h2>
 <% @plantio.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @faz_id, @parametro_ano, "20-40").each do |analise| %>
+<h2>Necessidade para Plantio</h2>
 
 <table class="table table-condensed text-center">
 		<thead>
@@ -203,8 +211,8 @@
 
 <%# Bloco 1° Ano%>
 
-<h2>Necessidade para 1° Ano</h2>
 <% @primeiroAno.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @faz_id, @parametro_ano, "20-40").each do |analise| %>
+<h2>Necessidade para 1° Ano</h2>
 
 <table class="table table-condensed text-center">
     <thead>
@@ -384,8 +392,8 @@
 <%# Bloco 2 Ano%>
 
 
-<h2>Necessidade para 2° Ano / Poda</h2>
 <% @segundoAno.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @faz_id, @parametro_ano, "20-40").each do |analise| %>
+<h2>Necessidade para 2° Ano / Poda</h2>
 
 <table class="table table-condensed text-center">
     <thead>
@@ -566,8 +574,8 @@
 <%# Bloco Produção%>
 
 
-<h2>Necessidade para Produção</h2>
 <% @producao.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @faz_id, @parametro_ano, "20-40").each do |analise| %>
+<h2>Necessidade para Produção</h2>
 
 <table class="table table-condensed text-center">
     <thead>

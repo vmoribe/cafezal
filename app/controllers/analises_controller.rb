@@ -17,11 +17,14 @@ class AnalisesController < ApplicationController
     @primeiroAno = @analises.where("situacao = ?", "1° Ano").order("ano DESC", "talhao_id ASC")
     @segundoAno = @analises.where("situacao = ?", "2° Ano / Poda").order("ano DESC", "talhao_id ASC")
     @producao = @analises.where("situacao = ?", "Produção").order("ano DESC", "talhao_id ASC")
+    @ano = Analise.order("ano Desc").uniq.pluck(:ano)
+    @fazenda = Fazenda.uniq.pluck(:nome)
 
     respond_to do |format|
       format.html
-      format.pdf { render pdf: "Fertilizantes",
-        footer: { center: "[page] of [topage]"},
+
+      format.pdf { render pdf: "Análise Fertilizantes",
+        content: render_to_string(template: 'analises/fertilizantes.html.erb'),
         orientation: 'Landscape',
         page_size: 'A4',
         zoom: 0.60
@@ -34,11 +37,16 @@ class AnalisesController < ApplicationController
     @search = Analise.where(user_id: current_user.id).ransack(params[:q])
     @analises = @search.result
     @analises = @analises.where(:ano => nil) unless params[:q]
+    @ano = Analise.order("ano Desc").uniq.pluck(:ano)
+    @fazenda = Fazenda.uniq.pluck(:nome)
 
     respond_to do |format|
       format.html
-      format.pdf { render pdf: "Necessidade micronutrientes",
-        footer: { center: "[page] of [topage]"},
+
+      format.pdf { render pdf: "Micronutrientes",
+        content: render_to_string(template: 'analises/micronutrientes.html.erb'),
+        orientation: 'Landscape',
+        page_size: 'A4',
         zoom: 0.60
         }
     end
@@ -50,11 +58,16 @@ class AnalisesController < ApplicationController
     @analises = @search.result
     @analises = @analises.where(:ano => nil) unless params[:q]
     @vargessos = Vargesso.where(user_id: current_user.id).order("id DESC")
+    @ano = Analise.order("ano Desc").uniq.pluck(:ano)
+    @fazenda = Fazenda.uniq.pluck(:nome)
 
     respond_to do |format|
       format.html
-      format.pdf { render pdf: "Necessidade gessagem",
-        footer: { center: "[page] of [topage]"},
+
+      format.pdf { render pdf: "Gessagem",
+        content: render_to_string(template: 'analises/gessagem.html.erb'),
+        orientation: 'Landscape',
+        page_size: 'A4',
         zoom: 0.60
         }
     end
@@ -64,18 +77,23 @@ class AnalisesController < ApplicationController
   def fertilidade
     @search = Analise.where(user_id: current_user.id).ransack(params[:q])
     @analises = @search.result
-    @analises = @analises.where(:ano => nil) unless params[:q]
+    @analises = @analises.order("ano ASC").where(:ano => nil) unless params[:q]
     @parametros = Parametro.where(user_id: current_user.id).order("id DESC")
     @plantio = @analises.where("situacao = ?", "Plantio").order("ano DESC", "talhao_id ASC")
     @primeiroAno = @analises.where("situacao = ?", "1° Ano").order("ano DESC", "talhao_id ASC")
     @segundoAno = @analises.where("situacao = ?", "2° Ano / Poda").order("ano DESC", "talhao_id ASC")
     @producao = @analises.where("situacao = ?", "Produção").order("ano DESC", "talhao_id ASC")
+    @ano = Analise.order("ano Desc").uniq.pluck(:ano)
+    @fazenda = Fazenda.uniq.pluck(:nome)
+
+
 
     respond_to do |format|
       format.html
 
-      format.pdf { render pdf: "Necessidade npk",
-        footer: { center: "[page] of [topage]"},
+      format.pdf { render pdf: "Necessidade NPK",
+        content: render_to_string(template: 'analises/fertilidade.html.erb'),
+        orientation: 'Landscape',
         zoom: 0.60
         }
     end
@@ -89,12 +107,15 @@ class AnalisesController < ApplicationController
     @plantio = @analises.where("situacao = ?", "Plantio").order("ano DESC")
     @correcao = @analises.where("situacao != ?", "Plantio").order("ano DESC")
     @variavels = Variavel.where(user_id: current_user.id).order("id DESC")
+    @ano = Analise.order("ano Desc").uniq.pluck(:ano)
+    @fazenda = Fazenda.uniq.pluck(:nome)
 
     respond_to do |format|
       format.html
 
-      format.pdf { render pdf: "Necessidade calagem",
-        footer: { center: "[page] of [topage]"},
+      format.pdf { render pdf: "Necessidade de Calagem",
+        content: render_to_string(template: 'analises/calagem.html.erb'),
+        orientation: 'Landscape',
         zoom: 0.60
         }
     end
@@ -105,6 +126,20 @@ class AnalisesController < ApplicationController
   def historico
     @analises = Analise.where(user_id: current_user.id)
     @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
+
+    respond_to do |format|
+      format.html
+
+      format.pdf { render pdf: "Histórico",
+        footer: { center: "[page] of [topage]"},
+        content: render_to_string(template: 'analises/_historico.html.erb'),
+        orientation: 'Landscape',
+        zoom: 0.60
+        }
+    end
+
+
+
   end
   def index
     @analises = Analise.where(user_id: current_user.id).order( "profundidade ASC", "talhao_id ASC")

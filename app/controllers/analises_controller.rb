@@ -124,27 +124,31 @@ class AnalisesController < ApplicationController
   # GET /analises
   # GET /analises.json
   def historico
-    @analises = Analise.where(user_id: current_user.id)
-    @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
+    @search = Analise.where(user_id: current_user.id).ransack(params[:q])
+    @analises = @search.result
+    @fazendas = Fazenda.where(user_id: current_user.id).uniq.pluck(:id)
+    @ano = Analise.order("ano Desc").uniq.pluck(:ano)
+    @fazenda = Fazenda.uniq.pluck(:nome)
+    @profundidade = Analise.uniq.pluck(:profundidade)
+    @teste = Fazenda.where(user_id: current_user.id)
 
     respond_to do |format|
       format.html
 
       format.pdf { render pdf: "Histórico",
-        footer: { center: "[page] of [topage]"},
-        content: render_to_string(template: 'analises/_historico.html.erb'),
+        content: render_to_string(template: 'analises/historico.html.erb'),
         orientation: 'Landscape',
         zoom: 0.60
         }
     end
 
-
-
   end
+
   def index
     @analises = Analise.where(user_id: current_user.id).order( "profundidade ASC", "talhao_id ASC")
     @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
     @parametros = Parametro.where(user_id: current_user.id).order("id DESC")
+    @talhao = Talhao.where(user_id: current_user.id).order("fazenda_id ASC")
   end
 
   # GET /analises/1

@@ -9,6 +9,7 @@
       <th class="text-center">Profundidade</th>
       <th class="text-center">Área de aplicação</th>
       <th class="text-center">Produto</th>
+      <th class="text-center">Método</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -20,6 +21,7 @@
         <td><%= variavel.profundidade %></td>
         <td><%= variavel.areaAplicacao %></td>
         <td><%= variavel.produto %></td>
+        <td><%= variavel.metodo %></td>
         <td><% link_to 'Show', variavel %></td>
         <td><%= link_to 'Edit', edit_variavel_path(variavel) %></td>
         <td><%= link_to 'Destroy', variavel, method: :delete, data: { confirm: 'Are you sure?' } %></td>

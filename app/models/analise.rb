@@ -124,6 +124,14 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
     end 
   end
 
+  def necessidadeCalagemNovo(cao)
+    if calcio_ca < 3
+      ((((3 - calcio_ca) * 560 ) / (cao / 100) ) * 2 ) / 1000
+    else  
+    end
+    
+  end
+
   def necCalagemCompl
     @volumeCova = 64
     if situacao == "Plantio"
@@ -161,6 +169,18 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
     end
   end
 
+  def ncTotalComAreaCorrigidaNovo(ncCalagemNovo, profundidade, areaAplicacao, prnt)
+    if situacao == "Plantio"
+      ncCalagemNovo * (100/prnt)
+    else
+      (ncCalagemNovo * ((profundidade / 20)*(areaAplicacao / 100)*(100/prnt))) * talhao.area
+    end
+  end
+
+  def ncCorrigidaPorHa(nc, area)
+    nc / area    
+  end
+
   def somaCalcario(profundidade, areaAplicacao, prnt)
     if situacao == "Plantio"
       (nctotalcomarea * (100/prnt)) + necCalagemCompAreaTotal
@@ -180,6 +200,20 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
   def mgAposCalagem(mgo,ncTotalComAreaCorrigida,mgantes)
     ((mgo * 0.0248)*ncTotalComAreaCorrigida)+mgantes
   end
+  
+  def caAposCalagemNova(nc, cao, caantes)
+    ((((nc*1000) * 0.5) * (cao/100)) / 560) + caantes
+  end
+
+  def mgAposCalagemNova(nc,mgo,mgantes)
+    ((((nc*1000) * 0.5) * (mgo/100)) / 400) + mgantes
+  end
+
+  def regulagem(nc)
+    ((nc*1000) / metrosLineares) * 50
+  end
+
+
 #Fertilidade - Micronutrientes
 
   def necBoro #Extrator Água quente

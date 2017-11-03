@@ -4,7 +4,7 @@ class VariavelsController < ApplicationController
   # GET /variavels
   # GET /variavels.json
   def index
-    @variavels = Variavel.where(user_id: current_user.id).order("id DESC")
+    @variavels = Variavel.where(user_id: current_user.id).order("id DESC, ano Asc")
   end
 
   # GET /variavels/1
@@ -69,6 +69,6 @@ class VariavelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def variavel_params
-      params.require(:variavel).permit(:user_id, :ano, :profundidade, :areaAplicacao, :produto_id)
+      params.require(:variavel).permit(:user_id, :ano, :profundidade, :areaAplicacao, :produto_id, :metodo)
     end
 end

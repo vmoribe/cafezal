@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-md-4">
     <%= f.association :fazenda, label_method: :nome, collection: Fazenda.where(user_id: current_user.id) %>
-    <%= f.association :talhao, label_method: :nome, collection: Talhao.where(user_id: current_user.id).order("fazenda_id ASC") %>
+    <%= f.association :talhao, label_method: :nome, collection: Talhao.where(user_id: current_user.id) %>
     <%= f.input :situacao, collection: ["Produção","1° Ano", "2° Ano / Poda", "Plantio"] %>
     <%= f.input :profundidade, collection: ["0-20","20-40", "40-60", "60-80"] %>
     <%= f.input :ano %>

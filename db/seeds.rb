@@ -95,11 +95,11 @@ Vargesso.create!([
   {user_id: 1, ano: 2017, profundidade: "35.0", areaAplicacao: "75.0", teorCalcio: "20.0"}
 ])
 Variavel.create!([
-  {user_id: 1, ano: 2016, profundidade: "7.0", areaAplicacao: "100.0", prnt: "90.0", produto_id: 29},
-  {user_id: 1, ano: 2015, profundidade: "10.0", areaAplicacao: "100.0", prnt: "90.0", produto_id: 13},
-  {user_id: 1, ano: 2013, profundidade: "7.0", areaAplicacao: "75.0", prnt: "90.0", produto_id: 30},
-  {user_id: 1, ano: 2014, profundidade: "7.0", areaAplicacao: "75.0", prnt: "90.0", produto_id: 30},
-  {user_id: 1, ano: 2017, profundidade: "10.0", areaAplicacao: "100.0", prnt: "87.03", produto_id: 30}
+  {user_id: 1, ano: 2015, profundidade: "10.0", areaAplicacao: "100.0", prnt: "90.0", produto_id: 13, metodo: "5ª Aprox"},
+  {user_id: 1, ano: 2013, profundidade: "7.0", areaAplicacao: "75.0", prnt: "90.0", produto_id: 30, metodo: "5ª Aprox"},
+  {user_id: 1, ano: 2014, profundidade: "7.0", areaAplicacao: "75.0", prnt: "90.0", produto_id: 30, metodo: "5ª Aprox"},
+  {user_id: 1, ano: 2016, profundidade: "20.0", areaAplicacao: "100.0", prnt: "90.0", produto_id: 30, metodo: "Novo"},
+  {user_id: 1, ano: 2017, profundidade: "20.0", areaAplicacao: "50.0", prnt: "87.03", produto_id: 30, metodo: "Novo"}
 ])
 Analise.create!([
   {user_id: 1, fazenda_id: 1, talhao_id: 2, situacao: "Produção", profundidade: "0-20", ano: 2013, ph: "5.3", potassio_k: "76.0", fosforo_p: "7.21", sodio_na: "0.0", calcio_ca: "1.1", magnesio_mg: "0.4", aluminio_al: "0.1", h_al: "3.24", mat_organica: "2.23", p_rem: "20.22", zinco_zn: "0.99", ferro_fe: "34.07", manganes_mn: "4.1", cobre_cu: "1.56", boro_b: "0.28", enxofre_s: "49.14"},
@@ -474,4 +474,3 @@ Lote.create!([
   {user_id: 1, fazenda_id: 2, talhao_id: 16, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20011, numeroOrigem: nil, dataEntrada: "2017-06-29", quantidade: "4000.0", safra: "2017/2018"},
   {user_id: 1, fazenda_id: 2, talhao_id: 26, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 144090, numeroOrigem: 0, dataEntrada: "2016-08-06", quantidade: "18000.0", safra: "2016/2017"}
 ])
-

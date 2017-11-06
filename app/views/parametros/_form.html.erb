@@ -5,6 +5,7 @@
     <%= f.input :ano %>
     <%= f.input :parcelamento %>
     <%= f.input :producao_esperada, collection: ["<20", "21 - 30", "31 - 40", "41 - 50", "51 - 60", ">60"] %>
+    <%= f.input :metodo, collection: ["5ª Aprox", "Novo"]%>
   </div>
 
   <div class="form-actions">

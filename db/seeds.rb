@@ -84,11 +84,11 @@ Produto.create!([
   {user_id: 1, nome: "21-00-21", tipo: "Nutrição", preco: "1200.0", custo_op: "80.0", nitrogenio_n: "21.0", fosforo_p2o5: "0.0", potassio_k2o: "21.0", calcio_ca: "0.0", magnesio_mg: "0.0", enxofre_s: "0.0", boro_b: "0.0", cobre_cu: "0.0", ferro_fe: "0.0", manganes_mn: "0.0", zinco_zn: "0.0", ano: 2017, cao: "0.0", mgo: "0.0", prnt: "0.0"}
 ])
 Parametro.create!([
-  {ano: 2013, parcelamento: 3, producao_esperada: "21 - 30", user_id: 1},
-  {ano: 2014, parcelamento: 4, producao_esperada: "31 - 40", user_id: 1},
-  {ano: 2015, parcelamento: 4, producao_esperada: "31 - 40", user_id: 1},
-  {ano: 2016, parcelamento: 3, producao_esperada: "21 - 30", user_id: 1},
-  {ano: 2017, parcelamento: 3, producao_esperada: "31 - 40", user_id: 1}
+  {ano: 2016, parcelamento: 3, producao_esperada: "21 - 30", user_id: 1, metodo: "5ª Aprox"},
+  {ano: 2015, parcelamento: 4, producao_esperada: "31 - 40", user_id: 1, metodo: "5ª Aprox"},
+  {ano: 2014, parcelamento: 4, producao_esperada: "31 - 40", user_id: 1, metodo: "5ª Aprox"},
+  {ano: 2013, parcelamento: 3, producao_esperada: "21 - 30", user_id: 1, metodo: "5ª Aprox"},
+  {ano: 2017, parcelamento: 3, producao_esperada: "21 - 30", user_id: 1, metodo: "Novo"}
 ])
 Vargesso.create!([
   {user_id: 1, ano: 2016, profundidade: "35.0", areaAplicacao: "75.0", teorCalcio: "20.0"},

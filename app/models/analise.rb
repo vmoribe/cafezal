@@ -790,5 +790,98 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
     necK2oProducaoKgha(producao_esperada) * talhao.area
   end
 
+    #Fertilidade - Producao Método Novo
+
+  def necNProducaoKghaNovo(producao_esperada) #em Kg/ha/ano, mais para frente adicionar produção esperada na análise em integer mesmo, dai fazer a fórmula com multiplicação
+    case producao_esperada
+      when "<20"
+        20 * 6.7
+      when "21 - 30"
+        25 * 6.7
+      when "31 - 40"
+        35 * 6.7
+      when "41 - 50"
+        45 * 6.7
+      when "51 - 60"
+        55 * 6.7
+      when ">60"
+        65 * 6.7
+    end  
+  end
+
+  def necNProducaoAplicacaoNovo(producao_esperada,parcelamento) # kg/aplicação
+    (necNProducaoKghaNovo(producao_esperada) / parcelamento)
+  end
+
+  def necNProducaoTotalNovo(producao_esperada) #kg/ talhao
+    necNProducaoKghaNovo(producao_esperada) * talhao.area
+  end
+
+  def necP2o5ProducaoemMetroLinear(producao_esperada) # gramas/metro linear
+  (necP2o5ProducaoKgha(producao_esperada) * 1000) / metrosLineares   
+  end
+
+  def necP2o5ProducaoTotalNovo(necP2o5ProducaoKghaNovo) #kg/talhão
+     necP2o5ProducaoKghaNovo * talhao.area
+  end
+
+  def necP2o5ProducaoKghaNovo(producao_esperada,fosforo) #kg/ha/ano
+    if ((15 - fosforo) * 15) < 100
+      0
+    else
+      ((15 - fosforo) * 15)
+    end
+  end
+
+
+  def necK2oProducaoKghaNovo(producao_esperada,potassio) #kg/ha/ano
+    case producao_esperada
+      when "<20"
+        if ((0.3 - (potassio / 390)) * 942) < 0
+          0 + (20 * 5.9)
+        else
+          (20 * 5.9) + ((0.3 - (potassio / 390)) * 942)
+        end
+      when "21 - 30"
+        if ((0.3 - (potassio / 390)) * 942) < 0
+          0 + (25 * 5.9)
+        else
+          (25 * 5.9) + ((0.3 - (potassio / 390)) * 942)
+        end
+      when "31 - 40"
+        if ((0.3 - (potassio / 390)) * 942) < 0
+          0 + (35 * 5.9)
+        else
+          (35 * 5.9) + ((0.3 - (potassio / 390)) * 942)
+        end
+      when "41 - 50"
+        if ((0.3 - (potassio / 390)) * 942) < 0
+          0 + (45 * 5.9)
+        else
+          (45 * 5.9) + ((0.3 - (potassio / 390)) * 942)
+        end
+      when "51 - 60"
+        if ((0.3 - (potassio / 390)) * 942) < 0
+          0 + (55 * 5.9)
+        else
+          (55 * 5.9) + ((0.3 - (potassio / 390)) * 942)
+        end
+      when ">60"
+        if ((0.3 - (potassio / 390)) * 942) < 0
+          0 + (65 * 5.9)
+        else
+          (65 * 5.9) + ((0.3 - (potassio / 390)) * 942)
+        end
+    end  
+  end
+
+  def necK2oProducaoAplicacaoNovo(nk2o,parcelamento) # kg/aplicação
+    (nk2o / parcelamento)
+  end
+
+  def necK2oProducaoTotalNovo(necK2oProducaoKghaNovo) #kg/ talhao
+    necK2oProducaoKghaNovo * talhao.area
+  end
+
 
 end

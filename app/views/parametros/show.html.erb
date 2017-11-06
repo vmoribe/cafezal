@@ -14,6 +14,11 @@
   <%= @parametro.producao_esperada %>
 </p>
 
+<p>
+  <strong>Método:</strong>
+  <%= @parametro.metodo %>
+</p>
+
 <%= link_to 'Edit', edit_parametro_path(@parametro) %> |
 <%= link_to 'Back', parametros_path %>
 <%= link_to 'Voltar para Adubação', analises_fertilidade_path %>

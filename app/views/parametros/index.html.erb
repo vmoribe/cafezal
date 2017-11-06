@@ -8,6 +8,7 @@
       <th>Ano</th>
       <th>Parcelamento</th>
       <th>Produção esperada</th>
+      <th>Método</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -18,6 +19,7 @@
         <td><%= parametro.ano %></td>
         <td><%= parametro.parcelamento %></td>
         <td><%= parametro.producao_esperada %></td>
+        <td><%= parametro.metodo %></td>
         <td><% link_to 'Show', parametro %></td>
         <td><%= link_to 'Edit', edit_parametro_path(parametro) %></td>
         <td><%= link_to 'Destroy', parametro, method: :delete, data: { confirm: 'Are you sure?' } %></td>

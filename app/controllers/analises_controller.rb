@@ -147,7 +147,7 @@ class AnalisesController < ApplicationController
   def index
     @analises = Analise.where(user_id: current_user.id).order( "profundidade ASC", "talhao_id ASC")
     @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
-    @parametros = Parametro.where(user_id: current_user.id).order("id DESC")
+    @parametros = Parametro.where(user_id: current_user.id).order("ano DESC, id DESC")
     @talhao = Talhao.where(user_id: current_user.id).order("fazenda_id ASC")
   end
 

@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.2.0'
+gem 'factory_bot'
+gem 'nokogiri', '~> 1.8.2'
 gem 'figaro'
 gem 'turbolinks'
 gem 'ransack'
@@ -24,7 +26,7 @@ gem 'bootstrap-sass'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise_invitable'
-gem 'pg'
+gem 'pg', '~> 0.11'
 gem 'pundit'
 gem 'simple_form'
 gem 'unicorn'
@@ -36,7 +38,7 @@ group :development do
   gem 'spring-commands-rspec'
 end
 group :development, :test do
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'faker'
   gem 'pry-rails'
   gem 'pry-rescue'
@@ -44,10 +46,10 @@ group :development, :test do
   gem 'rubocop'
 end
 group :production do
+  gem 'pg', '~> 0.11'
   gem 'rails_12factor'
 end
 group :test do
-  gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
   gem 'selenium-webdriver'

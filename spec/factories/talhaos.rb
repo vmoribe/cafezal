@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :talhao do
     fazenda nil
     nome "MyString"

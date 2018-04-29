@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :fazenda do
     nome "MyString"
     descricao "MyText"

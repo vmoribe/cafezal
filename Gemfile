@@ -45,7 +45,7 @@ group :development, :test do
   gem 'rubocop'
 end
 group :production do
-  gem 'pg', '~> 0.11'
+  gem 'pg', '~> 0.2'
   gem 'rails_12factor'
 end
 group :test do

@@ -826,10 +826,10 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
   end
 
   def necP2o5ProducaoKghaNovo(producao_esperada,fosforo) #kg/ha/ano
-    if ((15 - fosforo) * 15) < 100
+    if ((25 - fosforo) * 15) < 100
       0
     else
-      ((15 - fosforo) * 15)
+      ((25 - fosforo) * 15)
     end
   end
 

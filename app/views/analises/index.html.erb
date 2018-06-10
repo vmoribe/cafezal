@@ -71,6 +71,7 @@
       <th class="text-center">Cu</th>
       <th class="text-center">B</th>
       <th class="text-center">S</th>
+      <th class="text-center">Prod Esperada</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -146,6 +147,7 @@
           <td class="alert-danger"><%= analise.boro_b %></td>
         <% end %>
         <td><%= analise.enxofre_s %></td>
+        <td><%= analise.prodEsperada %></td>
         <td><% link_to 'Show', analise %></td>
         <td><%= link_to 'Edit', edit_analise_path(analise) %></td>
         <td><%= link_to 'Destroy', analise, method: :delete, data: { confirm: 'Are you sure?' } %></td>

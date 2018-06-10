@@ -44,12 +44,13 @@
       <th class="text-center"></th>
       <th class="text-center">5.5 - 6</th>
       <th class="text-center">10 - 20</th>
-      <th class="text-center">81,9 - 156</th>
       <th class="text-center">0,21 - 0,4</th>
       <th class="text-center">2.2 - 3.7</th>
       <th class="text-center">0.6 - 1</th>
       <th class="text-center">0 - 0.5</th>
       <th class="text-center">3 - 5</th>
+      <th></th>
+      <th></th>
       <th></th>
       <th></th>
       <th class="text-center">40 - 70</th>
@@ -81,13 +82,14 @@
       <th class="text-center">Ph</th>
       <th class="text-center">P</th>
       <th class="text-center">K</th>
-      <th class="text-center">K</th>
       <th class="text-center">Ca</th>
       <th class="text-center">Mg</th>
       <th class="text-center">Al</th>
       <th class="text-center">H_al</th>
       <th class="text-center">SB</th>
       <th class="text-center">V%</th>
+      <th class="text-center">t</th>
+      <th class="text-center">T</th>
       <th class="text-center">Ca / CTC</th>
       <th class="text-center">Mg / CTC</th>
       <th class="text-center">K / CTC</th>
@@ -121,11 +123,6 @@
         <% else %>
           <td class="alert-danger"><%= analise.fosforo_p %></td>
         <% end %>
-        <% if analise.potassio_k >= 81.9 && analise.potassio_k <= 156 %>
-          <td class="alert-success"><%= analise.potassio_k %></td>
-        <% else %>
-          <td class="alert-danger"><%= analise.potassio_k %></td>
-        <% end %>
         <% if analise.kcmolcConvertido >= 0.21 && analise.kcmolcConvertido <= 0.4 %>
           <td class="alert-success"><%= valor_duascasas(analise.kcmolcConvertido) %></td>
         <% else %>
@@ -153,6 +150,8 @@
         <% end %>
         <td><%= valor_duascasas(analise.somaDasBases) %></td>
         <td><%= valor_duascasas(analise.saturacaoBase) %></td>
+        <td><%= valor_duascasas(analise.ctcEfetiva) %></td>
+        <td><%= valor_duascasas(analise.ctcApH7) %></td>
         <% if analise.caNaCtc >= 40 && analise.caNaCtc <= 70 %>
           <td class="alert-success"><%= valor_duascasas(analise.caNaCtc) %></td>
         <% else %>

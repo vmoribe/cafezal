@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171104154730) do
+ActiveRecord::Schema.define(version: 20180528185302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20171104154730) do
     t.decimal  "enxofre_s",    precision: 10, scale: 2
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
+    t.decimal  "prodEsperada", precision: 10, scale: 2
   end
 
   add_index "analises", ["fazenda_id"], name: "index_analises_on_fazenda_id", using: :btree

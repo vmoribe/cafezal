@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180528185302) do
+ActiveRecord::Schema.define(version: 20180614234511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,25 +23,28 @@ ActiveRecord::Schema.define(version: 20180528185302) do
     t.string   "situacao"
     t.string   "profundidade"
     t.integer  "ano"
-    t.decimal  "ph",           precision: 10, scale: 2
-    t.decimal  "potassio_k",   precision: 10, scale: 2
-    t.decimal  "fosforo_p",    precision: 10, scale: 2
-    t.decimal  "sodio_na",     precision: 10, scale: 2
-    t.decimal  "calcio_ca",    precision: 10, scale: 2
-    t.decimal  "magnesio_mg",  precision: 10, scale: 2
-    t.decimal  "aluminio_al",  precision: 10, scale: 2
-    t.decimal  "h_al",         precision: 10, scale: 2
-    t.decimal  "mat_organica", precision: 10, scale: 2
-    t.decimal  "p_rem",        precision: 10, scale: 2
-    t.decimal  "zinco_zn",     precision: 10, scale: 2
-    t.decimal  "ferro_fe",     precision: 10, scale: 2
-    t.decimal  "manganes_mn",  precision: 10, scale: 2
-    t.decimal  "cobre_cu",     precision: 10, scale: 2
-    t.decimal  "boro_b",       precision: 10, scale: 2
-    t.decimal  "enxofre_s",    precision: 10, scale: 2
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.decimal  "prodEsperada", precision: 10, scale: 2
+    t.decimal  "ph",            precision: 10, scale: 2
+    t.decimal  "potassio_k",    precision: 10, scale: 2
+    t.decimal  "fosforo_p",     precision: 10, scale: 2
+    t.decimal  "sodio_na",      precision: 10, scale: 2
+    t.decimal  "calcio_ca",     precision: 10, scale: 2
+    t.decimal  "magnesio_mg",   precision: 10, scale: 2
+    t.decimal  "aluminio_al",   precision: 10, scale: 2
+    t.decimal  "h_al",          precision: 10, scale: 2
+    t.decimal  "mat_organica",  precision: 10, scale: 2
+    t.decimal  "p_rem",         precision: 10, scale: 2
+    t.decimal  "zinco_zn",      precision: 10, scale: 2
+    t.decimal  "ferro_fe",      precision: 10, scale: 2
+    t.decimal  "manganes_mn",   precision: 10, scale: 2
+    t.decimal  "cobre_cu",      precision: 10, scale: 2
+    t.decimal  "boro_b",        precision: 10, scale: 2
+    t.decimal  "enxofre_s",     precision: 10, scale: 2
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.decimal  "prodEsperada",  precision: 10, scale: 2
+    t.string   "safra"
+    t.decimal  "litrosScMedia", precision: 10, scale: 2
+    t.decimal  "scHaMedia",     precision: 10, scale: 2
   end
 
   add_index "analises", ["fazenda_id"], name: "index_analises_on_fazenda_id", using: :btree

@@ -1,0 +1,99 @@
+<%= wicked_pdf_stylesheet_link_tag 'pdf_stylesheet' %>
+<%= wicked_pdf_stylesheet_link_tag 'application' %>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<% unless request.format.to_sym == :pdf %>
+
+<div class="row">
+
+<div class="col-xs-4">
+  
+  <h3>Opções</h3>
+    <%= link_to "Gerar PDF", analises_estimativa_path(params.merge(:format => "pdf")), class: "btn btn-primary", :target => "_blank" %>
+ </div>
+
+<div class="col-xs-8">
+<%= search_form_for @search, :class => "form-inline", url: analises_estimativa_path do |f| %>
+<h3>Filtro</h3>
+    <%= f.label :ano_eq, "Ano:" %>
+    <%= f.select :ano_eq, options_for_select(@ano), {:include_blank => true}, { :class => "form-control" }%>
+    <%= f.label :fazenda_nome_cont, "Fazenda:" %>
+    <%= f.select :fazenda_nome_cont, options_for_select(@fazenda), {:include_blank => true}, { :class => "form-control" } %>
+
+  <%= f.submit :class => 'btn btn-primary' %>
+<% end %>
+</div>
+</div>
+<% end %>
+
+<h1>Estimativa de Produção</h1>
+
+
+<% @analises.select("DISTINCT(ano)").order("ano desc").each do |p| %>
+
+   <tr>
+     <td><h2  class="text-center"><%= p.ano %></h2></td>
+   </tr>      
+<% @parametro_ano = p.ano %>
+
+  <% @fazendas.each do |fazenda| %>
+    <tr>
+      <td><h3><%= fazenda.nome %></h3></td>
+    </tr>
+  <% @fazenda_id = fazenda.id %>
+ 
+<table class="table table-condensed table-hover text-center">
+  <thead>
+    <tr>
+      <th class="text-center" colspan="4"></th>
+      <th class="text-center cabecalho" colspan="2">Média 2 anos</th>
+      <th class="text-center cabecalho" colspan="3">PRODUÇÃO</th>
+      <th class="text-center cabecalho" colspan="3">VEGETAÇÃO</th>
+    </tr>
+    
+    <tr>
+      <th class="text-center">Talhão</th>
+      <th class="text-center">Situação</th>
+      <th class="text-center">Safra</th>
+      <th class="text-center">Área</th>
+      <th class="text-center editavel">Litros/Sc</th>
+      <th class="text-center editavel">Sc/Ha</th>
+      <th class="text-center editavel">Litros / pé</th>
+      <th class="text-center">Sc / Ha</th>
+      <th class="text-center">Sc/Total</th>
+      <th class="text-center">Litros / pé</th>
+      <th class="text-center">Sc / Ha</th>
+      <th class="text-center">Sc/Total</th>
+      
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+        <% @totalScProducao = 0 %>
+    <% @analises.where("(fazenda_id= ? AND ano= ?)", @fazenda_id, @parametro_ano).order("talhao_id").each do |analise| %>
+        <td><%= analise.talhao.nome %></td>
+        <td><%= analise.situacao %></td>
+        <td><%= best_in_place analise, :safra, :as => :select, :collection => {"1" => "13/14", "2" => "14/15", "3" => "15/16", "4" => "16/17", "5" => "17/18", "6" => "18/19", "7" => "19/20"} %></td>
+        <td><%= analise.talhao.area %></td>
+        <td class="editavel"><%= best_in_place analise, :litrosScMedia %></td>
+        <td class="editavel"><%= best_in_place analise, :scHaMedia %></td>
+        <td class="editavel"><%= best_in_place analise, :prodEsperada %></td>
+        <td><%= valor_inteiro(analise.scHaProducao) %></td>
+        <td><%= valor_inteiro(analise.scTotalProducao) %></td>
+        <td><%= valor_umacasa(analise.ltPeVegetacao) %></td>
+        <td><%= valor_inteiro(analise.scHaVegetacao) %></td>
+        <td><%= valor_inteiro(analise.scTotalVegetacao) %></td>
+      </tr>
+  </tbody>
+      <% @totalScProducao += analise.scTotalProducao if analise.scTotalProducao %>
+<% end %>
+      <tr>
+        <td class="text-center" colspan="7"></td>
+        <td>Total</td>
+        <td><%= valor_inteiro(@totalScProducao) %></td>
+      </tr>
+</table>
+<%end%>
+<%end%>

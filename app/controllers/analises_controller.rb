@@ -1,6 +1,29 @@
 class AnalisesController < ApplicationController
   before_action :set_analise, only: [:show, :edit, :update, :destroy]
 
+  def estimativa
+    @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
+    @fazenda = Fazenda.uniq.pluck(:nome)
+    @ano = Analise.order("ano Desc").uniq.pluck(:ano)
+    @search = Analise.where(user_id: current_user.id).ransack(params[:q])
+    @analises = @search.result
+    @analises = @analises.where(:ano => nil) unless params[:q]
+   
+    
+    
+    respond_to do |format|
+      format.html
+
+      format.pdf { render pdf: "Estimativa de Produção",
+        content: render_to_string(template: 'analises/estimativa.html.erb'),
+        orientation: 'Landscape',
+        page_size: 'A4',
+        zoom: 0.60
+        }
+    end
+
+  end
+
   def relacoes
     @analises = Analise.where(user_id: current_user.id).order( "profundidade ASC", "talhao_id ASC")
     @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
@@ -124,9 +147,9 @@ class AnalisesController < ApplicationController
   # GET /analises
   # GET /analises.json
   def historico
+    @fazendas = Fazenda.where(user_id: current_user.id).uniq.pluck(:id)
     @search = Analise.where(user_id: current_user.id).ransack(params[:q])
     @analises = @search.result
-    @fazendas = Fazenda.where(user_id: current_user.id).uniq.pluck(:id)
     @ano = Analise.order("ano Desc").uniq.pluck(:ano)
     @fazenda = Fazenda.uniq.pluck(:nome)
     @profundidade = Analise.uniq.pluck(:profundidade)

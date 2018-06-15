@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     get 'analises/calagem'
     get 'analises/fertilidade'
     get 'analises/historico'
+    get 'analises/estimativa'
   
   resources :analises
 

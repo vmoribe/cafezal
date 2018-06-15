@@ -11,6 +11,9 @@ module ApplicationHelper
 	def valor_duascasas(number)
 		number_with_precision number, precision: 2
 	end
+	def valor_umacasa(number)
+		number_with_precision number, precision: 1
+	end
 
 	def valor_inteiro(number)
 		number_with_precision number, precision: 0

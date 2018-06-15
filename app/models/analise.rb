@@ -86,6 +86,32 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
 
 #Calagem
 
+  def qtde_plantas
+    ((10000/talhao.esp_ruas)/talhao.esp_plantas)
+  end
+  
+  def scTotalVegetacao
+    (scHaVegetacao*talhao.area) if scHaVegetacao
+  end
+  
+  def ltPeVegetacao
+    (scHaVegetacao*litrosScMedia)/qtde_plantas if scHaVegetacao if litrosScMedia
+  end
+  
+  def scHaVegetacao
+    (scHaMedia*2)-scHaProducao if scHaProducao if scHaMedia
+  end
+  
+  def scHaProducao
+    (qtde_plantas * prodEsperada) / litrosScMedia if litrosScMedia
+  end
+  
+  def scTotalProducao
+    (qtde_plantas * prodEsperada* talhao.area) / litrosScMedia if litrosScMedia
+  end
+  
+  
+  
   def ctcEfetiva
     somaDasBases + aluminio_al
   end
@@ -165,7 +191,7 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
     if situacao == "Plantio"
       nctotalcomarea * (100/prnt)
     else
-      nctotalcomarea * ((profundidade / 20)*(areaAplicacao / 100)*(100/prnt))
+      nctotalcomarea * ((profundidade / 20)*(areaAplicacao / 100) * (100/prnt))
     end
   end
 

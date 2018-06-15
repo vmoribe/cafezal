@@ -5,6 +5,6 @@ class Lote < ActiveRecord::Base
 
   validates_presence_of :user_id, :fazenda_id, :talhao_id, :tipo, :local, :numero, :dataEntrada, :quantidade, :safra
   def qtdeSacas
-  	quantidade/500  	
+  	quantidade/480  	
   end
 end

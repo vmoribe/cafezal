@@ -4,7 +4,7 @@ class LotesController < ApplicationController
   # GET /lotes
   # GET /lotes.json
   def index
-    @search = Lote.where(user_id: current_user.id).ransack(params[:q])
+    @search = Lote.where(user_id: current_user.id).order("safra DESC").ransack(params[:q])
     @lotes = @search.result
     @safra = Lote.uniq.pluck(:safra)
     @fazenda = Fazenda.uniq.pluck(:nome)

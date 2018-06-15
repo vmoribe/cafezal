@@ -532,5 +532,11 @@ Lote.create!([
   {user_id: 1, fazenda_id: 2, talhao_id: 17, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20009, numeroOrigem: nil, dataEntrada: "2017-06-27", quantidade: "8000.0", safra: "2017/2018"},
   {user_id: 1, fazenda_id: 2, talhao_id: 16, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20010, numeroOrigem: nil, dataEntrada: "2017-06-28", quantidade: "12500.0", safra: "2017/2018"},
   {user_id: 1, fazenda_id: 2, talhao_id: 16, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 20011, numeroOrigem: nil, dataEntrada: "2017-06-29", quantidade: "4000.0", safra: "2017/2018"},
-  {user_id: 1, fazenda_id: 2, talhao_id: 26, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 144090, numeroOrigem: 0, dataEntrada: "2016-08-06", quantidade: "18000.0", safra: "2016/2017"}
+  {user_id: 1, fazenda_id: 2, talhao_id: 26, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 144090, numeroOrigem: 0, dataEntrada: "2016-08-06", quantidade: "18000.0", safra: "2016/2017"},
+  {user_id: 1, fazenda_id: 1, talhao_id: 5, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 135353, numeroOrigem: nil, dataEntrada: "2018-06-04", quantidade: "12000.0", safra: "2018/2019"},
+  {user_id: 1, fazenda_id: 1, talhao_id: 5, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 135354, numeroOrigem: nil, dataEntrada: "2018-06-05", quantidade: "24000.0", safra: "2018/2019"},
+  {user_id: 1, fazenda_id: 1, talhao_id: 5, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 135355, numeroOrigem: nil, dataEntrada: "2018-06-11", quantidade: "24000.0", safra: "2018/2019"},
+  {user_id: 1, fazenda_id: 1, talhao_id: 5, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 135356, numeroOrigem: nil, dataEntrada: "2018-06-12", quantidade: "18000.0", safra: "2018/2019"},
+  {user_id: 1, fazenda_id: 1, talhao_id: 10, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 135357, numeroOrigem: nil, dataEntrada: "2018-06-13", quantidade: "32000.0", safra: "2018/2019"},
+  {user_id: 1, fazenda_id: 1, talhao_id: 10, tipo: "Café da Roça", local: "Colheita Mecanizada", numero: 135358, numeroOrigem: nil, dataEntrada: "2018-06-14", quantidade: "32000.0", safra: "2018/2019"}
 ])

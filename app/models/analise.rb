@@ -103,11 +103,11 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
   end
   
   def scHaProducao
-    (qtde_plantas * prodEsperada) / litrosScMedia if litrosScMedia
+    (qtde_plantas * prodEsperada) / litrosScMedia if litrosScMedia if prodEsperada
   end
   
   def scTotalProducao
-    (qtde_plantas * prodEsperada* talhao.area) / litrosScMedia if litrosScMedia
+    (qtde_plantas * prodEsperada* talhao.area) / litrosScMedia if litrosScMedia if prodEsperada
   end
   
   

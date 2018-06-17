@@ -8,7 +8,7 @@ class AnalisesController < ApplicationController
     @search = Analise.where(user_id: current_user.id).ransack(params[:q])
     @analises = @search.result
     @analises = @analises.where(:ano => nil) unless params[:q]
-   
+    @lotes = Lote.where(user_id: current_user.id).order("safra DESC")
     
     
     respond_to do |format|

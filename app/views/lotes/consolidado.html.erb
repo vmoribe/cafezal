@@ -16,6 +16,8 @@
 <% end %>
 </div>
 
+
+
 <% @lotes.select("DISTINCT(fazenda_id)").each do |v| %>
   <% @faz_id = v.fazenda_id %>
   <% @quantidadeFazenda = 0 %>
@@ -25,6 +27,7 @@
   <% @quantidade = 0 %>
   <% @qtdeSacas = 0 %>
   <% @qtdeSacasHa = 0 %>
+
 
 <table class="table table-condensed table-hover text-center">
   <thead>
@@ -36,7 +39,6 @@
       <th>Tipo</th>
       <th>Local</th>
       <th>Numero</th>
-      <th>Lote Origem</th>
       <th>Data Entrada</th>
       <th>Quantidade</th>
       <th>Sacas</th>
@@ -46,7 +48,6 @@
 
   <tbody>
 <% @lotes.where("(fazenda_id= ? AND talhao_id= ?)", @faz_id, @talhao_id).each do |lote| %>
-<% @numeroOrigem = lote.numeroOrigem %>
       <tr>
         <td><%= lote.fazenda.nome %></td>
         <td><%= lote.talhao.nome %></td>
@@ -54,8 +55,7 @@
         <td><%= lote.tipo %></td>
         <td><%= lote.local %></td>
         <td><%= lote.numero %></td>
-        <td><%= lote.numeroOrigem %></td>
-        <td><%= lote.dataEntrada %></td>
+        <td><%= lote.data_entrada %></td>
         <td><%= valor_inteiro(lote.quantidade) %></td>
         <td><%= valor_inteiro(lote.qtdeSacas) %></td>
         <td><% link_to 'Show', lote %></td>
@@ -63,24 +63,6 @@
         <td><%= link_to 'Destroy', lote, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% @qtde = lote.quantidade %>
-<% @lotes.where("(fazenda_id= ? AND talhao_id= ? AND numero= ?)", @faz_id, @talhao_id, @numeroOrigem).order("fazenda_id", "talhao_id").each do |lote| %>
-      <tr>
-        <td><%= lote.fazenda.nome %></td>
-        <td><%= lote.talhao.nome %></td>
-        <td><%= lote.safra %></td>
-        <td><%= lote.tipo %></td>
-        <td><%= lote.local %></td>
-        <td><%= lote.numero %></td>
-        <td><%= lote.numeroOrigem %></td>
-        <td><%= lote.dataEntrada %></td>
-        <td><%= valor_inteiro(lote.quantidade) %></td>
-        <td><%= valor_inteiro(lote.qtdeSacas) %></td>
-        <td><%= lote.quantidade - @qtde %></td>
-        <td><% link_to 'Show', lote %></td>
-        <td><%= link_to 'Edit', edit_lote_path(lote) %></td>
-        <td><%= link_to 'Destroy', lote, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
  <% @quantidade += lote.quantidade %>
  <% @qtdeSacas += lote.qtdeSacas %>
  <% @qtdeSacasHa = @qtdeSacas / lote.talhao.area %>
@@ -89,7 +71,7 @@
         <td><b>Total</b></td>
         <td>Sacas por ha</td>
         <td><%= valor_inteiro(@qtdeSacasHa) %></td>
-        <td colspan="5"></td>
+        <td colspan="4"></td>
         <td><b><%= valor_inteiro(@quantidade) %></b></td>
         <td><b><%= valor_inteiro(@qtdeSacas)%></b></td>
       </tr>
@@ -119,3 +101,33 @@
 </div><%# Fim Div%>
 <%end%>
 <br>
+
+
+
+
+
+
+<div class="col-md-6 col-md-offset-3">
+<table class="table table-condensed table-striped"> <%# Table 4%>
+  <thead>
+  <tr>
+    <th class="text-center">Talhão</th>
+    <th class="text-center"><b>Quantidade Litros</b></th>    
+  </tr> 
+  </thead>
+<% @tal.each do |talhao| %>
+<% @talhao_id = talhao.id %>
+  <tbody>
+  <tr>
+    <td class="text-center"><b><%= talhao.nome %></b></td>
+    <td class="text-center"><%= @lotes.where(:talhao_id=>@talhao_id).sum('quantidade') %></td>
+  </tr>
+<% end %>
+</tbody>
+</table><%# Fim Table 4%>
+</div><%# Fim Div%>
+
+
+
+
+

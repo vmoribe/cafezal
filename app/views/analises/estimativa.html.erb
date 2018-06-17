@@ -36,6 +36,8 @@
    </tr>      
 <% @parametro_ano = p.ano %>
 
+  <% @quantidadeFazenda = 0 %>
+  <% @qtdeSacasFazenda = 0 %>
   <% @fazendas.each do |fazenda| %>
     <tr>
       <td><h3><%= fazenda.nome %></h3></td>
@@ -64,6 +66,7 @@
       <th class="text-center">Litros / pé</th>
       <th class="text-center">Sc / Ha</th>
       <th class="text-center">Sc/Total</th>
+      <th class="text-center">Litros Total</th>
       
       <th colspan="2"></th>
     </tr>
@@ -72,7 +75,8 @@
   <tbody>
       <tr>
         <% @totalScProducao = 0 %>
-    <% @analises.where("(fazenda_id= ? AND ano= ?)", @fazenda_id, @parametro_ano).order("talhao_id").each do |analise| %>
+    <% @analises.where("(fazenda_id= ? AND ano= ? AND profundidade= ?)", @fazenda_id, @parametro_ano,"0-20").order("talhao_id").each do |analise| %>
+<% @talhao_id = analise.talhao_id %>
         <td><%= analise.talhao.nome %></td>
         <td><%= analise.situacao %></td>
         <td><%= best_in_place analise, :safra, :as => :select, :collection => {"1" => "13/14", "2" => "14/15", "3" => "15/16", "4" => "16/17", "5" => "17/18", "6" => "18/19", "7" => "19/20"} %></td>
@@ -85,6 +89,7 @@
         <td><%= valor_umacasa(analise.ltPeVegetacao) %></td>
         <td><%= valor_inteiro(analise.scHaVegetacao) %></td>
         <td><%= valor_inteiro(analise.scTotalVegetacao) %></td>
+        <td class="text-center"><%= @lotes.where("extract(year from data_entrada) = ? AND talhao_id= ?", @parametro_ano+1, @talhao_id).sum('quantidade') %></td>
       </tr>
   </tbody>
       <% @totalScProducao += analise.scTotalProducao if analise.scTotalProducao %>
@@ -95,5 +100,23 @@
         <td><%= valor_inteiro(@totalScProducao) %></td>
       </tr>
 </table>
+<% @qtdeSacasFazenda += @totalScProducao %>
 <%end%>
+
+<div class="col-md-6 col-md-offset-3">
+<table class="table table-condensed table-striped"> <%# Table 4%>
+  <thead>
+  <tr>
+    <th class="text-center"></th>
+    <th class="text-center"><b>Quantidade Sacas</b></th>    
+  </tr> 
+  </thead>
+  <tbody>
+  <tr>
+    <td class="text-center"><b>Total</b></td>
+    <td class="text-center"><%= valor_inteiro(@qtdeSacasFazenda) %></td>
+  </tr>
+</tbody>
+</table><%# Fim Table 4%>
+</div><%# Fim Div%>
 <%end%>

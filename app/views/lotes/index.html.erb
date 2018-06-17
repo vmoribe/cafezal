@@ -29,7 +29,7 @@
       <th><%= sort_link(@search, :tipo)%></th>
       <th><%= sort_link(@search, :local)%></th>
       <th>Numero</th>
-      <th><%= sort_link(@search, :dataEntrada)%></th>
+      <th><%= sort_link(@search, :data_entrada)%></th>
       <th>Quantidade</th>
       <th>Sacas</th>
       <th colspan="3"></th>
@@ -48,9 +48,10 @@
         <td><%= lote.tipo %></td>
         <td><%= lote.local %></td>
         <td><%= lote.numero %></td>
-        <td><%= lote.dataEntrada.to_time.strftime('%d/%m/%Y') %></td>
+        <td><%= lote.data_entrada.to_time.strftime('%d/%m/%Y') %></td>
         <td><%= valor_inteiro(lote.quantidade) %></td>
         <td><%= valor_inteiro(lote.qtdeSacas) %></td>
+        <td><%= @lotes.sum(:quantidade, :conditions => ['talhao_id = ?', 5]) %></td>
         <td><% link_to 'Show', lote %></td>
         <td><%= link_to 'Edit', edit_lote_path(lote) %></td>
         <td><%= link_to 'Destroy', lote, method: :delete, data: { confirm: 'Are you sure?' } %></td>

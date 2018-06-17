@@ -14,6 +14,8 @@ class LotesController < ApplicationController
   end
 
   def consolidado
+    @tal = Talhao.order("nome ASC")
+    @lot = Lote.where(user_id: current_user.id)
     @search = Lote.where(user_id: current_user.id).ransack(params[:q])
     @lotes = @search.result
     @lotes = @lotes.where(:safra => nil) unless params[:q]
@@ -87,6 +89,6 @@ class LotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lote_params
-      params.require(:lote).permit(:user_id, :fazenda_id, :talhao_id, :tipo, :local, :numero, :numeroOrigem, :dataEntrada, :quantidade, :safra)
+      params.require(:lote).permit(:user_id, :fazenda_id, :talhao_id, :tipo, :local, :numero, :numeroOrigem, :data_entrada, :quantidade, :safra)
     end
 end

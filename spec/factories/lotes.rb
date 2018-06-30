@@ -6,7 +6,7 @@ FactoryBot.define do
     tipo "MyString"
     local "MyString"
     numero 1
-    numeroOrigem 1
+    numero_origem 1
     data_entrada "2016-09-14"
     quantidade "9.99"
   end

@@ -7,7 +7,7 @@ class CreateLotes < ActiveRecord::Migration
       t.string :tipo
       t.string :local
       t.integer :numero
-      t.integer :numeroOrigem
+      t.integer :numero_origem
       t.date :data_entrada
       t.decimal :quantidade, precision: 10, scale: 2
 

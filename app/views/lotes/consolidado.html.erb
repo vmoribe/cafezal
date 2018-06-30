@@ -48,7 +48,7 @@
 
   <tbody>
 <% @lotes.where("(fazenda_id= ? AND talhao_id= ?)", @faz_id, @talhao_id).each do |lote| %>
-<% @numeroOrigem = lote.numeroOrigem %>
+<% @numero_origem = lote.numero_origem %>
       <tr>
         <td><%= lote.fazenda.nome %></td>
         <td><%= lote.talhao.nome %></td>
@@ -59,7 +59,7 @@
         <td><%= lote.data_entrada %></td>
         <td><%= valor_inteiro(lote.quantidade) %></td>
         <td><%= valor_inteiro(lote.qtdeSacas) %></td>
- <% @lotes.where("(fazenda_id= ? AND talhao_id= ? AND numero= ?)", @faz_id, @talhao_id, @numeroOrigem).each do |lote1| %>
+ <% @lotes.where("(fazenda_id= ? AND talhao_id= ? AND numero= ?)", @faz_id, @talhao_id, @numero_origem).each do |lote1| %>
    <td><%= valor_inteiro((lote.quantidade * 100)/lote1.quantidade) %></td>
   <% end %>
         <td><% link_to 'Show', lote %></td>

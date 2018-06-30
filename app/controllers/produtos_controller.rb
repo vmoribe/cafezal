@@ -4,7 +4,7 @@ class ProdutosController < ApplicationController
   # GET /produtos
   # GET /produtos.json
   def index
-    @produtos = Produto.where(user_id: current_user.id)
+    @produtos = Produto.where(user_id: current_user.id).order("ano DESC")
   end
 
   # GET /produtos/1

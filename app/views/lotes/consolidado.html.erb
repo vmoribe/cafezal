@@ -31,7 +31,6 @@
 
 <table class="table table-condensed table-hover text-center">
   <thead>
-
     <tr>
       <th>Fazenda</th>
       <th>Talhao</th>
@@ -42,12 +41,14 @@
       <th>Data Entrada</th>
       <th>Quantidade</th>
       <th>Sacas</th>
-      <th colspan="3"></th>
+      <th>% do Lote</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
 <% @lotes.where("(fazenda_id= ? AND talhao_id= ?)", @faz_id, @talhao_id).each do |lote| %>
+<% @numeroOrigem = lote.numeroOrigem %>
       <tr>
         <td><%= lote.fazenda.nome %></td>
         <td><%= lote.talhao.nome %></td>
@@ -58,20 +59,24 @@
         <td><%= lote.data_entrada %></td>
         <td><%= valor_inteiro(lote.quantidade) %></td>
         <td><%= valor_inteiro(lote.qtdeSacas) %></td>
+ <% @lotes.where("(fazenda_id= ? AND talhao_id= ? AND numero= ?)", @faz_id, @talhao_id, @numeroOrigem).each do |lote1| %>
+   <td><%= valor_inteiro((lote.quantidade * 100)/lote1.quantidade) %></td>
+  <% end %>
         <td><% link_to 'Show', lote %></td>
-        <td><%= link_to 'Edit', edit_lote_path(lote) %></td>
-        <td><%= link_to 'Destroy', lote, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><% link_to 'Edit', edit_lote_path(lote) %></td>
+        <td><% link_to 'Destroy', lote, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% @qtde = lote.quantidade %>
  <% @quantidade += lote.quantidade %>
  <% @qtdeSacas += lote.qtdeSacas %>
  <% @qtdeSacasHa = @qtdeSacas / lote.talhao.area %>
+ 
 <% end %>
       <tr>
         <td><b>Total</b></td>
         <td>Sacas por ha</td>
         <td><%= valor_inteiro(@qtdeSacasHa) %></td>
-        <td colspan="4"></td>
+        <td colspan="3"></td>
         <td><b><%= valor_inteiro(@quantidade) %></b></td>
         <td><b><%= valor_inteiro(@qtdeSacas)%></b></td>
       </tr>
@@ -100,34 +105,3 @@
 </table><%# Fim Table 4%>
 </div><%# Fim Div%>
 <%end%>
-<br>
-
-
-
-
-
-
-<div class="col-md-6 col-md-offset-3">
-<table class="table table-condensed table-striped"> <%# Table 4%>
-  <thead>
-  <tr>
-    <th class="text-center">Talhão</th>
-    <th class="text-center"><b>Quantidade Litros</b></th>    
-  </tr> 
-  </thead>
-<% @tal.each do |talhao| %>
-<% @talhao_id = talhao.id %>
-  <tbody>
-  <tr>
-    <td class="text-center"><b><%= talhao.nome %></b></td>
-    <td class="text-center"><%= @lotes.where(:talhao_id=>@talhao_id).sum('quantidade') %></td>
-  </tr>
-<% end %>
-</tbody>
-</table><%# Fim Table 4%>
-</div><%# Fim Div%>
-
-
-
-
-

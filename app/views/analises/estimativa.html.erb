@@ -89,7 +89,7 @@
         <td><%= valor_umacasa(analise.ltPeVegetacao) %></td>
         <td><%= valor_inteiro(analise.scHaVegetacao) %></td>
         <td><%= valor_inteiro(analise.scTotalVegetacao) %></td>
-        <td class="text-center"><%= @lotes.where("extract(year from data_entrada) = ? AND talhao_id= ?", @parametro_ano+1, @talhao_id).sum('quantidade') %></td>
+        <td class="text-center"><%= @lotes.where("extract(year from data_entrada) = ? AND talhao_id= ? AND local LIKE ?", @parametro_ano+1, @talhao_id, "%Colheita%").sum('quantidade') %></td>
       </tr>
   </tbody>
       <% @totalScProducao += analise.scTotalProducao if analise.scTotalProducao %>

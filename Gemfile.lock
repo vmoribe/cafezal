@@ -363,3 +363,9 @@ DEPENDENCIES
   web-console (~> 2.0)
   wicked_pdf
   wkhtmltopdf-binary
+
+RUBY VERSION
+   ruby 2.2.0p0
+
+BUNDLED WITH
+   1.16.2

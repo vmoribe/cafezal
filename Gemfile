@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.3.4'
+ruby '2.2.4'
 gem 'factory_bot'
 gem 'nokogiri', '~> 1.8.2'
 gem 'figaro'

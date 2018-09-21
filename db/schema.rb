@@ -45,9 +45,14 @@ ActiveRecord::Schema.define(version: 20180614234511) do
     t.string   "safra"
     t.decimal  "litrosScMedia", precision: 10, scale: 2
     t.decimal  "scHaMedia",     precision: 10, scale: 2
+    t.integer  "produto_id"
+    t.decimal  "aprovcalcario", precision: 10, scale: 2
+    t.decimal  "objetivoca",    precision: 10, scale: 2
+    t.decimal  "kgharecomend",  precision: 10, scale: 2
   end
 
   add_index "analises", ["fazenda_id"], name: "index_analises_on_fazenda_id", using: :btree
+  add_index "analises", ["produto_id"], name: "index_analises_on_produto_id", using: :btree
   add_index "analises", ["talhao_id"], name: "index_analises_on_talhao_id", using: :btree
   add_index "analises", ["user_id"], name: "index_analises_on_user_id", using: :btree
 
@@ -200,6 +205,7 @@ ActiveRecord::Schema.define(version: 20180614234511) do
   add_index "variavels", ["user_id"], name: "index_variavels_on_user_id", using: :btree
 
   add_foreign_key "analises", "fazendas"
+  add_foreign_key "analises", "produtos"
   add_foreign_key "analises", "talhaos"
   add_foreign_key "analises", "users"
   add_foreign_key "fazendas", "users"

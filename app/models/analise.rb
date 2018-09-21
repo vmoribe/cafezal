@@ -2,6 +2,7 @@ class Analise < ActiveRecord::Base
   belongs_to :user
   belongs_to :fazenda
   belongs_to :talhao
+  belongs_to :produto
 
 validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :ph, :potassio_k, :fosforo_p, :sodio_na, :calcio_ca, :magnesio_mg, :aluminio_al, :h_al, :mat_organica, :p_rem, :zinco_zn, :ferro_fe, :manganes_mn, :cobre_cu, :boro_b, :enxofre_s
 
@@ -119,6 +120,25 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
     
   end
   
+  def kghacao
+    (objetivoca - calcio_ca) * 560 if objetivoca
+  end
+  
+  def kghacorretivo
+    @produtocao = produto.cao / 100
+    @produtoprnt = produto.prnt / 100
+    
+    ((kghacao/aprovcalcario)/@produtocao)/@produtoprnt if kghacao if aprovcalcario
+  end
+
+  def regulagem
+    ((kgharecomend) / metrosLineares) * 50 if kgharecomend
+  end
+  
+  def kglavouracalcario
+    kgharecomend * talhao.area
+  end
+
   def ctcEfetiva
     somaDasBases + aluminio_al
   end
@@ -242,9 +262,6 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
     ((((nc*1000) * 0.5) * (mgo/100)) / 400) + mgantes
   end
 
-  def regulagem(nc)
-    ((nc*1000) / metrosLineares) * 50
-  end
 
 
 #Fertilidade - Micronutrientes

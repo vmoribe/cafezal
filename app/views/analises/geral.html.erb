@@ -37,10 +37,10 @@
       <td><h2><b>Calagem de Produção - <%= @parametro_ano %> </b></h3></td>
     </tr>
 
-
+      <% @calcariofazendas = 0 %>
     <% @analises.select("DISTINCT(fazenda_id)").where("(ano= ?)", @parametro_ano).each do |v| %>
+    <% @totalcalcario = 0 %>
     <% @faz_id = v.fazenda_id %>
-
 
     <table class="table table-condensed table-striped">
       <thead>
@@ -56,22 +56,21 @@
           <th>K</th>
           <th>Relação Ca:Mg:K</th>
           <th class="text-center editavel">Objetivo Ca</th>
-          <th>NC/ha - Corrigida</th>
-          <th>Ca Antes</th>
-          <th>Ca Após</th>
-          <th>Mg Antes</th>
-          <th>Mg Após</th>
-          <th>Ca/Mg Antes</th>
-          <th>Ca/Mg Após</th>
+          <th>Kg/ha CaO</th>
+          <th class="text-center editavel">Corretivo</th>
+          <th>CaO</th>
+          <th>MgO</th>
+          <th>PRNT</th>
+          <th class="text-center editavel">% Aprov</th>
+          <th>Kg/ha Corretivo</th>
+          <th>Kg/ha Recomendado</th>
+          <th>Regulagem</th>
+          <th>Kg Corretivo Lavoura</th>
         </tr>
       </thead>
       <tbody class="text-center">
-
-        <% @nctotalcorrigida = 0 %>
-        <% @nctotalcomplementar = 0 %>
-        <% @totalcalcario = 0 %>
+        <% @calcariotalhao = 0 %>
         <% @analises.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @faz_id, @parametro_ano, "20-40").order("talhao_id").each do |analise| %>
-
         <tr>
           <td><%= analise.fazenda.nome %></td>
           <td><%= analise.talhao.nome %></td>
@@ -83,31 +82,71 @@
           <td><%= analise.magnesio_mg %></td>
           <td><%= valor_duascasas(analise.kcmolcConvertido) %></td>
           <td><%= valor_duascasas(analise.relacaocamgk) %></td>
-
+          <td class="editavel"><%= best_in_place analise, :objetivoca %></td>
+          <td><%= valor_duascasas(analise.kghacao) %></td>
+          <td class="editavel"><%= best_in_place analise, :produto_id, :as => :select, :collection => Produto.where("ano= ?", @parametro_ano).all.map { |i| [i.id, i.nome] } %></td>
+          <td><%= analise.produto.cao if analise.produto_id %></td>
+          <td><%= analise.produto.mgo if analise.produto_id %></td>
+          <td><%= analise.produto.prnt if analise.produto_id %></td>
+          <td class="editavel"><%= best_in_place analise, :aprovcalcario %></td>
+          <td><%= valor_duascasas(analise.kghacorretivo) %></td>
+          <td class="editavel"><%= best_in_place analise, :kgharecomend %></td>
+          <td><%= valor_duascasas(analise.regulagem) %></td>
+          <td><%= valor_duascasas(analise.kglavouracalcario) %></td>
         </tr>
+        <% @calcariotalhao += analise.kglavouracalcario %>
         <% end %>
-
+          <% @kgharecomend = @analises.where("ano = ? AND fazenda_id= ?", @parametro_ano, @faz_id).sum('kgharecomend') %>
+          
+    <% @totalcalcario += @calcariotalhao %>
         <tr>
           <th class="text-center"><b>TOTAL</b></th>   
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th class="text-center"><b><%= valor_duascasas(@nctotalcorrigida) %></b></th>
-          <th></th>
-          <th class="text-center" colspan="6"></th>
+          <th class="text-center" colspan="19"></th>
+          <th class="text-center"><%= @totalcalcario %></th>
         </tr>
       </tbody>
     </table>
+    <% @calcariofazendas += @totalcalcario %>
     <% end %>
-
   </table>
+
+    <div class="col-md-6 col-md-offset-3">
+      <table class="table table-condensed table-striped"> <%# Table 4%>
+        <thead>
+          <tr>
+            <th class="text-center"><%= @parametro_ano%></th>
+            <th class="text-center"><b>Total Calcario</b></th>
+            <th class="text-center"><b>Total Complementar</b></th>    
+            <th class="text-center"><b></b>Total Geral</th>
+          </tr> 
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center"><b>Plantio</b></td>
+            <td class="text-center"><%= valor_duascasas(0) %></td>
+            <td class="text-center"><%= valor_duascasas(0) %></td>
+            <td class="text-center"><%= valor_duascasas(0)%></td>
+          </tr>
+          <tr>
+            <td class="text-center"><b>Produção</b></td>
+            <td class="text-center"><%= valor_duascasas(0) %></td>
+            <td class="text-center"></td>
+            <td class="text-center"><%= valor_duascasas(0)%></td>
+          </tr>
+          <% @kgharecomendtotal = @analises.where("ano = ?", @parametro_ano).sum('kgharecomend') %>
+          <tr>
+            <td class="text-center"><b>Total</b></td>
+            <td class="text-center"><%= valor_duascasas(@calcariofazendas) %></td>
+            <td class="text-center"><%= valor_duascasas(0) %></td>
+            <td class="text-center"><%= valor_duascasas(0) %></td>
+          </tr>
+        </tbody>
+      </table><%# Fim Table 4%>
+    </div><%# Fim Div%>
+
+
 
 </div><!--Fim div Calagem-->
 
 <% end %><!--Fim each analises - ANO-->
+

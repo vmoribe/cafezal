@@ -25,7 +25,7 @@ class AnalisesController < ApplicationController
         }
     end
 
-  end
+    end
 
   def estimativa
     @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")

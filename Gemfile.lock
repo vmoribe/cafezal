@@ -308,7 +308,6 @@ GEM
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
     wicked_pdf (1.1.0)
-    wkhtmltopdf-binary (0.12.4)
     wkhtmltopdf-heroku (2.12.4.0)
 
 PLATFORMS
@@ -360,7 +359,6 @@ DEPENDENCIES
   unicorn-rails
   web-console (~> 2.0)
   wicked_pdf
-  wkhtmltopdf-binary
   wkhtmltopdf-heroku
 
 RUBY VERSION

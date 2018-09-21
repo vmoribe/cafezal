@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     get 'analises/gessagem'
     get 'analises/calagem'
     get 'analises/fertilidade'
+    get 'analises/geral'
     get 'analises/historico'
     get 'analises/estimativa'
   

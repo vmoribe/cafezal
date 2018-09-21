@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.0'
+ruby '2.3.4'
 gem 'factory_bot'
 gem 'nokogiri', '~> 1.8.2'
 gem 'figaro'
@@ -48,7 +48,7 @@ group :development, :test do
   gem 'rubocop'
 end
 group :production do
-  gem 'pg', '~> 0.2'
+  gem 'pg', '~> 0.18.4'
   gem 'rails_12factor'
 end
 group :test do

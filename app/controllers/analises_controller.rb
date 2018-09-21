@@ -1,5 +1,30 @@
 class AnalisesController < ApplicationController
   before_action :set_analise, only: [:show, :edit, :update, :destroy]
+  
+  
+    def geral
+    @search = Analise.where(user_id: current_user.id).ransack(params[:q])
+    @analises = @search.result
+    @analises = @analises.order("ano ASC").where(:ano => nil) unless params[:q]
+    @parametros = Parametro.where(user_id: current_user.id).order("id DESC")
+    @plantio = @analises.where("situacao = ?", "Plantio").order("ano DESC", "talhao_id ASC")
+    @primeiroAno = @analises.where("situacao = ?", "1° Ano").order("ano DESC", "talhao_id ASC")
+    @segundoAno = @analises.where("situacao = ?", "2° Ano / Poda").order("ano DESC", "talhao_id ASC")
+    @producao = @analises.where("situacao = ?", "Produção").order("ano DESC", "talhao_id ASC")
+    @ano = Analise.order("ano Desc").uniq.pluck(:ano)
+    @fazenda = Fazenda.uniq.pluck(:nome)
+
+    respond_to do |format|
+      format.html
+
+      format.pdf { render pdf: "Necessidade NPK",
+        content: render_to_string(template: 'analises/fertilidade.html.erb'),
+        orientation: 'Landscape',
+        zoom: 0.60
+        }
+    end
+
+  end
 
   def estimativa
     @fazendas = Fazenda.where(user_id: current_user.id).order("id ASC")
@@ -236,6 +261,6 @@ class AnalisesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def analise_params
-      params.require(:analise).permit(:user_id, :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :ph, :potassio_k, :fosforo_p, :sodio_na, :calcio_ca, :magnesio_mg, :aluminio_al, :h_al, :mat_organica, :p_rem, :zinco_zn, :ferro_fe, :manganes_mn, :cobre_cu, :boro_b, :enxofre_s, :prodEsperada, :safra, :litrosScMedia, :scHaMedia)
+      params.require(:analise).permit(:user_id, :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :ph, :potassio_k, :fosforo_p, :sodio_na, :calcio_ca, :magnesio_mg, :aluminio_al, :h_al, :mat_organica, :p_rem, :zinco_zn, :ferro_fe, :manganes_mn, :cobre_cu, :boro_b, :enxofre_s, :prodEsperada, :safra, :litrosScMedia, :scHaMedia, :produto,:aprovcalcario, :objetivoca, :kgharecomend )
     end
 end

@@ -1,0 +1,113 @@
+<%= wicked_pdf_stylesheet_link_tag 'pdf_stylesheet' %>
+<%= wicked_pdf_stylesheet_link_tag 'application' %>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<% unless request.format.to_sym == :pdf %>
+<div class="row">
+  <div class="col-xs-6">
+    <h3>Opções</h3>
+    <%= link_to 'Novo Parâmetro', new_parametro_path,:class => 'btn btn-default' %>
+    <%= link_to "Gerar PDF", analises_geral_path(params.merge(:format => "pdf")), class: "btn btn-primary", :target => "_blank"%>
+
+  </div>
+  <div class="col-xs-6">
+    <%= search_form_for @search, :class => "form-inline", url: analises_geral_path do |f| %>
+    <h3>Filtro</h3>
+    <%= f.label :ano_eq, "Ano:" %>
+    <%= f.select :ano_eq, options_for_select(@ano), {:include_blank => true}, { :class => "form-control" }%>
+    <%= f.label :fazenda_nome_cont, "Fazenda:" %>
+    <%= f.select :fazenda_nome_cont, options_for_select(@fazenda), {:include_blank => true}, { :class => "form-control" } %>
+    <%= f.submit :class => 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
+<%end%>
+
+
+<% @analises.select("DISTINCT(ano)").order("ano desc").each do |p| %>
+<% @parametro_ano = p.ano %>
+
+<%# Bloco Calagem%>
+
+<div><!-- Início div Calagem-->
+  
+   <%# Bloco Produção%>
+
+  <table class="table table-condensed">
+    <tr>
+      <td><h2><b>Calagem de Produção - <%= @parametro_ano %> </b></h3></td>
+    </tr>
+
+
+    <% @analises.select("DISTINCT(fazenda_id)").where("(ano= ?)", @parametro_ano).each do |v| %>
+    <% @faz_id = v.fazenda_id %>
+
+
+    <table class="table table-condensed table-striped">
+      <thead>
+        <tr>
+          <th>Fazenda</th>
+          <th>Talhão</th>
+          <th>Ph</th>
+          <th>CTC a Ph 7</th>
+          <th>V%</th>
+          <th>Talhão area</th>
+          <th>Ca</th>
+          <th>Mg</th>
+          <th>K</th>
+          <th>Relação Ca:Mg:K</th>
+          <th class="text-center editavel">Objetivo Ca</th>
+          <th>NC/ha - Corrigida</th>
+          <th>Ca Antes</th>
+          <th>Ca Após</th>
+          <th>Mg Antes</th>
+          <th>Mg Após</th>
+          <th>Ca/Mg Antes</th>
+          <th>Ca/Mg Após</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+
+        <% @nctotalcorrigida = 0 %>
+        <% @nctotalcomplementar = 0 %>
+        <% @totalcalcario = 0 %>
+        <% @analises.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @faz_id, @parametro_ano, "20-40").order("talhao_id").each do |analise| %>
+
+        <tr>
+          <td><%= analise.fazenda.nome %></td>
+          <td><%= analise.talhao.nome %></td>
+          <td><%= analise.ph %></td>
+          <td><%= valor_duascasas(analise.ctcApH7) %></td>
+          <td><%= valor_duascasas(analise.saturacaoBase) %></td>
+          <td><%= analise.talhao.area %></td>
+          <td><%= analise.calcio_ca %></td>
+          <td><%= analise.magnesio_mg %></td>
+          <td><%= valor_duascasas(analise.kcmolcConvertido) %></td>
+          <td><%= valor_duascasas(analise.relacaocamgk) %></td>
+
+        </tr>
+        <% end %>
+
+        <tr>
+          <th class="text-center"><b>TOTAL</b></th>   
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th class="text-center"><b><%= valor_duascasas(@nctotalcorrigida) %></b></th>
+          <th></th>
+          <th class="text-center" colspan="6"></th>
+        </tr>
+      </tbody>
+    </table>
+    <% end %>
+
+  </table>
+
+</div><!--Fim div Calagem-->
+
+<% end %><!--Fim each analises - ANO-->

@@ -110,7 +110,14 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
     (qtde_plantas * prodEsperada* talhao.area) / litrosScMedia if litrosScMedia if prodEsperada
   end
   
-  
+  def relacaocamgk
+    @a=(calcio_ca / kcmolcConvertido).round(0)
+    @b=(magnesio_mg / kcmolcConvertido).round(0)
+    @c=(kcmolcConvertido / kcmolcConvertido).round(0)
+    
+    "#{@a}:#{@b}:#{@c}"
+    
+  end
   
   def ctcEfetiva
     somaDasBases + aluminio_al

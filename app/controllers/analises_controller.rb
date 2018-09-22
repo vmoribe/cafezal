@@ -37,18 +37,19 @@ class AnalisesController < ApplicationController
     @lotes = Lote.where(user_id: current_user.id).order("safra DESC")
     
     
-    respond_to do |format|
-      format.html
-
-      format.pdf { render pdf: "Estimativa de Produção",
-        content: render_to_string(template: 'analises/estimativa.html.erb'),
-        orientation: 'Landscape',
-        page_size: 'A4',
-        zoom: 0.60
-        }
-    end
+WickedPdf.config ||= {}
+      respond_to do |format|
+        format.html
+        format.pdf { render pdf: "Estimativa de Produção",
+          content: render_to_string(template: 'analises/estimativa.html.erb'),
+          orientation: 'Landscape',
+          page_size: 'A4',
+          zoom: 0.60
+          }
+      end
 
   end
+    
 
   def relacoes
     @analises = Analise.where(user_id: current_user.id).order( "profundidade ASC", "talhao_id ASC")

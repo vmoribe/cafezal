@@ -37,7 +37,6 @@ class AnalisesController < ApplicationController
     @lotes = Lote.where(user_id: current_user.id).order("safra DESC")
     
     
-WickedPdf.config ||= {}
       respond_to do |format|
         format.html
         format.pdf { render pdf: "Estimativa de Produção",
@@ -46,7 +45,7 @@ WickedPdf.config ||= {}
           page_size: 'A4',
           zoom: 0.60
           }
-      end
+      end 
 
   end
     

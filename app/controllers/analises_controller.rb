@@ -14,14 +14,15 @@ class AnalisesController < ApplicationController
     @producao = @analises.where("situacao = ?", "Produção").order("ano DESC", "talhao_id ASC")
     @ano = Analise.order("ano Desc").uniq.pluck(:ano)
     @fazenda = Fazenda.uniq.pluck(:nome)
-
+    
     respond_to do |format|
       format.html
 
-      format.pdf { render pdf: "Necessidade NPK",
-        content: render_to_string(template: 'analises/fertilidade.html.erb'),
+      format.pdf { render pdf: "Necessidade Corretivos e Fertilizantes",
+        content: render_to_string(template: 'analises/geral.html.erb'),
         orientation: 'Landscape',
-        zoom: 0.60
+        zoom: 0.60,
+        :show_as_html => params[:debug].present?
         }
     end
 

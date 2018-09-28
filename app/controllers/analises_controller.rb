@@ -21,8 +21,7 @@ class AnalisesController < ApplicationController
       format.pdf { render pdf: "Necessidade Corretivos e Fertilizantes",
         content: render_to_string(template: 'analises/geral.html.erb'),
         orientation: 'Landscape',
-        zoom: 0.60,
-        :show_as_html => params[:debug].present?
+        zoom: 0.60
         }
     end
 

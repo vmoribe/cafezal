@@ -6,6 +6,13 @@ class Analise < ActiveRecord::Base
 
 validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :ph, :potassio_k, :fosforo_p, :sodio_na, :calcio_ca, :magnesio_mg, :aluminio_al, :h_al, :mat_organica, :p_rem, :zinco_zn, :ferro_fe, :manganes_mn, :cobre_cu, :boro_b, :enxofre_s
 
+#Planejamento Corretivos e Fertilizantes
+
+def caFinal
+  (kghacorretivo * aprovcalcario) * ((produto.cao/100)/560) + calcio_ca
+end
+
+
 #Relações
 
   def caNaCtc
@@ -125,8 +132,8 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
   end
   
   def kghacorretivo
-    @produtocao = produto.cao / 100
-    @produtoprnt = produto.prnt / 100
+    @produtocao = produto.cao / 100 if produto_id
+    @produtoprnt = produto.prnt / 100 if produto_id
     
     ((kghacao/aprovcalcario)/@produtocao)/@produtoprnt if kghacao if aprovcalcario
   end
@@ -136,7 +143,7 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
   end
   
   def kglavouracalcario
-    kgharecomend * talhao.area
+    kgharecomend * talhao.area if kgharecomend
   end
 
   def ctcEfetiva

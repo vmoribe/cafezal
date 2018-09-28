@@ -1,12 +1,5 @@
-<% if params[:debug].present? %>
-<%= stylesheet_link_tag 'documents' %>
-<% else %>
 <%= wicked_pdf_stylesheet_link_tag 'pdf_stylesheet' %>
 <%= wicked_pdf_stylesheet_link_tag 'application' %>
-<%= wicked_pdf_stylesheet_link_tag 'documents' %>
-
-<% end %>
-
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <% unless request.format.to_sym == :pdf %>
 <div class="row">
@@ -33,26 +26,25 @@
 <% @analises.select("DISTINCT(ano)").order("ano desc").each do |p| %>
 <% @parametro_ano = p.ano %>
 
-<%# Bloco Calagem%>
-
-<div><!-- Início div Calagem-->
   
-   <%# Bloco Produção%>
 
-  <table class="table table-condensed">
-    <tr>
-      <td><h2><b>Calagem de Produção - <%= @parametro_ano %> </b></h3></td>
-    </tr>
+<%# Bloco Calagem%>
 
       <% @calcariofazendas = 0 %>
     <% @analises.select("DISTINCT(fazenda_id)").where("(ano= ?)", @parametro_ano).each do |v| %>
     <% @totalcalcario = 0 %>
     <% @faz_id = v.fazenda_id %>
+    <tr>
+      <h2><%= v.fazenda.nome %></h2>
+    </tr>
+<div><!-- Início div Calagem-->
+    <tr>
+      <td><h2><b>Calagem - <%= @parametro_ano %> </b></h3></td>
+    </tr>
 
     <table class="table table-condensed table-striped">
       <thead>
         <tr>
-          <th>Fazenda</th>
           <th>Talhão</th>
           <th>Ph</th>
           <th>CTC a Ph 7</th>
@@ -79,7 +71,6 @@
         <% @calcariotalhao = 0 %>
         <% @analises.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @faz_id, @parametro_ano, "20-40").order("talhao_id").each do |analise| %>
         <tr>
-          <td><%= analise.fazenda.nome %></td>
           <td><%= analise.talhao.nome %></td>
           <td><%= analise.ph %></td>
           <td><%= valor_duascasas(analise.ctcApH7) %></td>
@@ -101,23 +92,48 @@
           <td><%= valor_duascasas(analise.regulagem) %></td>
           <td><%= valor_duascasas(analise.kglavouracalcario) %></td>
         </tr>
-        <% @calcariotalhao += analise.kglavouracalcario %>
+        <% @calcariotalhao += analise.kglavouracalcario if analise.kglavouracalcario %>
         <% end %>
           <% @kgharecomend = @analises.where("ano = ? AND fazenda_id= ?", @parametro_ano, @faz_id).sum('kgharecomend') %>
           
     <% @totalcalcario += @calcariotalhao %>
         <tr>
           <th class="text-center"><b>TOTAL</b></th>   
-          <th class="text-center" colspan="19"></th>
+          <th class="text-center" colspan="18"></th>
           <th class="text-center"><%= @totalcalcario %></th>
         </tr>
       </tbody>
     </table>
     <% @calcariofazendas += @totalcalcario %>
-    <% end %>
   </table>
 
-    <div class="col-md-6 col-md-offset-3">
+</div><!--Fim div Calagem-->
+
+<div><!--Inicio div Planejamento-->
+    <tr>
+      <td><h2><b>Planejamento Adubação - <%= @parametro_ano %> </b></h3></td>
+    </tr>
+    
+    <table class="table table-condensed table-striped">
+      <thead class="text-center">
+        <tr>
+          <th>Ca Final</th>
+        </tr>
+      </thead>
+        <% @analises.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @faz_id, @parametro_ano, "20-40").order("talhao_id").each do |analise| %>
+      <tbody class="text-center">
+        <tr>
+          <td><%= valor_duascasas(analise.caFinal) %></td>
+        </tr>
+      </tbody>
+        <%end%>
+    </table>
+    
+</div><!--Inicio div Planejamento-->
+
+    <% end %> <!-- Fim do Do Fazendas -->
+
+    <div class="col-md-6 col-md-offset-3"><!--Inicio Totais-->
       <table class="table table-condensed table-striped"> <%# Table 4%>
         <thead>
           <tr>
@@ -150,10 +166,6 @@
         </tbody>
       </table><%# Fim Table 4%>
     </div><%# Fim Div%>
-
-
-
-</div><!--Fim div Calagem-->
 
 <% end %><!--Fim each analises - ANO-->
 

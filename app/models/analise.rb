@@ -9,9 +9,16 @@ validates_presence_of :fazenda_id, :talhao_id, :situacao, :profundidade, :ano, :
 #Planejamento Corretivos e Fertilizantes
 
 def caFinal
-  (kghacorretivo * aprovcalcario) * ((produto.cao/100)/560) + calcio_ca
+  (kghacorretivo * aprovcalcario) * ((produto.cao/100)/560) + calcio_ca if kghacorretivo if aprovcalcario
 end
 
+def mgFinal
+  (kghacorretivo * aprovcalcario) * ((produto.mgo/100)/560) + magnesio_mg if kghacorretivo if aprovcalcario
+end
+
+def kExigido
+  caFinal / 9 if caFinal if caFinal
+end
 
 #Relações
 
@@ -119,12 +126,20 @@ end
   end
   
   def relacaocamgk
-    @a=(calcio_ca / kcmolcConvertido).round(0)
-    @b=(magnesio_mg / kcmolcConvertido).round(0)
-    @c=(kcmolcConvertido / kcmolcConvertido).round(0)
+    @a=(calcio_ca / kcmolcConvertido).round
+    @b=(magnesio_mg / kcmolcConvertido).round
+    @c=(kcmolcConvertido / kcmolcConvertido).round
     
     "#{@a}:#{@b}:#{@c}"
     
+  end
+  
+  def relacaocamgkFinal
+    @a=(caFinal / kExigido).round if caFinal if kExigido
+    @b=(mgFinal / kExigido).round if mgFinal if kExigido
+    @c=(kExigido / kExigido).round if kExigido
+    
+    "#{@a}:#{@b}:#{@c}"
   end
   
   def kghacao

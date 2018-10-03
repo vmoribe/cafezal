@@ -14,6 +14,7 @@ class AnalisesController < ApplicationController
     @producao = @analises.where("situacao = ?", "Produção").order("ano DESC", "talhao_id ASC")
     @ano = Analise.order("ano Desc").uniq.pluck(:ano)
     @fazenda = Fazenda.uniq.pluck(:nome)
+    @lotes = Lote.where(user_id: current_user.id).order("safra DESC")
     
     respond_to do |format|
       format.html

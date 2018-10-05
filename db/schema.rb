@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180614234511) do
+ActiveRecord::Schema.define(version: 20181005194519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,11 @@ ActiveRecord::Schema.define(version: 20180614234511) do
     t.decimal  "aprovcalcario", precision: 10, scale: 2
     t.decimal  "objetivoca",    precision: 10, scale: 2
     t.decimal  "kgharecomend",  precision: 10, scale: 2
+    t.decimal  "objetivok",     precision: 10, scale: 2
+    t.decimal  "k2orecomend",   precision: 10, scale: 2
+    t.decimal  "nrecomend",     precision: 10, scale: 2
+    t.decimal  "p2o5recomend",  precision: 10, scale: 2
+    t.decimal  "objetivop",     precision: 10, scale: 2
   end
 
   add_index "analises", ["fazenda_id"], name: "index_analises_on_fazenda_id", using: :btree

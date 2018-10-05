@@ -13,7 +13,7 @@ def caFinal
 end
 
 def mgFinal
-  (kghacorretivo * aprovcalcario) * ((produto.mgo/100)/560) + magnesio_mg if kghacorretivo if aprovcalcario
+  (kghacorretivo * aprovcalcario) * ((produto.mgo/100)/400) + magnesio_mg if kghacorretivo if aprovcalcario
 end
 
 def kExigido
@@ -103,6 +103,22 @@ end
 
   def qtde_plantas
     ((10000/talhao.esp_ruas)/talhao.esp_plantas)
+  end
+  
+  def sobrafaltak20
+    necessidadek2opv - ((kcmolcConvertido - objetivok)*942) if necessidadek2opv if kcmolcConvertido if objetivok
+  end
+  
+  def sobrafaltap
+    (objetivop - fosforo_p ) * 20 if objetivop
+  end
+
+  def necessidadek2opv
+    (scHaVegetacao * 2.9) + (scHaProducao * 3) if scHaProducao if scHaVegetacao
+  end
+  
+  def necessidadenpv
+    (scHaVegetacao * 3.6) + (scHaProducao * 2.6) if scHaProducao if scHaVegetacao
   end
   
   def scTotalVegetacao

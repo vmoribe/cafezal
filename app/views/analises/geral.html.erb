@@ -122,7 +122,7 @@
           <th class="text-center editavel">% Aprov</th>
           <th>Kg/ha Corretivo</th>
           <th>Kg/ha Recomendado</th>
-          <th>Regulagem</th>
+          <th>Regulagem / 50m</th>
           <th>Kg Corretivo Lavoura</th>
         </tr>
       </thead>
@@ -180,6 +180,17 @@
           <th>Mg Final</th>
           <th>K Exigido</th>
           <th>Relação Final</th>
+          <th>K Atual</th>
+          <th>Objetivo K</th>
+          <th>Necessidade K2O P+V</th>
+          <th>Sobra / Falta K2O</th>
+          <th>Recomendação K2O</th>
+          <th>Necessidade N P+V</th>
+          <th>Recomendação N</th>
+          <th>P Atual</th>
+          <th>Objetivo P Resina</th>
+          <th>Sobra / Falta P</th>
+          <th>Recomendação P2O5</th>
         </tr>
       </thead>
         <% @analises.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @faz_id, @parametro_ano, "20-40").order("talhao_id").each do |analise| %>
@@ -190,6 +201,19 @@
           <td><%= valor_duascasas(analise.mgFinal) %></td>
           <td><%= valor_duascasas(analise.kExigido) %></td>
           <td><%= valor_duascasas(analise.relacaocamgkFinal) %></td>
+          <td><%= valor_duascasas(analise.kcmolcConvertido) %></td>
+          <td class="editavel"><%= best_in_place analise, :objetivok %></td>
+          <td><%= valor_duascasas(analise.necessidadek2opv) %></td>
+          <td><%= valor_duascasas(analise.sobrafaltak20) %></td>
+          <td class="editavel"><%= best_in_place analise, :k2orecomend %></td>
+          <td><%= valor_duascasas(analise.necessidadenpv) %></td>
+          <td class="editavel"><%= best_in_place analise, :nrecomend %></td>
+          <td><%= valor_duascasas(analise.fosforo_p) %></td>
+          <td class="editavel"><%= best_in_place analise, :objetivop %></td>
+          <td><%= valor_duascasas(analise.sobrafaltap) %></td>
+          <td class="editavel"><%= best_in_place analise, :p2o5recomend %></td>
+          
+          
         </tr>
       </tbody>
         <%end%>

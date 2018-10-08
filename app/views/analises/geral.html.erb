@@ -33,8 +33,13 @@
     <% @qtdeSacasFazenda = 0 %>
     <% @totalcalcario = 0 %>
     <% @faz_id = v.fazenda_id %>
+    </br>
     <tr>
-      <h2><%= v.fazenda.nome %></h2>
+      <h1 class="text-center"><b><%= v.fazenda.nome %></b></h1>
+    </tr>
+    
+    <tr>
+      <td><h2><b>Estimativa de Produção - <%= @parametro_ano %> </b></h3></td>
     </tr>
     
 <div><!-- Início div Estimativa -->
@@ -141,7 +146,7 @@
           <td><%= valor_duascasas(analise.relacaocamgk) %></td>
           <td class="editavel"><%= best_in_place analise, :objetivoca %></td>
           <td><%= valor_duascasas(analise.kghacao) %></td>
-          <td class="editavel"><%= best_in_place analise, :produto_id, :as => :select, :collection => Produto.where("ano= ?", @parametro_ano).all.map { |i| [i.id, i.nome] } %></td>
+          <td class="editavel"><%= best_in_place analise, :produto_id, :as => :select, :collection => Produto.where("ano= ? AND tipo=?", @parametro_ano, "Corretivo").all.map { |i| [i.id, i.nome] } %></td>
           <td><%= analise.produto.cao if analise.produto_id %></td>
           <td><%= analise.produto.mgo if analise.produto_id %></td>
           <td><%= analise.produto.prnt if analise.produto_id %></td>
@@ -219,6 +224,41 @@
         <%end%>
     </table>
 </div><!--Fim div Planejamento-->
+
+<div><!-- Inicio 1ª Adubação -->
+
+  <tr>
+      <td><h2><b>1ª Adubação - <%= @parametro_ano %> </b></h3></td>
+    </tr>
+    
+    <table class="table table-condensed table-hover text-center">
+      <thead class="text-center">
+        <tr>
+          <th>Talhão</th>
+          <th>Fertilizante</th>
+          <th>N</th>
+          <th>P2O5</th>
+          <th>K20</th>
+        </tr>
+      </thead>
+        <% @analises.where("(fazenda_id= ? AND ano= ? AND profundidade!= ?)", @faz_id, @parametro_ano, "20-40").order("talhao_id").each do |analise| %>
+      <tbody class="text-center">
+        <tr>
+          <td><%= valor_duascasas(analise.talhao.nome) %></td>
+          <td class="editavel"><%= best_in_place analise, :produto_id, :as => :select, :collection => Produto.where("ano= ? AND tipo=?", @parametro_ano, "Nutrição").all.map { |i| [i.id, i.nome] } %></td>
+          <td><%= analise.produto.nitrogenio_n if analise.produto_id %></td>
+          <td><%= analise.produto.fosforo_p2o5 if analise.produto_id %></td>
+          <td><%= analise.produto.potassio_k2o if analise.produto_id %></td>
+          
+        </tr>
+      </tbody>
+        <%end%>
+    </table>
+
+  
+</div><!-- Fim 1ª Adubação -->
+
+
 
   <div class="col-md-12">
     <div class="col-md-6 col-md-offset-3"><!--Inicio Totais-->
